@@ -9,13 +9,27 @@ import Contact from './Containers/Pages/Contact'
 import Signup from './Containers/Pages/Signup'
 import Login from './Containers/Pages/Login'
 import Dashboard from './Containers/Pages/Dashboard';
+import UserWatchlist from './Containers/Pages/UserWatchlist'
+import MovieSearch from './Containers/Pages/MovieSearch'
 
+// {/* <Route path="/users/:id" render={({match}) => {
+//   let id = parseInt(match.params.id)
+//   let foundUser = this.state.allUsers.find(user => user.id === id)
+//   return(
+//     <>
+//     <UserWatchlist user={foundUser} />
+//     {/* <Dashboard user={foundUser}/> */}
+//   //   </>
+//   // ) 
+  // }} /> */}
 
 
 class App extends React.Component {
 
   state = {
-    user: null
+    allUsers: [],
+    user: null,
+    movies: null
   }
 
   componentDidMount = () => {
@@ -27,9 +41,17 @@ class App extends React.Component {
           Authorization: `Bearer ${token}`},
         })
       .then(resp => resp.json())
-      .then(data => this.setState({ user: data.user }))
+      .then(data => this.setState({
+        user: data.user,
+        movies: data.user.movies
+      }))
     } 
-  };
+    fetch("http://localhost:3000/api/v1/users")
+    .then(resp => resp.json())
+    .then(data => {
+      this.setState({ allUsers: data})
+    })
+    };
 
   logoutHandler = () => {
     localStorage.removeItem("token")
@@ -82,7 +104,9 @@ class App extends React.Component {
       <React.Fragment>
         {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
           <Switch>
-          <Route path="/dashboard" render={() => <Dashboard user={this.state.user}/>} />
+            <Route path="/movies/search" render={() => <MovieSearch />} />
+            <Route path="/dashboard" render={() => <Dashboard user={this.state.user}/>} />
+            <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} />} />
             <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
             <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} />} />
             <Route path="/contact" component={Contact}/>
