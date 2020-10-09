@@ -1,5 +1,5 @@
 import React from 'react'
-import SignupForm from '../Components/Forms/SignupForm'
+import SignupForm from '../../Components/Forms/SignupForm'
 // import AltFooter from '../Components/AltFooter'
 
 class Signup extends React.Component {
