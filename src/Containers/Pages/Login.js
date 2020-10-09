@@ -1,6 +1,6 @@
 import React from 'react'
 // import Footer from '../Components/Footer'
-import LoginForm from '../Components/Forms/LoginForm'
+import LoginForm from '../../Components/Forms/LoginForm'
 
 class Login extends React.Component {
 

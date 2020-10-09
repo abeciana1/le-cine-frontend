@@ -2,11 +2,15 @@ import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import './App.css';
 import NavBar from './Components/Navbar'
-import Home from './Containers/Home'
-import About from './Containers/About'
-import Contact from './Containers/Contact'
-import Signup from './Containers/Signup'
-import Login from './Containers/Login'
+import AuthNavBar from './Components/AuthNavbar'
+import Home from './Containers/Pages/Home'
+import About from './Containers/Pages/About'
+import Contact from './Containers/Pages/Contact'
+import Signup from './Containers/Pages/Signup'
+import Login from './Containers/Pages/Login'
+import Dashboard from './Containers/Pages/Dashboard';
+
+
 
 class App extends React.Component {
 
@@ -26,6 +30,13 @@ class App extends React.Component {
       .then(data => this.setState({ user: data.user }))
     } 
   };
+
+  logoutHandler = () => {
+    localStorage.removeItem("token")
+    this.setState({
+      user: null
+    })
+  }
 
   loginHandler = (userObj) => {
     // console.log(userObj)
@@ -69,8 +80,9 @@ class App extends React.Component {
   render(){
     return (
       <React.Fragment>
-        <NavBar user={this.state.user} />
+        {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
           <Switch>
+          <Route path="/dashboard" render={() => <Dashboard user={this.state.user}/>} />
             <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
             <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} />} />
             <Route path="/contact" component={Contact}/>
