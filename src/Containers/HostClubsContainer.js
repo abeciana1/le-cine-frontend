@@ -17,7 +17,7 @@ class HostClubsContainer extends React.Component {
     }
 
     getMyClubs = () => {
-        return this.state.clubs.map(club => <ClubComponent key={club.id} club={club}/>)
+        return this.state.clubs.slice(0,5).map(club => <ClubComponent key={club.id} club={club}/>)
     }
 
     render() {

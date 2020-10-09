@@ -43,7 +43,7 @@ class DashboardMeeting extends React.Component {
 
     listMeetings = () => {
         // console.log(this.props.meetings)
-        return this.props.meetings.map(meeting =>
+        return this.props.meetings.slice(0,5).map(meeting =>
         <ListGroup.Item action href="#link1" className="meeting-list-item">{meeting.title} | {meeting.date}, {meeting.time}</ListGroup.Item>)
     }
 
