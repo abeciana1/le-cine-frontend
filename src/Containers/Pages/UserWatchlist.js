@@ -1,5 +1,6 @@
 import React from 'react';
 import MovieCard from '../../Components/MovieSearchCard'
+import { Link } from 'react-router-dom';
 
 class UserWatchlist extends React.Component {
 
@@ -12,7 +13,9 @@ class UserWatchlist extends React.Component {
             <React.Fragment>
                 <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
                     <h1>Your Watchlist</h1>
-                    <button className="read-more-btn"><a href="/movies/search" style={{textDecoration: "none", "color": "#FF3900"}}>Add Movies to your Watchlist</a></button>
+                    <Link to="/movies/search">
+                        <button className="read-more-btn">Add Movies to your Watchlist</button>
+                    </Link>
                     {this.props.movies ? this.getMovies() : null }
                 </div>
             </React.Fragment>
