@@ -40,7 +40,7 @@ class MovieSearch extends React.Component {
                     <br />
                     <br />
                     {/* <MovieSearchResults searchResults={this.state.searchResults} /> */}
-                    {this.state.searchResults ? <MovieSearchResults searchResults={this.state.searchResults} /> : null }
+                    {this.state.searchResults ? <MovieSearchResults movieShow={this.props.movieShow} searchResults={this.state.searchResults} /> : null }
                 </div>
             </React.Fragment>
         )

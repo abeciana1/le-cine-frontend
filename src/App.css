@@ -132,6 +132,10 @@ aside {
   .site-logo {
     display: none;
   }
+
+  .movie-backdrop {
+    display: none;
+  }
 }
 
 h1 {

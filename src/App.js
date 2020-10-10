@@ -11,6 +11,7 @@ import Login from './Containers/Pages/Login'
 import Dashboard from './Containers/Pages/Dashboard';
 import UserWatchlist from './Containers/Pages/UserWatchlist'
 import MovieSearch from './Containers/Pages/MovieSearch'
+import MovieShow from './Containers/Pages/MovieShow'
 
 // {/* <Route path="/users/:id" render={({match}) => {
 //   let id = parseInt(match.params.id)
@@ -29,7 +30,8 @@ class App extends React.Component {
   state = {
     // allUsers: [],
     user: null,
-    movies: null
+    movies: null,
+    selectedMovie: 0
   }
 
   componentDidMount = () => {
@@ -99,15 +101,27 @@ class App extends React.Component {
     })
   }
 
+  // goToMovieShow = (id) => {
+  //   console.log(id)
+  // }
+
   render(){
     return (
       <React.Fragment>
+      {/* <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> */}
         {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
           <Switch>
-            <Route path="/movies/search" render={() => <MovieSearch />} />
+            <Route path="/movies/search/:id" render={({match}) => {
+              // console.log(match)
+              let id = parseInt(match.params.id)
+              // let mov = this.state.
+              // this.goToMovieShow(id)
+              return <MovieShow id={id} />
+            }} /> 
             <Route path="/dashboard" render={() => <Dashboard user={this.state.user}/>} />
-            <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} />} />
             <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
+            <Route path="/movies/search" render={() => <MovieSearch movieShow={this.goToMovieShow} />} />
+            <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} />} />
             <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} />} />
             <Route path="/contact" component={Contact}/>
             <Route path="/about" component={About} />

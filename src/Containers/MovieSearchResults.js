@@ -4,7 +4,7 @@ import MovieSearchCard from '../Components/MovieSearchCard'
 class MovieSearchResults extends React.Component {
 
     getSearchResults = () => {
-        return this.props.searchResults.map(movie => <MovieSearchCard key={movie.id} movie={movie} />)
+        return this.props.searchResults.map(movie => <MovieSearchCard key={movie.id} movie={movie} movieShow={this.props.movieShow} />)
     }
 
     render() {
