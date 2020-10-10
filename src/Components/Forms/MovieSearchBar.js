@@ -9,25 +9,26 @@ class MovieSearchBar extends React.Component {
 
     searchHandler = (e) => {
         this.setState({ searchTerm: e.target.value})
-        this.props.searchHandler(e.target.value)
+    }
+
+    submitHandler = (e) => {
+        e.preventDefault()
+        this.props.searchHandler(this.state.searchTerm)
+        this.setState({
+            searchTerm: ""
+        })
     }
 
     render() {
         return (
             <React.Fragment>
-                {/* <Form.Label htmlFor="inputPassword5">Password</Form.Label> */}
-                <Form.Control
-                    type="text"
-                    // name="searchTerm"
-                    id="inputPassword5"
-                    aria-describedby="passwordHelpBlock"
-                    style={{"width": "60%"}}
-                    onChange={this.searchHandler}
-                    value={this.state.searchTerm}
-                />
-                <Form.Text id="passwordHelpBlock" muted>
-                    Search for any film by it's title!
-                </Form.Text>
+                <Form onSubmit={this.submitHandler} style={{"paddingTop": "60px", "paddingBottom": "60px"}}>
+                        <Form.Group controlId="searchBar">
+                            {/* <Form.Label>Email address</Form.Label> */}
+                            <Form.Control name="text" type="text" value={this.state.email} onChange={this.searchHandler} style={{"width": "60%"}} placeholder="Search for movies by title"/>
+                        </Form.Group>
+                        <input type="submit" value="Search" className="read-more-btn" style={{"backgorundColor": "#EFEFEF"}}/>
+                    </Form>
             </React.Fragment>
         )
     }

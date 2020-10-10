@@ -27,7 +27,7 @@ import MovieSearch from './Containers/Pages/MovieSearch'
 class App extends React.Component {
 
   state = {
-    allUsers: [],
+    // allUsers: [],
     user: null,
     movies: null
   }
@@ -46,11 +46,11 @@ class App extends React.Component {
         movies: data.user.movies
       }))
     } 
-    fetch("http://localhost:3000/api/v1/users")
-    .then(resp => resp.json())
-    .then(data => {
-      this.setState({ allUsers: data})
-    })
+      fetch("http://localhost:3000/api/v1/users")
+      .then(resp => resp.json())
+      .then(data => {
+        this.setState({ allUsers: data})
+      })
     };
 
   logoutHandler = () => {
