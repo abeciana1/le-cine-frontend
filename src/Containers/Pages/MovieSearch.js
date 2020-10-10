@@ -5,14 +5,15 @@ import MovieSearchResults from '../MovieSearchResults'
 class MovieSearch extends React.Component {
 
     state = {
-        title: ""
+        title: "",
+        searchResults: []
     }
 
     searchHandler = (movTitle) => {
+        console.log(movTitle)
         this.setState({
             title: movTitle
         })
-        // this.getMovies(movTitle)
         const options = {
             method: 'POST',
             headers: {
@@ -23,7 +24,11 @@ class MovieSearch extends React.Component {
         }
         fetch("http://localhost:3000/api/v1/search", options)
         .then(res => res.json())
-        .then(console.log)
+        .then(data => {
+            this.setState({
+                searchResults: data
+            })
+        })
     }
 
     render() {
@@ -34,7 +39,8 @@ class MovieSearch extends React.Component {
                     <MovieSearchBar searchHandler={this.searchHandler} />
                     <br />
                     <br />
-                    <MovieSearchResults />
+                    {/* <MovieSearchResults searchResults={this.state.searchResults} /> */}
+                    {this.state.searchResults ? <MovieSearchResults searchResults={this.state.searchResults} /> : null }
                 </div>
             </React.Fragment>
         )
