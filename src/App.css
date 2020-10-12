@@ -132,6 +132,10 @@ aside {
   .site-logo {
     display: none;
   }
+
+  .movie-backdrop {
+    display: none;
+  }
 }
 
 h1 {
@@ -199,4 +203,14 @@ h1 {
   color: black;
   background-color: white;
   text-decoration: none;
+}
+
+.movie-card {
+  opacity: 0.6;
+  transition: opacity 0.6s;
+  z-index: 3;
+}
+
+.hide {
+  display: none;
 }

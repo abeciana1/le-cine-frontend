@@ -11,7 +11,7 @@ class NavBar extends React.Component {
     render() {
         return(
         <React.Fragment>
-            <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/>
+            {this.props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
             <Navbar bg="white" expand="lg">
                 <Navbar.Brand href="/" style={{"color": "#FF3900"}}><strong>Le Cine</strong></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
