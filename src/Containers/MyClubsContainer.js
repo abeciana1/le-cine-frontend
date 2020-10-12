@@ -1,5 +1,6 @@
 import React from 'react'
 import { Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 import ClubComponent from '../Components/ClubComponent'
 
 class MyClubsContainer extends React.Component {
@@ -30,7 +31,7 @@ class MyClubsContainer extends React.Component {
                             {this.getMyClubs()}
                         </Row>
                         {this.state.clubs.count > 4 ? <button className="read-more-btn">View All</button> : null }
-                        {this.state.clubs.count > 4 ? <button className="read-more-btn" style={{"marginLeft": "20px"}}>Find a Club</button> : <button className="read-more-btn">Find a Club</button>}
+                        {this.state.clubs.count > 4 ? <Link to="/clubs/index"><button className="read-more-btn" style={{"marginLeft": "20px"}}>Find a Club</button></Link> : <Link to="/clubs/index"><button className="read-more-btn">Find a Club</button></Link>}
                     </div>
                 </div>
             </React.Fragment>

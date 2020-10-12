@@ -8,11 +8,7 @@ class NavBar extends React.Component {
         this.props.logoutHandler()
     }
 
-    // logoHandler = () => {}
-
     render() {
-        console.log(this.props)
-        
         return(
         <React.Fragment>
             {this.props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }

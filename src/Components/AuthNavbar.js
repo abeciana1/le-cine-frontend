@@ -38,7 +38,11 @@ class AuthNavBar extends React.Component {
                     <Nav.Link href="/my-watchlist" >Watchlist</Nav.Link>
                     {/* <Nav.Link href={"users/" + this.props.user.id + "/dashboard"} >Dashboard</Nav.Link> */}
                     {/* <Nav.Link href={"/users/" + this.props.user.id + "/watchlist"} >My Watchlist</Nav.Link> */}
-                    <Nav.Link href="/dashboard" >Clubs</Nav.Link>
+                    
+                    <NavDropdown title="Clubs" id="basic-nav-dropdown">
+                        <NavDropdown.Item href="/clubs">Clubs</NavDropdown.Item>
+                        <NavDropdown.Item href="/clubs/manage">Manage Clubs</NavDropdown.Item>
+                    </NavDropdown>
                     <Nav.Link onClick={this.logout}>Logout</Nav.Link>
                     {/* <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/about">About Us</Nav.Link>

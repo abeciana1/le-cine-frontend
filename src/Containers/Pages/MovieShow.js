@@ -14,14 +14,9 @@ class MovieShow extends React.Component {
 
     configRuntime = () => {
         let time = this.state.movie.runtime / 60
-        let time_formatted = moment().startOf('day').add(parseFloat(time), "hours").format("hh:mm");
+        let time_formatted = moment().startOf('day').add(parseFloat(time), "hours").format("h:mm");
         return time_formatted
     }
-
-    configRecs = () => {
-        console.log(this.state.movie)
-    }
-
 
     componentDidMount() {
         const options = {
@@ -39,6 +34,10 @@ class MovieShow extends React.Component {
         })
     }
 
+    watchlistHandler = (e) => {
+        this.props.watchlistHandler(this.state.movie)
+    }
+
     render() {
         return(
             <React.Fragment>
@@ -52,7 +51,7 @@ class MovieShow extends React.Component {
                             <h3>{this.configGenres()} | Runtime: {this.configRuntime()}</h3>
                             <br />
                             <p>{this.state.movie.overview}</p>
-                            <button className="read-more-btn">Add to Watchlist</button>
+                            <button onClick={this.watchlistHandler} className="read-more-btn">Add to Watchlist</button>
                             <button className="read-more-btn" style={{"marginLeft": "20px"}}>Add to a Club Watchlist</button>
                         </div>
                         {/* <img src={"https://image.tmdb.org/t/p/w500" + this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "400px"}} /> */}
@@ -61,10 +60,11 @@ class MovieShow extends React.Component {
                         <h1>Trailer</h1>
                         <iframe title={this.state.movie.title} width="560" height="315" src={"https://www.youtube.com/embed/" + this.state.movie.trailer.key} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </section>
-                    <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px",}}>
+                    <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px", "paddingBottom": "20px"}}>
                         <h1>Recommendations</h1>
                         {/* <h2>Recommendations Container</h2> */}
-                        <RecommendationsContainer />
+                        {/* {this.configRecs()} */}
+                        <RecommendationsContainer user={this.props.user} movies={this.state.movie.recommendations} />
                     </section>
                 </React.Fragment>
             :
