@@ -4,36 +4,42 @@ import { Form } from 'react-bootstrap'
 class AddMovieToClub extends React.Component {
 
     state = {
-        selectedClub: null
+        selectedClubId: 0,
+        disabled: false
     }
 
     getClubOptions = () => {
-        return this.props.user.clubs.map(club => <option value={club.id}>{club.name}</option>)
+        return this.props.user.clubs.map(club => <option key={club.id} value={club.id}>{club.name}</option>)
     }
 
     clubSelection = (e) => {
+        console.log(e.target.value) //* club id
         console.log("select")
+        this.setState({
+            selectedClubId: e.target.value
+        })
     }
 
     submitHandler = (e) => {
         e.preventDefault()
-        console.log("submit")
+        this.props.clubWatchlistSubmit()
     }
 
     render() {
-        console.log(this.props.user.clubs.length === 0)
+        console.log(this.state.selectedClub)
         return (
             <React.Fragment>
                 <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
                     <Form onSubmit={this.submitHandler}>
                         <Form.Group controlId="clubWatchlistAddForm">
                             <Form.Label>Which club would you like to add this movie to?</Form.Label>
-                            <Form.Control as="select" onChange={this.clubSelection}>
+                            <Form.Control as="select" name="selectedClub" onChange={this.clubSelection}>
                             {this.props.user.clubs.length === 0 ? <option data-err="not-option">Sorry, you don't seem to be a member of any clubs</option> : <option>- Choose One -</option>}
                             {this.getClubOptions()}
                             </Form.Control>
+                            <Form.Text style={{"color":"red"}}>{this.state.selectedClubId === "- Choose One -" ? "This is not an option, the submit button has been disabled!" : null}</Form.Text>
                         </Form.Group>
-                        {this.props.user.clubs.length === 0 ? null : <input type="submit" value="Add To Club Watchlist" className="read-more-btn"/>}
+                        {this.state.selectedClubId !== 0 ? <input type="submit" value="Add To Club Watchlist" className="read-more-btn" disabled={this.state.selectedClubId === "- Choose One -" ? true : false}/> : null}
                     </Form>
                 </div>
             </React.Fragment>
