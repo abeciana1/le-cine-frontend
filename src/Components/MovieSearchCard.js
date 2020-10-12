@@ -31,6 +31,14 @@ class MovieSearchCard extends React.Component {
         })
     }
 
+    addToClubWatchlist = (clubId) => {
+        // console.logx("movie card")
+        console.log(clubId)
+        //! getting movie id from here
+        this.props.clubWatchlistSubmit()
+        // this.props.clubWatchlistSubmit(clubId, this.props.movie.id)
+    }
+
     render(){
         return(
             <React.Fragment>
@@ -64,15 +72,12 @@ class MovieSearchCard extends React.Component {
                         <Modal.Body>
                         <p style={{"textAlign": "center"}}>Woohoo, you're adding a movie to club's watchlist!</p>
                         <p>You chose: <strong>{this.props.movie.title}, {moment(this.props.movie.release_date).format("YYYY")}</strong></p>
-                        <AddMovieToClub user={this.props.user} />
+                        <AddMovieToClub clubWatchlistSubmit={this.addToClubWatchlist} user={this.props.user} />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.clubWatchlistHandler}>
                             Close
                             </Button>
-                            {/* <Button variant="primary" onClick={this.clubWatchlistHandler}>
-                            Save Changes
-                            </Button> */}
                         </Modal.Footer>
                     </Modal>
                     </>
