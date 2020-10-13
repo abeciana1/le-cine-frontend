@@ -18,6 +18,7 @@ import ClubsManage from './Containers/Pages/ClubsManage'
 import ClubShow from './Containers/Pages/ClubShow'
 import ClubWatchlist from './Containers/Pages/ClubWatchlist'
 import ClubMemberIndex from './Containers/Pages/ClubMemberIndex'
+import ClubMeetingsIndex from './Containers/Pages/ClubMeetingsIndex'
 
 // {/* <Route path="/users/:id" render={({match}) => {
 //   let id = parseInt(match.params.id)
@@ -168,9 +169,9 @@ class App extends React.Component {
 
   deleteFromUserWatchlist = (id) => {
     let foundWatchlist = this.state.userWatchlist.find(watchlist => watchlist.movie_id === id)
-    let newArray = [...this.state.userWatchlist]
-    newArray.splice(newArray.indexOf(foundWatchlist), 1)
-    this.setState({userWatchlist: newArray})
+    // let newArray = [...this.state.userWatchlist]
+    // newArray.splice(newArray.indexOf(foundWatchlist), 1)
+    // this.setState({userWatchlist: newArray}, ()=> console.log(this.state.userWatchlist))
     const options = {method: 'DELETE'}
     fetch("http://localhost:3000/api/v1/watchlists/" + foundWatchlist.id, options)
     .then(res => res.json())
@@ -180,11 +181,23 @@ class App extends React.Component {
     })
   }
 
-  //! Used for club watchlist
-  clubWatchlistSubmit = () => {
-    console.log("submit from app")
+  addToClubWatchlist = (clubId, movie) => {
+    console.log("adding to club")
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        club_id: clubId,
+        movie_id: movie.id
+      })
+    }
+    fetch("http://localhost:3000/api/v1/club_watchlists", options)
+    .then(resp => resp.json())
+    .then(console.log)
   }
-
 
   render(){
     return (
@@ -192,6 +205,10 @@ class App extends React.Component {
       {/* <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> */}
         {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
           <Switch>
+          <Route path="/clubs/:id/meetings" render={({match}) => {
+              let id = parseInt(match.params.id)
+              return <ClubMeetingsIndex user={this.state.user} id={id} />
+            }}/>
             <Route path="/clubs/:id/member-list" render={({match}) => {
               let id = parseInt(match.params.id)
               return <ClubMemberIndex user={this.state.user} id={id} />
@@ -212,7 +229,7 @@ class App extends React.Component {
             }} /> 
             <Route path="/dashboard" render={() => <Dashboard user={this.state.user}/>} />
             <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
-            <Route path="/movies/search" render={() => <MovieSearch clubWatchlistSubmit={this.clubWatchlistSubmit} user={this.state.user} watchlistHandler={this.watchlistHandler} movieShow={this.goToMovieShow} />} />
+            <Route path="/movies/search" render={() => <MovieSearch addToClub={this.addToClubWatchlist} clubWatchlistSubmit={this.clubWatchlistSubmit} user={this.state.user} watchlistHandler={this.watchlistHandler} movieShow={this.goToMovieShow} />} />
             <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} userWatchlistId={this.state.userWatchlistId} deleteHandler={this.deleteFromUserWatchlist} />} />
             <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} />} />
             <Route path="/contact" component={Contact}/>

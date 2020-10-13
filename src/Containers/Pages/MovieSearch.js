@@ -55,7 +55,7 @@ class MovieSearch extends React.Component {
                 <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
                     <h1>Movie Search</h1>
                     <MovieSearchBar searchHandler={this.searchHandler} />
-                    {this.state.searchResults ? <MovieSearchResults clubWatchlistSubmit={this.props.clubWatchlistSubmit} watchlistHandler={this.props.watchlistHandler} movieShow={this.props.movieShow} searchResults={this.state.searchResults} user={this.props.user} /> : null }
+                    {this.state.searchResults ? <MovieSearchResults addToClub={this.props.addToClub} clubWatchlistSubmit={this.props.clubWatchlistSubmit} watchlistHandler={this.props.watchlistHandler} movieShow={this.props.movieShow} searchResults={this.state.searchResults} user={this.props.user} /> : null }
                 </div>
             </React.Fragment>
         )

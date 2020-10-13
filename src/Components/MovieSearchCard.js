@@ -32,11 +32,20 @@ class MovieSearchCard extends React.Component {
     }
 
     addToClubWatchlist = (clubId) => {
-        // console.logx("movie card")
-        console.log(clubId)
-        //! getting movie id from here
-        this.props.clubWatchlistSubmit()
-        // this.props.clubWatchlistSubmit(clubId, this.props.movie.id)
+        let club = parseInt(clubId)
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(this.props.movie)
+        }
+        fetch("http://localhost:3000/api/v1/movies", options)
+        .then(res => res.json())
+        .then(data => {
+            this.props.addToClub(club, data.movie)
+        })
     }
 
     render(){
