@@ -3,6 +3,10 @@ import ClubManagementCard from '../../Components/ClubManagementCard'
 
 class ClubsManage extends React.Component {
 
+    state = {
+        clubs: null
+    }
+
     componentDidMount = () => {
         this.setState({
             clubs: this.props.clubs

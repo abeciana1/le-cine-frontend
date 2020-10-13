@@ -22,7 +22,7 @@ class AddMovieToClub extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.clubWatchlistSubmit()
+        this.props.clubWatchlistSubmit(this.state.selectedClubId)
     }
 
     render() {

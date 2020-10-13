@@ -5,11 +5,13 @@ import RecommendationsContainer from '../RecommendationsContainer'
 class MovieShow extends React.Component {
 
     state = {
-        movie: null
+        movie: null,
+        genres: []
     }
 
     configGenres = () => {
-        return this.state.movie.genres.map(genre => genre.name.split(' ').join(','))
+        let genreNames = this.state.genres.map(genre => genre.name)
+        return genreNames.join(', ')
     }
 
     configRuntime = () => {
@@ -30,7 +32,10 @@ class MovieShow extends React.Component {
         fetch("http://localhost:3000/api/v1/details", options)
         .then(res => res.json())
         .then(movie => {
-            this.setState({movie: movie})
+            this.setState({
+                movie: movie,
+                genres: movie.genres
+            })
         })
     }
 
@@ -39,6 +44,8 @@ class MovieShow extends React.Component {
     }
 
     render() {
+        console.log(this.props.movie)
+        // debugger
         return(
             <React.Fragment>
             {this.state.movie ?
@@ -56,14 +63,29 @@ class MovieShow extends React.Component {
                         </div>
                         {/* <img src={"https://image.tmdb.org/t/p/w500" + this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "400px"}} /> */}
                     </div>
+                    {this.state.movie.trailer ? 
                     <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
                         <h1>Trailer</h1>
                         <iframe title={this.state.movie.title} width="560" height="315" src={"https://www.youtube.com/embed/" + this.state.movie.trailer.key} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                     </section>
+                    :
+                    <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
+                    </section>
+                    }
+                    {this.state.movie.trailer ?
+                    <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px",}}>
+                        <h1>Cast</h1>
+                        {/* CAST CONTAINER HERE -- STRETCH */}
+                    </section>
+                    :
+                    <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
+                        <h1>Cast</h1>
+                        {/* CAST CONTAINER HERE -- STRETCH */}
+                    </section>
+                    }
+                    
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px", "paddingBottom": "20px"}}>
                         <h1>Recommendations</h1>
-                        {/* <h2>Recommendations Container</h2> */}
-                        {/* {this.configRecs()} */}
                         <RecommendationsContainer user={this.props.user} movies={this.state.movie.recommendations} />
                     </section>
                 </React.Fragment>

@@ -1,17 +1,19 @@
 import React from 'react'
 import LoadingComponent from '../../Components/LoadingComponent'
-import { Col, Row } from 'react-bootstrap'
+import { Col, Row, Modal, Button } from 'react-bootstrap'
 import moment from 'moment'
 import UpcomingMeetings from '../UpcomingMeetings'
 import ClubNav from '../../Components/ClubNav'
 import { withRouter } from 'react-router-dom'
+import CreateMeeting from '../../Components/Forms/CreateMeeting'
 
 class ClubShow extends React.Component {
 
     state = {
         club: null,
         allMeetings: [],
-        upcomingMeetings: []
+        upcomingMeetings: [],
+        modalOpen: false
     }
 
     componentDidMount = () => {
@@ -51,10 +53,26 @@ class ClubShow extends React.Component {
         })
     }
 
+    modalHandler = (e) => {
+        this.setState({
+            modalOpen: !this.state.modalOpen
+        })
+    }
+
+    editClubHandler = () => {
+        console.log("edit club")
+    }
+
+    // addMeetingHandler = (e) => {
+    //     this.modalHandler()
+    //     console.log("add meeting")
+        
+    // }
+
     render() {
         return(
             <React.Fragment>
-            {this.state.club ?
+            {this.props.user && this.state.club ?
                 <React.Fragment>
                 <ClubNav club={this.state.club} />
                 <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "100px", "position": "relative", "left":"220px", "top": "50px", "width": "70%"}}>
@@ -66,7 +84,16 @@ class ClubShow extends React.Component {
                         </Col>
                         <Col xs={6}>
                             <h1>{this.state.club.name}</h1>
-                            <h4 style={{"paddingBottom": "40px"}}>Located: {this.state.club.city}, {this.state.club.state}, {this.state.club.country}</h4>
+                            <h4 style={{"paddingBottom": "30px"}}>Located: {this.state.club.city}, {this.state.club.state}, {this.state.club.country}</h4>
+                            {this.state.club.host_id === this.props.user.id ? 
+                            <div>
+                                {/* <br /> */}
+                                <button onClick={this.editClubHandler} className="read-more-btn">Edit Club</button>
+                                <button onClick={this.modalHandler} className="read-more-btn" style={{"marginLeft": "20px"}}>Add A Meeting</button>
+                            </div>
+                            :
+                            null
+                            }
                         </Col>
                         <Col></Col>
                     </Row>
@@ -95,6 +122,23 @@ class ClubShow extends React.Component {
                         <h3>Email to contact {this.state.club.host.email}</h3>
                     </div>
                 </div>
+                <>
+                    <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
+                        <Modal.Header closeButton onClick={this.modalHandler}>
+                            <Modal.Title>Add To Your Club Watchlist</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <p style={{"textAlign": "center"}}>Woohoo, you're adding a meeting to this club!</p>
+                            {/* RENDER MEETING CREATION FORM */}
+                            <CreateMeeting club={this.state.club} />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.modalHandler}>
+                            Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    </>
                 </React.Fragment>
                 : <LoadingComponent />
             }

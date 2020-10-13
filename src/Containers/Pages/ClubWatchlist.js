@@ -1,7 +1,7 @@
 import React from 'react'
-import WatchlistMovieCard from '../../Components/WatchlistMovieCard'
+import ClubMovieCard from '../../Components/ClubMovieCard'
 import ClubNav from '../../Components/ClubNav'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { Row } from 'react-bootstrap'
 
 class ClubWatchlist extends React.Component {
@@ -23,12 +23,12 @@ class ClubWatchlist extends React.Component {
     }
 
     getMovies = () => {
-        return this.state.movies.map(movie => <WatchlistMovieCard key={movie.id} movie={movie} movId={this.props.movId} deleteHandler={this.props.deleteHandler}/>)
+        return this.state.movies.map(movie => <ClubMovieCard key={movie.id} movie={movie} movId={this.props.movId} user={this.props.user} club={this.state.club}/>)
     }
 
     render() {
-        console.log(this.state.club)
-        console.log(this.props.user)
+        // console.log(this.state.club)
+        console.log(this.props)
         return(
             <React.Fragment>
             {this.state.club ?
@@ -43,7 +43,8 @@ class ClubWatchlist extends React.Component {
                     <br />
                     <br />
                     <Row>
-                        {this.props.movies ? this.getMovies() : null }
+                    {this.getMovies()}
+                        {/* {this.props.movies ? this.getMovies() : null } */}
                     </Row>
                 </div>
             </React.Fragment>
@@ -54,4 +55,4 @@ class ClubWatchlist extends React.Component {
     }
 }
 
-export default ClubWatchlist
+export default withRouter(ClubWatchlist)
