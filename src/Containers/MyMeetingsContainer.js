@@ -13,7 +13,6 @@ class MyMeetingsContainer extends React.Component {
         .then(res => res.json())
         .then(user => {
             let newArray = [...user.clubs]
-            // console.log(newArray)
             this.setState({
                 clubs: newArray
             })
@@ -39,7 +38,6 @@ class MyMeetingsContainer extends React.Component {
             <React.Fragment>
                 <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "30px", "paddingBottom": "30px"}}>
                     <h1 style={{"textAlign": "center"}}>Upcoming Club Meetings</h1>
-                    {/* {this.getClubMeetings()} */}
                     <DashboardMeeting club={this.state.club} meetings={this.state.meetings} />
                 </div>
             </React.Fragment>

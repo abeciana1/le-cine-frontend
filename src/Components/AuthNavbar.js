@@ -8,17 +8,6 @@ class AuthNavBar extends React.Component {
         this.props.logoutHandler()
     }
 
-
-    // logoHandler = () => {
-    //     // console.log(this.props.location.pathname)
-    //     if(this.props.location.pathname == "/movies/search"){
-    //         // debugger
-    //         return null
-    //     } else {
-    //         return <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right"}} alt="le-cine-logo"/>
-    //     }
-    // }
-
     render() {
         return(
         <React.Fragment>
@@ -36,19 +25,11 @@ class AuthNavBar extends React.Component {
                     </NavDropdown>
                     <Nav.Link href="/dashboard" >Dashboard</Nav.Link>
                     <Nav.Link href="/my-watchlist" >Watchlist</Nav.Link>
-                    {/* <Nav.Link href={"users/" + this.props.user.id + "/dashboard"} >Dashboard</Nav.Link> */}
-                    {/* <Nav.Link href={"/users/" + this.props.user.id + "/watchlist"} >My Watchlist</Nav.Link> */}
-                    
                     <NavDropdown title="Clubs" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/clubs">Clubs</NavDropdown.Item>
                         <NavDropdown.Item href="/clubs/manage">Manage Clubs</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link onClick={this.logout}>Logout</Nav.Link>
-                    {/* <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/about">About Us</Nav.Link>
-                    <Nav.Link href="/contact">Contact Us</Nav.Link> */}
-                    {/* {this.props.user ?  : <Nav.Link href="/login">Login</Nav.Link>}
-                    {this.props.user ? null : <Nav.Link href="/signup">Signup</Nav.Link>} */}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

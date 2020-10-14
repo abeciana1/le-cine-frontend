@@ -27,7 +27,6 @@ class ClubWatchlist extends React.Component {
     }
 
     render() {
-        // console.log(this.state.club)
         console.log(this.props)
         return(
             <React.Fragment>
@@ -44,7 +43,6 @@ class ClubWatchlist extends React.Component {
                     <br />
                     <Row>
                     {this.getMovies()}
-                        {/* {this.props.movies ? this.getMovies() : null } */}
                     </Row>
                 </div>
             </React.Fragment>

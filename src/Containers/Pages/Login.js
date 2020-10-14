@@ -10,7 +10,6 @@ class Login extends React.Component {
                 <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
                     <LoginForm loginHandler={this.props.loginHandler} />
                 </div>
-                {/* <Footer /> */}
             </React.Fragment>
         )
     }

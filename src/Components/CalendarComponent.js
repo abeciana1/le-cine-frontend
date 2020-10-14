@@ -3,12 +3,6 @@ import moment from 'moment'
 
 class CalendarComponent extends React.Component {
 
-    // formatDay = () => {
-    //     let day = moment(this.props.meeting.date).format('D')
-    //     console.log(day)
-    //     debugger
-    // }
-
     render(){
         return (
             <React.Fragment>

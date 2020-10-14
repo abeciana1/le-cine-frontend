@@ -58,8 +58,6 @@ class ClubsManage extends React.Component {
                         <div style={{"backgroundColor": "#EFEFEF", "width": "80%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
                             <h2 style={{"textAlign":"center"}}>Your Clubs</h2>
                             {this.getClubs()}
-                            {/* {this.state.clubs ? null : this.getClubs()} */}
-                            {/* {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.upcomingMeetings}/> : null} */}
                         </div>
                     </div>
                 </React.Fragment>

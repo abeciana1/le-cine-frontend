@@ -1,5 +1,4 @@
 import React from 'react';
-// import Footer from '../Components/Footer'
 
 const Contact = (props) => {
     return (
@@ -19,7 +18,6 @@ const Contact = (props) => {
             
             <img id="lightbulb-gif" src={process.env.PUBLIC_URL + './images/ezgif.com-video-to-gif (9).gif'} alt="abstract design" />
         </div>
-        {/* <Footer /> */}
     </div>
         </React.Fragment>
     )

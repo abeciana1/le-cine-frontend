@@ -24,13 +24,11 @@ class CreateMovieMeeting extends React.Component {
     }
 
     movieSelection = (e) => {
-        // console.log(e.target.value)
         this.setState({movie_id: e.target.value})
     }
 
     submitHandler = (e) => {
         e.preventDefault()
-        // console.log("submit")
         this.props.submitHandler(this.state)
     }
 

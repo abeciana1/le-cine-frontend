@@ -15,7 +15,6 @@ class ClubsIndex extends React.Component {
         .then(res => res.json())
         .then(data =>{
             console.log(data)
-            // debugger
             let notPrivate = data.filter(club => club.privacy === false)
             this.setState({
                 publicClubs: notPrivate

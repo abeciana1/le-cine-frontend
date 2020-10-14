@@ -21,22 +21,9 @@ import ClubMemberIndex from './Containers/Pages/ClubMemberIndex'
 import ClubMeetingsIndex from './Containers/Pages/ClubMeetingsIndex'
 import ClubMeetingShow from './Containers/Pages/ClubMeetingShow'
 
-// {/* <Route path="/users/:id" render={({match}) => {
-//   let id = parseInt(match.params.id)
-//   let foundUser = this.state.allUsers.find(user => user.id === id)
-//   return(
-//     <>
-//     <UserWatchlist user={foundUser} />
-//     {/* <Dashboard user={foundUser}/> */}
-//   //   </>
-//   // ) 
-  // }} /> */}
-
-
 class App extends React.Component {
 
   state = {
-    // allUsers: [],
     user: null,
     movies: null,
     clubs: [],
@@ -129,8 +116,6 @@ class App extends React.Component {
     fetch("http://localhost:3000/api/v1/movies", options)
     .then(res => res.json())
     .then(data => {
-      // data.movie.poster_path = `https://image.tmdb.org/t/p/w500${data.movie.poster_path}`
-      // debugger
       let newArray = [...this.state.movies, data.movie]
         this.setState({
           selectedMovieId: data.movie.id,
@@ -170,9 +155,6 @@ class App extends React.Component {
 
   deleteFromUserWatchlist = (id) => {
     let foundWatchlist = this.state.userWatchlist.find(watchlist => watchlist.movie_id === id)
-    // let newArray = [...this.state.userWatchlist]
-    // newArray.splice(newArray.indexOf(foundWatchlist), 1)
-    // this.setState({userWatchlist: newArray}, ()=> console.log(this.state.userWatchlist))
     const options = {method: 'DELETE'}
     fetch("http://localhost:3000/api/v1/watchlists/" + foundWatchlist.id, options)
     .then(res => res.json())
@@ -206,17 +188,13 @@ class App extends React.Component {
       {/* <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> */}
         {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
           <Switch>
-          {/* <Route path="/meetings/:id" */}
           <Route path="/clubs/:club_id/meetings/:meeting_id" render={({match}) => {
             console.log(match)
-            // debugger
               let meeting_id = parseInt(match.params.meeting_id)
               let club_id = parseInt(match.params.club_id)
               return <ClubMeetingShow user={this.state.user} club_id={club_id} meeting_id={meeting_id} />
             }}/>
           <Route path="/clubs/:id/meetings" render={({match}) => {
-            // console.log(match)
-            // debugger
               let id = parseInt(match.params.id)
               return <ClubMeetingsIndex user={this.state.user} id={id} />
             }}/>
