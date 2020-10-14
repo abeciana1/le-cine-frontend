@@ -4,8 +4,17 @@ import moment from 'moment'
 
 class MovieMeeting extends React.Component {
 
+    removeMovieMeeting = (e) => {
+        this.props.removeMovieMeeting(this.props.movieMeeting)
+        const options = {method: 'DELETE'}
+        fetch("http://localhost:3000/api/v1/movie_meetings/" + this.props.movieMeeting.id, options)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+
     render(){
-        console.log(this.props)
         return(
             <React.Fragment>
             {this.props.movieMeeting ?
@@ -37,6 +46,8 @@ class MovieMeeting extends React.Component {
                         <img src={this.props.movieMeeting.movie.poster_path} alt={this.props.movieMeeting.movie.title} style={{"height":"250px","float":"left", "marginRight": "10px", "marginBottom": "5px", "padding": "2px"}}/>
                         <div style={{"marginLeft":"200px", "width":"100%", "top":"200px"}}>
                         {this.props.movieMeeting.movie.overview}
+                        <br />
+                        <br />
                         <p>
                         <strong>{moment(this.props.movieMeeting.movie.release_date).format("MMM Do YYYY")}</strong>
                         </p>
@@ -44,6 +55,7 @@ class MovieMeeting extends React.Component {
                         <Link to={"/movies/search/" + this.props.movieMeeting.movie.mov_id}>
                             <button className="read-more-btn">View Details</button>
                         </Link>
+                        <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button>
                         </div>
                     </div>
                 </div>
