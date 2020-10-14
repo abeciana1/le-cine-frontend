@@ -6,6 +6,8 @@ import UpcomingMeetings from '../UpcomingMeetings'
 import ClubNav from '../../Components/ClubNav'
 import { withRouter } from 'react-router-dom'
 import CreateMeeting from '../../Components/Forms/CreateMeeting'
+import UpdateClub from '../../Components/Forms/UpdateClub'
+
 
 class ClubShow extends React.Component {
 
@@ -13,6 +15,8 @@ class ClubShow extends React.Component {
         club: null,
         allMeetings: [],
         upcomingMeetings: [],
+        members: [],
+        meetingModalOpen: false,
         modalOpen: false
     }
 
@@ -20,9 +24,11 @@ class ClubShow extends React.Component {
         fetch("http://localhost:3000/api/v1/clubs/" + this.props.id)
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             this.setState({
                 club: data,
-                allMeetings: data.meetings
+                allMeetings: data.meetings,
+                members: data.users
             })
             this.getNextMeeting()
         })
@@ -53,6 +59,12 @@ class ClubShow extends React.Component {
         })
     }
 
+    meetingModalHandler = (e) => {
+        this.setState({
+            meetingModalOpen: !this.state.meetingModalOpen
+        })
+    }
+
     modalHandler = (e) => {
         this.setState({
             modalOpen: !this.state.modalOpen
@@ -63,11 +75,53 @@ class ClubShow extends React.Component {
         console.log("edit club")
     }
 
-    // addMeetingHandler = (e) => {
-    //     this.modalHandler()
-    //     console.log("add meeting")
-        
-    // }
+    addMeetingToClub = (meetingObj) => {
+        this.meetingModalHandler()
+        let newArray = [...this.state.allMeetings, meetingObj]
+        this.setState({
+            allMeetings: newArray
+        })
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(meetingObj)
+        }
+        fetch("http://localhost:3000/api/v1/meetings", options)
+        .then(res => res.json())
+        .then(window.location.reload(false))
+    }
+
+    disbandHandler = (e) => {
+        console.log("disband")
+        const options = {method: 'DELETE'}
+        fetch("http://localhost:3000/api/v1/clubs/" + this.state.club.id, options)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            this.props.history.push('/clubs')
+        })
+    }
+
+    updateHandler = (clubObj) => {
+        this.modalHandler()
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(clubObj)
+        }
+        fetch("http://localhost:3000/api/v1/clubs/" + clubObj.id, options)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            window.location.reload(false)
+        })
+    }
 
     render() {
         return(
@@ -79,7 +133,7 @@ class ClubShow extends React.Component {
                 <Row>
                         <Col xs={5}>
                         <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "width": "40%", "textAlign": "center", "paddingTop": "40px", "paddingBottom": "40px"}}>
-                            <img src={this.state.club.image} alt="user-profile-pic" style={{"borderRadius":"60px", "height": "100px", "backgroundColor": "white"}} />
+                            <img src={this.state.club.image} alt="user-profile-pic" style={{"borderRadius":"60px", "height": "100px", "width": "100px","backgroundColor": "white"}} />
                         </div>
                         </Col>
                         <Col xs={6}>
@@ -87,9 +141,12 @@ class ClubShow extends React.Component {
                             <h4 style={{"paddingBottom": "30px"}}>Located: {this.state.club.city}, {this.state.club.state}, {this.state.club.country}</h4>
                             {this.state.club.host_id === this.props.user.id ? 
                             <div>
-                                {/* <br /> */}
-                                <button onClick={this.editClubHandler} className="read-more-btn">Edit Club</button>
-                                <button onClick={this.modalHandler} className="read-more-btn" style={{"marginLeft": "20px"}}>Add A Meeting</button>
+                                <button onClick={this.modalHandler} className="read-more-btn">Update Club</button>
+                                <button onClick={this.meetingModalHandler} className="read-more-btn" style={{"marginLeft": "20px"}}>Add A Meeting</button>
+                                <br />
+                                <br />
+                                {this.state.members.length !== 0 ? <p style={{"color":"red"}}>You can't disband a club that has members!</p> : null}
+                                <button onClick={this.disbandHandler} className="read-more-btn" disabled={this.state.members.length !== 0 ? true : false}>Disband Club</button>
                             </div>
                             :
                             null
@@ -111,7 +168,7 @@ class ClubShow extends React.Component {
                     <br />
                         <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
                             <h2 style={{"textAlign":"center"}}>Upcoming Meetings</h2>
-                            {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.upcomingMeetings}/> : null}
+                            {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.upcomingMeetings} club={this.state.club} /> : null}
                         </div>
                     <br />
                     <br />
@@ -123,14 +180,29 @@ class ClubShow extends React.Component {
                     </div>
                 </div>
                 <>
-                    <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
-                        <Modal.Header closeButton onClick={this.modalHandler}>
-                            <Modal.Title>Add To Your Club Watchlist</Modal.Title>
+                    <Modal show={this.state.meetingModalOpen === true} close={this.state.meetingModalOpen === false} >
+                        <Modal.Header closeButton onClick={this.meetingModalHandler}>
+                            <Modal.Title>Add A Meeting To Your Club</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                         <p style={{"textAlign": "center"}}>Woohoo, you're adding a meeting to this club!</p>
-                            {/* RENDER MEETING CREATION FORM */}
-                            <CreateMeeting club={this.state.club} />
+                            <CreateMeeting club={this.state.club} submitHandler={this.addMeetingToClub} />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.meetingModalHandler}>
+                            Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    </>
+                    <>
+                    <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
+                        <Modal.Header closeButton onClick={this.modalHandler}>
+                            <Modal.Title>Update Your Club</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <p style={{"textAlign": "center"}}>Feel free to update your club!</p>
+                            <UpdateClub club={this.state.club} user={this.props.user} submitHandler={this.updateHandler} />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.modalHandler}>

@@ -21,7 +21,9 @@ class MemberCard extends React.Component {
                                         {this.props.club.host_id === this.props.user.id ? 
                                         <div>
                                             <p>{this.props.member.email}</p>
-                                            <button className="read-more-btn">Email {this.props.member.first_name}</button>
+                                            <a href={"mailto:" + this.props.member.email}>
+                                                <button className="read-more-btn">Email {this.props.member.first_name}</button>
+                                            </a>
                                             <button className="read-more-btn" style={{"marginLeft":"20px"}}>Remove Member</button>
                                         </div>
                                         :

@@ -4,7 +4,7 @@ import ClubMeetingComponent from '../Components/ClubMeetingComponent'
 class UpcomingMeetings extends React.Component {
 
     getMeetings = () => {
-        return this.props.meetings.map(meeting => <ClubMeetingComponent key={meeting.id} meeting={meeting}/>)
+        return this.props.meetings.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.props.club} meeting={meeting}/>)
     }
 
     render() {

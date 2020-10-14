@@ -19,6 +19,7 @@ import ClubShow from './Containers/Pages/ClubShow'
 import ClubWatchlist from './Containers/Pages/ClubWatchlist'
 import ClubMemberIndex from './Containers/Pages/ClubMemberIndex'
 import ClubMeetingsIndex from './Containers/Pages/ClubMeetingsIndex'
+import ClubMeetingShow from './Containers/Pages/ClubMeetingShow'
 
 // {/* <Route path="/users/:id" render={({match}) => {
 //   let id = parseInt(match.params.id)
@@ -205,7 +206,17 @@ class App extends React.Component {
       {/* <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> */}
         {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
           <Switch>
+          {/* <Route path="/meetings/:id" */}
+          <Route path="/clubs/:club_id/meetings/:meeting_id" render={({match}) => {
+            console.log(match)
+            // debugger
+              let meeting_id = parseInt(match.params.meeting_id)
+              let club_id = parseInt(match.params.club_id)
+              return <ClubMeetingShow user={this.state.user} club_id={club_id} meeting_id={meeting_id} />
+            }}/>
           <Route path="/clubs/:id/meetings" render={({match}) => {
+            // console.log(match)
+            // debugger
               let id = parseInt(match.params.id)
               return <ClubMeetingsIndex user={this.state.user} id={id} />
             }}/>

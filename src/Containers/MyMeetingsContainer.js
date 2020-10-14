@@ -21,39 +21,25 @@ class MyMeetingsContainer extends React.Component {
         })
     }
 
-    // getClubMeetings = () => {
-    //     for (const club of this.state.clubs) {
-    //             fetch("http://localhost:3000/api/v1/clubs/" + club.id)
-    //             .then(res => res.json())
-    //             .then(club => {
-    //                 this.setState({
-    //                     meetings: club.meetings
-    //                 })
-    //             })
-    //     }
-    // }
-
     getClubMeetings = () => {
         for (const club of this.state.clubs) {
-                fetch("http://localhost:3000/api/v1/clubs/" + club.id)
-                .then(res => res.json())
-                .then(club => {
-                    this.setState({
-                        club: club,
-                        meetings: club.meetings
-                    })
+            fetch("http://localhost:3000/api/v1/clubs/" + club.id)
+            .then(res => res.json())
+            .then(club => {
+                this.setState({
+                    club: club,
+                    meetings: club.meetings
                 })
+            })
         }
     }
 
     render() {
-        console.log(this.state.meetings)
         return(
             <React.Fragment>
                 <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "30px", "paddingBottom": "30px"}}>
                     <h1 style={{"textAlign": "center"}}>Upcoming Club Meetings</h1>
                     {/* {this.getClubMeetings()} */}
-                    {/* <DashboardMeeting  meetings={this.state.meetings} /> */}
                     <DashboardMeeting club={this.state.club} meetings={this.state.meetings} />
                 </div>
             </React.Fragment>

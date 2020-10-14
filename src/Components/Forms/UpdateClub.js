@@ -4,15 +4,16 @@ import { Form } from 'react-bootstrap'
 class CreateClub extends React.Component {
 
     state = {
-        name: "",
-        about: "",
-        city: "",
-        state: "",
-        country: "",
-        image: "",
-        member_count: 0,
-        member_capacity: 0,
-        privacy: false,
+        id: this.props.club.id,
+        name: this.props.club.name,
+        about: this.props.club.about,
+        city: this.props.club.city,
+        state: this.props.club.state,
+        country: this.props.club.country,
+        image: this.props.club.image,
+        member_count: this.props.club.member_count,
+        member_capacity: this.props.club.member_capacity,
+        privacy: this.props.club.privacy,
         host_id: this.props.user.id
     }
 
@@ -26,13 +27,13 @@ class CreateClub extends React.Component {
         this.setState({
             privacy: !this.state.privacy
         })
-        console.log(this.state.privacy)
     }
 
     submitHandler = (e) => {
         e.preventDefault()
-        this.props.createClubHandler(this.state)
+        this.props.submitHandler(this.state)
         this.setState({
+            id: 0,
             name: "",
             about: "",
             city: "",
