@@ -2,6 +2,7 @@ import React from 'react'
 import ClubNav from '../../Components/ClubNav'
 import ClubMeetingComponent from '../../Components/ClubMeetingComponent'
 import moment from 'moment'
+import { withRouter } from 'react-router-dom'
 
 class ClubMeetingsIndex extends React.Component {
 
@@ -26,7 +27,6 @@ class ClubMeetingsIndex extends React.Component {
     }
 
     getMeetings = () => {
-        console.log(this.state.allMeetings)
         let todayDate = moment().format('YYYY-MM-DD')
         this.setState({
             upcomingMeetings: this.state.allMeetings.filter(meeting => moment(meeting.date).isAfter(todayDate)),
@@ -38,15 +38,36 @@ class ClubMeetingsIndex extends React.Component {
 
     renderUpcomingMeeting = () => {
         if(this.state.upcomingMeetings.length !== 0){
-            return this.state.upcomingMeetings.map(meeting => <ClubMeetingComponent key={meeting.id} meeting={meeting} />)
+            console.log(this.state.upcomingMeetings)
+            return this.state.upcomingMeetings.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.state.club} deleteMeetingHandler={this.deleteMeetingHandler} meeting={meeting} />)
         }else {
             return <h3 style={{"textAlign": "center"}}>Sorry, there are no upcoming meetings!</h3>
         }
     }
 
     renderPreviousMeeting = () => {
-        return this.state.previousMeetings.map(meeting => <ClubMeetingComponent key={meeting.id} meeting={meeting} />)
+        return this.state.previousMeetings.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.state.club} deleteMeetingHandler={this.deleteMeetingHandler} meeting={meeting} />)
     }
+
+    deleteMeetingHandler = (meetingObj) => {
+        let newArray = [...this.state.allMeetings]
+            newArray.splice(newArray.indexOf(meetingObj), 1)
+            this.setState({ allMeetings: newArray})
+        console.log(meetingObj)
+        const options = {method: 'DELETE'}
+        fetch("http://localhost:3000/api/v1/meetings/" + meetingObj.id, options)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            window.location.reload(false)
+        })
+    }
+
+    // removeHandler = (movieObj) => {
+    //     // let newArray = [...this.state.favsArray]
+        
+    //     this.setState({favsArray: newArray}, alert('Movies!'))
+    // }
 
     render() {
         return(
@@ -95,4 +116,4 @@ class ClubMeetingsIndex extends React.Component {
     }
 }
 
-export default ClubMeetingsIndex
+export default withRouter(ClubMeetingsIndex)

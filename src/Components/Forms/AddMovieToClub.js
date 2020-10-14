@@ -13,8 +13,6 @@ class AddMovieToClub extends React.Component {
     }
 
     clubSelection = (e) => {
-        console.log(e.target.value) //* club id
-        console.log("select")
         this.setState({
             selectedClubId: e.target.value
         })
