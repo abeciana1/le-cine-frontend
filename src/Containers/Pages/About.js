@@ -1,9 +1,7 @@
 import React from 'react';
-// import Footer from '../Components/Footer'
 
 const About = (props) => {
     return (
-        // <React.Fragment>
         <React.Fragment>
         <div>
             <div className="page-container">
@@ -31,10 +29,8 @@ const About = (props) => {
         </div>
         </div>
         <div style={{"bottom": "0", "left": "0", "marginBottom": "0px"}}>
-        {/* <Footer /> */}
         </div>
         </div>
-        {/* </React.Fragment> */}
     </React.Fragment>
     )
 }

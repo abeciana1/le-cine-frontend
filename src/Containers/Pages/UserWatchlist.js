@@ -10,7 +10,6 @@ class UserWatchlist extends React.Component {
     }
 
     render() {
-        // console.log(this.props)
         return(
             <React.Fragment>
                 <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>

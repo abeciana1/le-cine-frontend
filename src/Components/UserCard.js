@@ -1,10 +1,5 @@
 import React from 'react';
 
-// const formatBirthday = (props) => {
-//     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-//     return console.log(props.user.birthday.toLocaleDateString("en-US", options))
-// }
-
 const UserCard = (props) => {
     return(
         <React.Fragment>

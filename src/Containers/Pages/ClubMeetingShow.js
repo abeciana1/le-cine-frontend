@@ -2,6 +2,7 @@ import React from 'react'
 import ClubNav from '../../Components/ClubNav'
 import CalendarComponent from '../../Components/CalendarComponent'
 import MovieMeeting from '../../Components/MovieMeeting'
+import MovieMeetingModal from '../../Components/MovieMeetingModal'
 
 class ClubMeetingShow extends React.Component {
 
@@ -9,7 +10,8 @@ class ClubMeetingShow extends React.Component {
         club: null,
         movies: null,
         meeting: null,
-        movieMeetings: []
+        movieMeetings: [],
+        movieMeetingId: []
     }
 
     componentDidMount = () => {
@@ -17,7 +19,6 @@ class ClubMeetingShow extends React.Component {
         fetch("http://localhost:3000/api/v1/clubs/" + this.props.club_id)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             this.setState({
                 club: data,
                 movies: data.movies
@@ -26,23 +27,45 @@ class ClubMeetingShow extends React.Component {
         fetch("http://localhost:3000/api/v1/meetings/" + this.props.meeting_id)
         .then(res => res.json())
         .then(data => {
-            this.setState({
-                meeting: data,
-                movieMeetings: data.movies
-            })
             console.log(data)
+            this.setState({
+                meeting: data//,
+            })
+            for (const movieMeeting of data.movie_meetings) {
+                // console.log(id)
+                fetch("http://localhost:3000/api/v1/movie_meetings/" + movieMeeting.id)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    // let newArray = []
+                    this.setState({
+                        movieMeetings: [...this.state.movieMeetings, data]
+                    })
+                })
+            }
         })
     }
 
     renderMovieMeetings = () => {
-        console.log(this.state.meeting)
-        return this.state.movieMeetings.map(movie => <MovieMeeting key={movie.id} movie={movie} />)
+        return this.state.movieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} />)
     }
 
-    addMovieMeetingOn = (movieObj) => {
-        let newArray = [...this.state.movies, movieObj]
-        this.setState({
-            movies: newArray
+    submitHandler = (movieMeetingObj) => {
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(movieMeetingObj)
+        }
+        fetch("http://localhost:3000/api/v1/movie_meetings", options)
+        .then(res => res.json())
+        .then(data => {
+            this.setState({
+                movieMeetings: [...this.state.movieMeetings, data.movie_meeting],
+                movieMeetingId: [...this.state.movieMeetingId, data.movie_meeting.id]
+            })
         })
     }
 
@@ -76,13 +99,13 @@ class ClubMeetingShow extends React.Component {
                             </div>
                         </div>
                         <br />
-                        <MovieMeeting club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} />
+                        <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
                     </div>
                     <div style={{"paddingTop": "50px"}}>
                     {this.state.movieMeetings.length === 0 ?
                         <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "50%", "textAlign": "center", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
                             <h2>There are no movies set for this meeting!</h2>
-                            <MovieMeeting club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} />
+                            <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
                         </div>
                         :
                         this.renderMovieMeetings()

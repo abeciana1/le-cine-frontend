@@ -51,7 +51,6 @@ class HostClubsContainer extends React.Component {
             <React.Fragment>
                 <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "width": "60%", "paddingTop": "30px", "paddingBottom": "30px"}}>
                     <div style={{"marginLeft" : "20px", "marginRight": "20px"}}>
-                    {/* <div style={{"marginLeft" : "auto", "marginRight": "auto"}}> */}
                         <h1>My Hosted Clubs</h1>
                         <Row>
                             {this.getMyClubs()}

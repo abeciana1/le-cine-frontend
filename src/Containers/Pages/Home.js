@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { Alert } from 'react-bootstrap'
-// import AltFooter from '../Components/AltFooter'
 
 
 class Home extends React.Component {
@@ -56,7 +55,6 @@ class Home extends React.Component {
                     </div>
                 </div>
             </div>
-            {/* <AltFooter /> */}
             </React.Fragment>
         )
     }
