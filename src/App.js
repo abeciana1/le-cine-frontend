@@ -189,7 +189,6 @@ class App extends React.Component {
         {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
           <Switch>
           <Route path="/clubs/:club_id/meetings/:meeting_id" render={({match}) => {
-            console.log(match)
               let meeting_id = parseInt(match.params.meeting_id)
               let club_id = parseInt(match.params.club_id)
               return <ClubMeetingShow user={this.state.user} club_id={club_id} meeting_id={meeting_id} />

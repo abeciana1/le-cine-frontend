@@ -44,8 +44,6 @@ class MovieShow extends React.Component {
     }
 
     render() {
-        console.log(this.props.movie)
-        // debugger
         return(
             <React.Fragment>
             {this.state.movie ?
@@ -61,7 +59,6 @@ class MovieShow extends React.Component {
                             <button onClick={this.watchlistHandler} className="read-more-btn">Add to Watchlist</button>
                             <button className="read-more-btn" style={{"marginLeft": "20px"}}>Add to a Club Watchlist</button>
                         </div>
-                        {/* <img src={"https://image.tmdb.org/t/p/w500" + this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "400px"}} /> */}
                     </div>
                     {this.state.movie.trailer ? 
                     <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
@@ -72,18 +69,17 @@ class MovieShow extends React.Component {
                     <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
                     </section>
                     }
-                    {this.state.movie.trailer ?
+                    {/* {this.state.movie.trailer ?
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px",}}>
                         <h1>Cast</h1>
-                        {/* CAST CONTAINER HERE -- STRETCH */}
+                        CAST CONTAINER HERE -- STRETCH
                     </section>
                     :
                     <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
                         <h1>Cast</h1>
-                        {/* CAST CONTAINER HERE -- STRETCH */}
+                        CAST CONTAINER HERE -- STRETCH
                     </section>
-                    }
-                    
+                    } */}
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px", "paddingBottom": "20px"}}>
                         <h1>Recommendations</h1>
                         <RecommendationsContainer user={this.props.user} movies={this.state.movie.recommendations} />

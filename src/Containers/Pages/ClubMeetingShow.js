@@ -15,7 +15,6 @@ class ClubMeetingShow extends React.Component {
     }
 
     componentDidMount = () => {
-        console.log(this.props)
         fetch("http://localhost:3000/api/v1/clubs/" + this.props.club_id)
         .then(res => res.json())
         .then(data => {
@@ -27,17 +26,13 @@ class ClubMeetingShow extends React.Component {
         fetch("http://localhost:3000/api/v1/meetings/" + this.props.meeting_id)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             this.setState({
                 meeting: data//,
             })
             for (const movieMeeting of data.movie_meetings) {
-                // console.log(id)
                 fetch("http://localhost:3000/api/v1/movie_meetings/" + movieMeeting.id)
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data)
-                    // let newArray = []
                     this.setState({
                         movieMeetings: [...this.state.movieMeetings, data]
                     })
@@ -47,7 +42,7 @@ class ClubMeetingShow extends React.Component {
     }
 
     renderMovieMeetings = () => {
-        return this.state.movieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} />)
+        return this.state.movieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} />)
     }
 
     submitHandler = (movieMeetingObj) => {
@@ -69,14 +64,18 @@ class ClubMeetingShow extends React.Component {
         })
     }
 
-    //TODO - Make MovieMeeting into two components - one for card and one for modal form
-    //TODO - add CDM to find movie and meeting association
-        //TODO - data should add itself to state and then render through renderMovieMeetings function for cards
-        //TODO - create custom action and route on backend to find association
-    //TODO - add delete movie meeting funtion
-    //TODO - create update meeting form / component
-    //TODO - add email all button in member index page
-    //TODO - work on remove member button
+    removeMovieMeeting = (movieMeetingObj) => {
+        console.log("delete")
+        let newArray = [...this.state.movieMeetings]
+        newArray.splice(newArray.indexOf(movieMeetingObj), 1)
+        this.setState({
+            movieMeetings: newArray
+        })
+    }
+    
+    // TODO - create update meeting form / component
+    // TODO - add email all button in member index page
+    // TODO - work on remove member button
 
 
     render() {
