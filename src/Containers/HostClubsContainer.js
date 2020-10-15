@@ -17,20 +17,16 @@ class HostClubsContainer extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3000/api/v1/users/" + this.props.user.id)
-        .then(res => res.json())
-        .then(user => {
-            this.setState({clubs: user.host_clubs})
-        })
+        this.setState({clubs: this.props.user.host_clubs})
     }
 
     getMyClubs = () => {
+        console.log(this.state.clubs)
         return this.state.clubs.slice(0,5).map(club => <ClubComponent key={club.id} club={club}/>)
     }
 
     createClubHandler = (clubObj) => {
         this.setState({modalOpen: false})
-        console.log("club created")
         const options = {
             method: 'POST',
             headers: {
@@ -43,6 +39,8 @@ class HostClubsContainer extends React.Component {
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            let newArray = [...this.state.clubs, data.club]
+            this.setState({clubs: newArray})
         })
     }
 
@@ -62,7 +60,7 @@ class HostClubsContainer extends React.Component {
                 <>
                     <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
                         <Modal.Header closeButton onClick={this.modalHandler}>
-                            <Modal.Title>Add To Your Club Watchlist</Modal.Title>
+                            <Modal.Title>Create Your Own Club</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                         <p style={{"textAlign": "center"}}>Woohoo, you're creating a new club!</p>

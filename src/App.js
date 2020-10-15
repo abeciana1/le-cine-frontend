@@ -12,7 +12,6 @@ import Dashboard from './Containers/Pages/Dashboard';
 import UserWatchlist from './Containers/Pages/UserWatchlist'
 import MovieSearch from './Containers/Pages/MovieSearch'
 import MovieShow from './Containers/Pages/MovieShow'
-import ClubsGeneral from './Containers/Pages/ClubsGeneral'
 import ClubsIndex from './Containers/Pages/ClubsIndex'
 import ClubsManage from './Containers/Pages/ClubsManage'
 import ClubShow from './Containers/Pages/ClubShow'
@@ -221,7 +220,7 @@ class App extends React.Component {
             <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} userWatchlistId={this.state.userWatchlistId} deleteHandler={this.deleteFromUserWatchlist} />} />
             <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} />} />
             <Route path="/contact" component={Contact}/>
-            <Route path="/clubs" render={() => <ClubsGeneral user={this.state.user} />}/>
+            {/* <Route path="/clubs" render={() => <ClubsGeneral user={this.state.user} />}/> */}
             <Route path="/about" component={About} />
             <Route path="/" render={()=> <Home user={this.state.user} />} />
           </Switch>
