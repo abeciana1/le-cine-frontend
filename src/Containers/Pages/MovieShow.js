@@ -69,7 +69,7 @@ class MovieShow extends React.Component {
                     <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
                     </section>
                     }
-                    {/* {this.state.movie.trailer ?
+                    {this.state.movie.trailer ?
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px",}}>
                         <h1>Cast</h1>
                         CAST CONTAINER HERE -- STRETCH
@@ -79,7 +79,7 @@ class MovieShow extends React.Component {
                         <h1>Cast</h1>
                         CAST CONTAINER HERE -- STRETCH
                     </section>
-                    } */}
+                    }
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px", "paddingBottom": "20px"}}>
                         <h1>Recommendations</h1>
                         <RecommendationsContainer user={this.props.user} movies={this.state.movie.recommendations} />

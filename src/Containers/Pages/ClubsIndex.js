@@ -1,5 +1,4 @@
 import React from 'react'
-import LoadingComponent from '../../Components/LoadingComponent'
 import ClubComponent from '../../Components/ClubComponent'
 import { Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
@@ -50,7 +49,7 @@ class ClubsIndex extends React.Component {
                     </Link>
                 </div>
                 :
-                <LoadingComponent />
+                null
             }
             </React.Fragment>
         )

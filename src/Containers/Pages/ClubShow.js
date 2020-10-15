@@ -1,5 +1,4 @@
 import React from 'react'
-import LoadingComponent from '../../Components/LoadingComponent'
 import { Col, Row, Modal, Button } from 'react-bootstrap'
 import moment from 'moment'
 import UpcomingMeetings from '../UpcomingMeetings'
@@ -126,6 +125,7 @@ class ClubShow extends React.Component {
     render() {
         return(
             <React.Fragment>
+            {/* {this.props.user && this.state.club ? */}
             {this.props.user && this.state.club ?
                 <React.Fragment>
                 <ClubNav club={this.state.club} />
@@ -212,7 +212,7 @@ class ClubShow extends React.Component {
                     </Modal>
                     </>
                 </React.Fragment>
-                : <LoadingComponent />
+                : null
             }
             </React.Fragment>
         )

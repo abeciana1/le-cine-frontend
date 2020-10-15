@@ -63,12 +63,6 @@ class ClubMeetingsIndex extends React.Component {
         })
     }
 
-    // removeHandler = (movieObj) => {
-    //     // let newArray = [...this.state.favsArray]
-        
-    //     this.setState({favsArray: newArray}, alert('Movies!'))
-    // }
-
     render() {
         return(
             <React.Fragment>
@@ -99,7 +93,6 @@ class ClubMeetingsIndex extends React.Component {
                         </div>
                     </div>
                 </div>
-                {/* <br /> */}
                 <div style={{"backgroundColor": "#EFEFEF", "width": "80%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
                     <div style={{"backgroundColor": "white", "paddingTop":"40px", "paddingBottom":"40px","marginLeft":"50px", "marginRight":"50px"}}>
                         {this.renderPreviousMeeting()}

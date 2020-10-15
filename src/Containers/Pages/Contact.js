@@ -15,7 +15,6 @@ const Contact = (props) => {
             </div>
         </div>
         <div className="page-right">
-            
             <img id="lightbulb-gif" src={process.env.PUBLIC_URL + './images/ezgif.com-video-to-gif (9).gif'} alt="abstract design" />
         </div>
     </div>
