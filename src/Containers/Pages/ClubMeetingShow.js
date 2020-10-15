@@ -3,6 +3,8 @@ import ClubNav from '../../Components/ClubNav'
 import CalendarComponent from '../../Components/CalendarComponent'
 import MovieMeeting from '../../Components/MovieMeeting'
 import MovieMeetingModal from '../../Components/MovieMeetingModal'
+import UpdateMovieMeetingModal from '../../Components/UpdateMovieMeetingModal'
+import { Alert } from 'react-bootstrap'
 
 class ClubMeetingShow extends React.Component {
 
@@ -11,7 +13,8 @@ class ClubMeetingShow extends React.Component {
         movies: null,
         meeting: null,
         movieMeetings: [],
-        movieMeetingId: []
+        movieMeetingId: [],
+        showAlert: false
     }
 
     componentDidMount = () => {
@@ -72,8 +75,21 @@ class ClubMeetingShow extends React.Component {
             movieMeetings: newArray
         })
     }
+
+    updateHandler = (meetingObj) => {
+        console.log(meetingObj)
+        this.renderAlert()
+        this.setState({
+            meeting: meetingObj
+        })
+    }
+
+    renderAlert = () => {
+        this.setState({
+            showAlert: true
+        })
+    }
     
-    // TODO - create update meeting form / component
     // TODO - add email all button in member index page
     // TODO - work on remove member button
 
@@ -87,8 +103,13 @@ class ClubMeetingShow extends React.Component {
             <div style={{"marginTop":"120px"}}>
                 <ClubNav club={this.state.club} />
             </div>
-                <div style={{"marginLeft": "300px", "marginTop": "80px", "marginRight": "100px", "width": "100%"}}>
+                <div style={{"marginLeft": "300px", "marginTop": "40px", "marginRight": "100px", "width": "100%"}}>
                     <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "50%", "textAlign": "left", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
+                    {this.state.showAlert ? 
+                    <Alert variant="success" style={{"textAlign":"center", "width":"100%", "marginLeft":"auto", "marginRight":"auto", "zIndex":"2"}}>Your changes have been saved!</Alert>
+                    :
+                    null
+                    }
                         <h1>{this.state.meeting.title}</h1>
                         <h3>{this.state.meeting.time}</h3>
                         <br />
@@ -97,6 +118,8 @@ class ClubMeetingShow extends React.Component {
                                 <h4>{this.state.meeting.about}</h4>
                             </div>
                         </div>
+                        <br />
+                        <UpdateMovieMeetingModal club={this.state.club} meeting={this.state.meeting} updateHandler={this.updateHandler} />
                         <br />
                         <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
                     </div>

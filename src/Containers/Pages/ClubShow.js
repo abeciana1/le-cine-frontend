@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Row, Modal, Button } from 'react-bootstrap'
+import { Col, Row, Modal, Button, Alert } from 'react-bootstrap'
 import moment from 'moment'
 import UpcomingMeetings from '../UpcomingMeetings'
 import ClubNav from '../../Components/ClubNav'
@@ -16,7 +16,8 @@ class ClubShow extends React.Component {
         upcomingMeetings: [],
         members: [],
         meetingModalOpen: false,
-        modalOpen: false
+        modalOpen: false,
+        showAlert: false
     }
 
     componentDidMount = () => {
@@ -70,10 +71,6 @@ class ClubShow extends React.Component {
         })
     }
 
-    editClubHandler = () => {
-        console.log("edit club")
-    }
-
     addMeetingToClub = (meetingObj) => {
         this.meetingModalHandler()
         let newArray = [...this.state.allMeetings, meetingObj]
@@ -106,6 +103,7 @@ class ClubShow extends React.Component {
 
     updateHandler = (clubObj) => {
         this.modalHandler()
+        this.renderAlert()
         const options = {
             method: 'PATCH',
             headers: {
@@ -122,10 +120,20 @@ class ClubShow extends React.Component {
         })
     }
 
+    renderAlert = () => {
+        this.setState({
+            showAlert: true
+        })
+    }
+
     render() {
         return(
             <React.Fragment>
-            {/* {this.props.user && this.state.club ? */}
+                    {this.state.showAlert ? 
+                    <Alert variant="success" style={{"textAlign":"center", "width":"100%", "marginLeft":"auto", "marginRight":"auto", "zIndex":"2"}}>Your changes have been saved!</Alert>
+                    :
+                    null
+                    }
             {this.props.user && this.state.club ?
                 <React.Fragment>
                 <ClubNav club={this.state.club} />
