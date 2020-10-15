@@ -144,6 +144,12 @@ h1, h2, h3, h4, h5, h6 {
   font-style: normal;
 }
 
+p, div, section {
+  font-family: futura-pt, sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
 .read-more-btn {
   color: #FF3900;
   border: 2px solid #FF3900;

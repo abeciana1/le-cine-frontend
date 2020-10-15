@@ -21,7 +21,6 @@ class ClubMeetingsIndex extends React.Component {
                 club: data,
                 allMeetings: data.meetings
             })
-            console.log(data)
             this.getMeetings()
         })
     }
@@ -32,8 +31,6 @@ class ClubMeetingsIndex extends React.Component {
             upcomingMeetings: this.state.allMeetings.filter(meeting => moment(meeting.date).isAfter(todayDate)),
             previousMeetings: this.state.allMeetings.filter(meeting => moment(todayDate).isAfter(meeting.date))
         })
-        console.log(this.state.upcomingMeetings)
-        console.log(this.state.previousMeetings)
     }
 
     renderUpcomingMeeting = () => {
