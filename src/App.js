@@ -118,7 +118,6 @@ class App extends React.Component {
     })
   }
 
-
   //! Used for user watchlist
   watchlistHandler = (movieObj) => {
     let newArray = [...this.state.movies, movieObj.movie]
@@ -151,42 +150,37 @@ class App extends React.Component {
     })
   }
 
-
   deleteFromUserWatchlist = (id) => {
-    console.log(id)
-    let newArray = [...this.state.userWatchlist]
-    let foundWatchlist = newArray.find(watchlist => watchlist.movie_id === id)
-    newArray.splice(newArray.indexOf(foundWatchlist), 1)
-    this.setState({
-      userWatchlist: newArray
-    })
     console.log(this.state)
     const options = {method: 'DELETE'}
-    fetch("http://localhost:3000/api/v1/watchlists/" + foundWatchlist.id, options)
+    fetch("http://localhost:3000/api/v1/watchlists/" + id, options)
     .then(res => res.json())
     .then(data => {
       console.log(data)
-      window.location.reload(false)
+      let newArray = [...this.state.userWatchlist]
+      newArray.splice(newArray.indexOf(data), 1)
+      this.setState({
+      userWatchlist: newArray
+      })
     })
   }
 
-  // addToClubWatchlist = (clubId, movie) => {
-  //   console.log("adding to club")
-  //   const options = {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Accept': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       club_id: clubId,
-  //       movie_id: movie.id
-  //     })
-  //   }
-  //   fetch("http://localhost:3000/api/v1/club_watchlists", options)
-  //   .then(resp => resp.json())
-  //   .then(console.log)
-  // }
+  addToClubWatchlist = (clubId, movie) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        club_id: clubId,
+        movie_id: movie
+      })
+    }
+    fetch("http://localhost:3000/api/v1/club_watchlists", options)
+    .then(resp => resp.json())
+    .then(console.log)
+  }
 
   render(){
     return (

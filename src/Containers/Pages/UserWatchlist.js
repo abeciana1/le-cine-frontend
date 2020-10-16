@@ -5,21 +5,19 @@ import { Row } from 'react-bootstrap'
 
 class UserWatchlist extends React.Component {
 
-    // state = {
-    //     movies: []
-    // }
+    state = {
+        movies: []
+    }
 
     deleteHandler = (id) => {
         this.props.deleteHandler(id)
     }
 
     getMovies = () => {
-        // return this.props.movies.map(movie => <WatchlistMovieCard key={movie.id} movie={movie} movId={this.props.movId} deleteHandler={this.deleteHandler}/>)
-        return this.props.movies.map(movie => <WatchlistMovieCard key={movie.id} movie={movie} movId={this.props.movId} deleteHandler={this.deleteHandler}/>)
+        return this.props.userWatchlist.map(watchlist => <WatchlistMovieCard key={watchlist.id} watchlistId={watchlist.id} movieId={watchlist.movie_id} deleteHandler={this.deleteHandler}/>)
     }
 
     render() {
-        console.log(this.state)
         return(            
             <React.Fragment>
                 <div className="page-normal-margin">
