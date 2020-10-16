@@ -160,7 +160,6 @@ class App extends React.Component {
     this.setState({
       userWatchlist: newArray
     })
-
     console.log(this.state)
     const options = {method: 'DELETE'}
     fetch("http://localhost:3000/api/v1/watchlists/" + foundWatchlist.id, options)
@@ -224,7 +223,7 @@ class App extends React.Component {
             <Route path="/dashboard" render={() => <Dashboard user={this.state.user}/>} />
             <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
             <Route path="/movies/search" render={() => <MovieSearch addToClub={this.addToClubWatchlist} clubWatchlistSubmit={this.clubWatchlistSubmit} user={this.state.user} watchlistHandler={this.watchlistHandler} movieShow={this.goToMovieShow} />} />
-            <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} userWatchlistId={this.state.userWatchlistId} deleteHandler={this.deleteFromUserWatchlist} />} />
+            <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} userWatchlistId={this.state.userWatchlistId} userWatchlist={this.state.userWatchlist} deleteHandler={this.deleteFromUserWatchlist} />} />
             <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} wrongCredentials={this.state.wrongCredentials} />} />
             <Route path="/contact" component={Contact}/>
             <Route path="/about" component={About} />
