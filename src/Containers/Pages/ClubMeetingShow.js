@@ -77,7 +77,6 @@ class ClubMeetingShow extends React.Component {
     }
 
     updateHandler = (meetingObj) => {
-        console.log(meetingObj)
         this.renderAlert()
         this.setState({
             meeting: meetingObj
@@ -113,9 +112,9 @@ class ClubMeetingShow extends React.Component {
                         <h1>{this.state.meeting.title}</h1>
                         <h3>{this.state.meeting.time}</h3>
                         <br />
-                        <div style={{"backgroundColor": "white", "paddingTop":"40px", "paddingBottom":"40px"}}>
+                        <div className="internal-card-white">
                             <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
-                                <h4>{this.state.meeting.about}</h4>
+                                <h5>{this.state.meeting.about}</h5>
                             </div>
                         </div>
                         <br />

@@ -10,7 +10,7 @@ class ClubManagementCard extends React.Component {
         return(
             <React.Fragment>
                 <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
-                    <div style={{"backgroundColor": "white", "paddingTop":"40px", "paddingBottom":"40px"}}>
+                    <div className="card-white">
                         <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
                             <img src={this.props.club.image} style={{"height":"100px", "float":"left", "position":"relative", "paddingRight":"40px"}} alt={this.props.club.name} />
                                 <h1>{this.props.club.name}</h1>

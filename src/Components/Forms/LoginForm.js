@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form } from 'react-bootstrap'
+import { Form, Alert } from 'react-bootstrap'
 
 class LoginForm extends React.Component {
 
@@ -28,6 +28,13 @@ class LoginForm extends React.Component {
                 <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "textAlign": "center", "width": "30%", "margin": "auto"}}>
                 
                     <Form onSubmit={this.loginHandler} style={{"paddingTop": "60px", "paddingBottom": "60px"}}>
+                    {this.props.wrongCredentials ?
+                        <Alert variant="danger" style={{"width": "100%", "textAlign": "center"}}>
+                            Invalid username or password
+                        </Alert>
+                    :
+                    null
+                    }
                     <h1>Login</h1>
                         <Form.Group controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>

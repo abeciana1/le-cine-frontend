@@ -66,32 +66,27 @@ class ClubMeetingsIndex extends React.Component {
             {this.state.club ?
             <React.Fragment>
             <ClubNav club={this.state.club} />
-            <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "100px", "position": "relative", "left":"220px", "top": "50px", "width": "70%"}}>
+            <div className="index-heading">
                 <h1>Club Meetings</h1>
                 <br />
-                <div style={{"backgroundColor": "#EFEFEF", "width": "80%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
-                    <div style={{"backgroundColor": "white", "paddingTop":"40px", "paddingBottom":"40px","marginLeft":"50px", "marginRight":"50px"}}>
-                        <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
-                            <h2>Upcoming Meetings</h2>
-                        </div>
+                <div className="index-container">
+                    <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
+                        <h2>Upcoming Meetings</h2>
                     </div>
                 </div>
-                {/* <br /> */}
-                <div style={{"backgroundColor": "#EFEFEF", "width": "80%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
-                    <div style={{"backgroundColor": "white", "paddingTop":"40px", "paddingBottom":"40px","marginLeft":"50px", "marginRight":"50px"}}>
+                <div className="index-container">
+                    <div className="internal-card-white">
                         {this.renderUpcomingMeeting()}
                     </div>
                 </div>
                 <br />
-                <div style={{"backgroundColor": "#EFEFEF", "width": "80%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
-                    <div style={{"backgroundColor": "white", "paddingTop":"40px", "paddingBottom":"40px","marginLeft":"50px", "marginRight":"50px"}}>
+                <div className="index-container">
                         <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
                             <h2>Previous Meetings</h2>
                         </div>
-                    </div>
                 </div>
-                <div style={{"backgroundColor": "#EFEFEF", "width": "80%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
-                    <div style={{"backgroundColor": "white", "paddingTop":"40px", "paddingBottom":"40px","marginLeft":"50px", "marginRight":"50px"}}>
+                <div className="index-container">
+                    <div className="internal-card-white">
                         {this.renderPreviousMeeting()}
                     </div>
                 </div>

@@ -5,19 +5,29 @@ import { Row } from 'react-bootstrap'
 
 class UserWatchlist extends React.Component {
 
+    // state = {
+    //     movies: []
+    // }
+
+    deleteHandler = (id) => {
+        this.props.deleteHandler(id)
+    }
+
     getMovies = () => {
-        return this.props.movies.map(movie => <WatchlistMovieCard key={movie.id} movie={movie} movId={this.props.movId} deleteHandler={this.props.deleteHandler}/>)
+        return this.props.movies.map(movie => <WatchlistMovieCard key={movie.id} movie={movie} movId={this.props.movId} deleteHandler={this.deleteHandler}/>)
     }
 
     render() {
-        return(
+        console.log(this.state)
+        return(            
             <React.Fragment>
-                <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
+                <div className="page-normal-margin">
                     <h1>Your Watchlist</h1>
                     <br />
                     <Link to="/movies/search">
                         <button className="read-more-btn">Add Movies To Your Watchlist</button>
                     </Link>
+                    {/* {this.props.movies ? this.getWatchlist() : null} */}
                     <br />
                     <br />
                     <Row>

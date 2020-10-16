@@ -53,9 +53,9 @@ class ClubsManage extends React.Component {
             <React.Fragment>
             {this.props.user ? 
                 <React.Fragment>
-                    <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
+                    <div className="page-normal-margin">
                         <h1>Manage My Clubs</h1>
-                        <div style={{"backgroundColor": "#EFEFEF", "width": "80%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
+                        <div className="index-container">
                             <h2 style={{"textAlign":"center"}}>Your Clubs</h2>
                             {this.getClubs()}
                         </div>

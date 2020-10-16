@@ -29,7 +29,9 @@ class App extends React.Component {
     selectedMovieId: 0,
     selectedMovie: null,
     userWatchlistId: 0,
-    userWatchlist: [] //! stretch - way to map over movie_id attributes and return movie objects found
+    userWatchlist: [], //! stretch - way to map over movie_id attributes and return movie objects found
+    // userLoggedOut: false,
+    wrongCredentials: false
   }
 
   componentDidMount = () => {
@@ -56,29 +58,44 @@ class App extends React.Component {
     };
 
   logoutHandler = () => {
-    localStorage.removeItem("token")
+    localStorage.clear()
     this.setState({
-      user: null
-    })
+      user: null //,
+      // userLoggedOut: true
+    }, () => this.props.history.push("/"))
   }
 
   loginHandler = (userObj) => {
-    // console.log(userObj)
+    console.log(userObj)
+    // debugger
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify(userObj)
+      body: JSON.stringify({
+        user: {
+          email: userObj.email,
+          password: userObj.password
+        }
+      })
     }
     fetch("http://localhost:3000/api/v1/login", options)
     .then(res => res.json())
     .then(data => {
-      localStorage.setItem("token", data.jwt)
-      this.setState({
-        user: data.user
-      }, () => this.props.history.push("/"))
+      console.log(data)
+      // debugger
+      if(data.user){
+        localStorage.setItem("token", data.jwt)
+        this.setState({
+          user: data.user
+        }, () => this.props.history.push("/"))
+      } else {
+        this.setState({
+          wrongCredentials: true
+        }, () => localStorage.clear())
+      }
     })
   }
 
@@ -104,30 +121,13 @@ class App extends React.Component {
 
   //! Used for user watchlist
   watchlistHandler = (movieObj) => {
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-        },
-        body: JSON.stringify(movieObj)
-    }
-    fetch("http://localhost:3000/api/v1/movies", options)
-    .then(res => res.json())
-    .then(data => {
-      let newArray = [...this.state.movies, data.movie]
-        this.setState({
-          selectedMovieId: data.movie.id,
-          selectedMovie: data.movie,
-          movies: newArray.reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [])
-        })
-        this.addToWatchlist(data.movie)
+    let newArray = [...this.state.movies, movieObj.movie]
+    this.setState({
+      selectedMovieId: movieObj.movie.id,
+      selectedMovie: movieObj.movie,
+      movies: newArray.reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [])
     })
-  }
 
-  //! Used for user watchlist
-  addToWatchlist = (movObj) => {
-    // debugger
     const options = {
       method: 'POST',
       headers: {
@@ -136,7 +136,7 @@ class App extends React.Component {
       },
       body: JSON.stringify({
         user_id: this.state.user.id,
-        movie_id: movObj.id
+        movie_id: movieObj.movie.id
       })
     }
     fetch("http://localhost:3000/api/v1/watchlists", options)
@@ -148,12 +148,20 @@ class App extends React.Component {
       this.setState({
         userWatchlist: newArray
       })
-      this.props.history.push("/my-watchlist")
     })
   }
 
+
   deleteFromUserWatchlist = (id) => {
-    let foundWatchlist = this.state.userWatchlist.find(watchlist => watchlist.movie_id === id)
+    console.log(id)
+    let newArray = [...this.state.userWatchlist]
+    let foundWatchlist = newArray.find(watchlist => watchlist.movie_id === id)
+    newArray.splice(newArray.indexOf(foundWatchlist), 1)
+    this.setState({
+      userWatchlist: newArray
+    })
+
+    console.log(this.state)
     const options = {method: 'DELETE'}
     fetch("http://localhost:3000/api/v1/watchlists/" + foundWatchlist.id, options)
     .then(res => res.json())
@@ -163,28 +171,27 @@ class App extends React.Component {
     })
   }
 
-  addToClubWatchlist = (clubId, movie) => {
-    console.log("adding to club")
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        club_id: clubId,
-        movie_id: movie.id
-      })
-    }
-    fetch("http://localhost:3000/api/v1/club_watchlists", options)
-    .then(resp => resp.json())
-    .then(console.log)
-  }
+  // addToClubWatchlist = (clubId, movie) => {
+  //   console.log("adding to club")
+  //   const options = {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Accept': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       club_id: clubId,
+  //       movie_id: movie.id
+  //     })
+  //   }
+  //   fetch("http://localhost:3000/api/v1/club_watchlists", options)
+  //   .then(resp => resp.json())
+  //   .then(console.log)
+  // }
 
   render(){
     return (
       <React.Fragment>
-      {/* <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> */}
         {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
           <Switch>
           <Route path="/clubs/:club_id/meetings/:meeting_id" render={({match}) => {
@@ -218,11 +225,10 @@ class App extends React.Component {
             <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
             <Route path="/movies/search" render={() => <MovieSearch addToClub={this.addToClubWatchlist} clubWatchlistSubmit={this.clubWatchlistSubmit} user={this.state.user} watchlistHandler={this.watchlistHandler} movieShow={this.goToMovieShow} />} />
             <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} userWatchlistId={this.state.userWatchlistId} deleteHandler={this.deleteFromUserWatchlist} />} />
-            <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} />} />
+            <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} wrongCredentials={this.state.wrongCredentials} />} />
             <Route path="/contact" component={Contact}/>
-            {/* <Route path="/clubs" render={() => <ClubsGeneral user={this.state.user} />}/> */}
             <Route path="/about" component={About} />
-            <Route path="/" render={()=> <Home user={this.state.user} />} />
+            <Route path="/" render={()=> <Home user={this.state.user} loggedOut={this.state.userLoggedOut} />} />
           </Switch>
       </React.Fragment>
     );
