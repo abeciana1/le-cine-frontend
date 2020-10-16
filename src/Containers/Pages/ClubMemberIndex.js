@@ -31,10 +31,10 @@ class ClubMemberIndex extends React.Component {
             {this.state.club ?
             <React.Fragment>
                 <ClubNav club={this.state.club} />
-                <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "100px", "position": "relative", "left":"220px", "top": "50px", "width": "70%"}}>
+                <div className="index-heading">
                     <h1>Club Members</h1>
                     <br />
-                    <div style={{"backgroundColor": "#EFEFEF", "width": "80%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
+                    <div className="index-container">
                         {this.getMembers()}
                     </div>
                 </div>

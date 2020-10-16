@@ -44,7 +44,7 @@ class Dashboard extends React.Component {
         return(
             <React.Fragment>
             {this.props.user ? 
-                <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
+                <div className="page-normal-margin">
                     <Row>
                         <Col xs={6}>
                             <UserContainer user={this.props.user} />

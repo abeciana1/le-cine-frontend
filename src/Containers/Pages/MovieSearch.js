@@ -11,7 +11,7 @@ class MovieSearch extends React.Component {
     }
 
     searchHandler = (movTitle) => {
-        console.log(movTitle)
+        // console.log(movTitle)
         this.setState({
             title: movTitle
         })
@@ -45,17 +45,17 @@ class MovieSearch extends React.Component {
         fetch("http://localhost:3000/api/v1/movies", options)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            this.props.watchlistHandler(data)
         })
     }
 
     render() {
         return(
             <React.Fragment>
-                <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
+                <div className="page-normal-margin">
                     <h1>Movie Search</h1>
                     <MovieSearchBar searchHandler={this.searchHandler} />
-                    {this.state.searchResults ? <MovieSearchResults addToClub={this.props.addToClub} clubWatchlistSubmit={this.props.clubWatchlistSubmit} watchlistHandler={this.props.watchlistHandler} movieShow={this.props.movieShow} searchResults={this.state.searchResults} user={this.props.user} /> : null }
+                    {this.state.searchResults ? <MovieSearchResults addToClub={this.props.addToClub} clubWatchlistSubmit={this.props.clubWatchlistSubmit} watchlistHandler={this.watchlistHandler} movieShow={this.props.movieShow} searchResults={this.state.searchResults} user={this.props.user} /> : null }
                 </div>
             </React.Fragment>
         )

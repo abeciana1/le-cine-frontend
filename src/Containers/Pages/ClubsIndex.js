@@ -29,7 +29,7 @@ class ClubsIndex extends React.Component {
         return(
             <React.Fragment>
             {this.props.user ? 
-                <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
+                <div className="page-normal-margin">
                     <h1>Find A Club</h1>
                     <h2>Here's a list of pulbic clubs to join</h2>
                     <br />

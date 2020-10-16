@@ -7,7 +7,8 @@ import AddMovieToClub from './Forms/AddMovieToClub'
 class MovieSearchCard extends React.Component {
 
     state = {
-        modalOpen: false
+        modalOpen: false,
+        addedToWatchlist: false
     }
 
     trimOverview = () => {
@@ -22,6 +23,7 @@ class MovieSearchCard extends React.Component {
     }
 
     watchlistHandler = (e) => {
+        this.setState({addedToWatchlist: !this.state.addedToWatchlist})
         this.props.watchlistHandler(this.props.movie)
     }
 
@@ -65,6 +67,9 @@ class MovieSearchCard extends React.Component {
                                     <button className="read-more-btn">View More</button>
                                 </Link>
                                 <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>
+                                {/* {this.state.addedToWatchlist ? <button className="read-more-btn" style={{"backgroundColor":"#FF3900", "color":"white"}}>Added!</button> : 
+                                <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>
+                                } */}
                                 <button onClick={this.clubWatchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to a Club Watchlist</button>
                             </div>
                         </div>

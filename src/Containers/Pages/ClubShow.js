@@ -137,7 +137,7 @@ class ClubShow extends React.Component {
             {this.props.user && this.state.club ?
                 <React.Fragment>
                 <ClubNav club={this.state.club} />
-                <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "100px", "position": "relative", "left":"220px", "top": "50px", "width": "70%"}}>
+                <div className="index-heading">
                 <Row>
                         <Col xs={5}>
                         <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "width": "40%", "textAlign": "center", "paddingTop": "40px", "paddingBottom": "40px"}}>

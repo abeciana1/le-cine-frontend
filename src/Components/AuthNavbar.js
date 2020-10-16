@@ -18,7 +18,7 @@ class AuthNavBar extends React.Component {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                     <NavDropdown title="Options" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="/home">Home</NavDropdown.Item>
+                        <NavDropdown.Item href="/">Home</NavDropdown.Item>
                         <NavDropdown.Item href="/about">About Us</NavDropdown.Item>
                         <NavDropdown.Item href="/contact">Contact Us</NavDropdown.Item>
                         <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>

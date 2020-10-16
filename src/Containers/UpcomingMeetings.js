@@ -10,7 +10,7 @@ class UpcomingMeetings extends React.Component {
     render() {
         return(
                 <React.Fragment>
-                    <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "50px"}}>
+                    <div className="page-normal-margin">
                         {this.getMeetings()}
                     </div>
                 </React.Fragment>

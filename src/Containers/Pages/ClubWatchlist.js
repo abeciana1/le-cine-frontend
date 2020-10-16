@@ -33,7 +33,7 @@ class ClubWatchlist extends React.Component {
             {this.state.club ?
             <React.Fragment>
                 <ClubNav club={this.state.club} />
-                <div style={{"marginLeft": "50px", "marginTop": "50px", "marginRight": "100px", "position": "relative", "left":"220px", "top": "50px", "width": "70%"}}>
+                <div className="index-heading">
                     <h1>Club Watchlist</h1>
                     <br />
                     <Link to="/movies/search">

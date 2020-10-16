@@ -8,7 +8,7 @@ class MemberCard extends React.Component {
             {this.props.user ?
             <React.Fragment>
                 <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
-                    <div style={{"backgroundColor": "white", "paddingTop":"40px", "paddingBottom":"40px"}}>
+                    <div className="card-white">
                         <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
                                 <Row>
                                     <Col xs lg="2">
