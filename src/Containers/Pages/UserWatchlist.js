@@ -14,6 +14,7 @@ class UserWatchlist extends React.Component {
     }
 
     getMovies = () => {
+        // return this.props.movies.map(movie => <WatchlistMovieCard key={movie.id} movie={movie} movId={this.props.movId} deleteHandler={this.deleteHandler}/>)
         return this.props.movies.map(movie => <WatchlistMovieCard key={movie.id} movie={movie} movId={this.props.movId} deleteHandler={this.deleteHandler}/>)
     }
 
