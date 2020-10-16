@@ -27,12 +27,14 @@ class MovieSearchCard extends React.Component {
         this.props.watchlistHandler(this.props.movie)
     }
 
+    //! ONLY EVENT HANDLER FOR MODAL
     clubWatchlistHandler = (e) => {
         this.setState({
             modalOpen: !this.state.modalOpen
         })
     }
 
+    //! CREATES MOVIE OBJECT
     addToClubWatchlist = (clubId) => {
         let club = parseInt(clubId)
         const options = {
@@ -46,7 +48,7 @@ class MovieSearchCard extends React.Component {
         fetch("http://localhost:3000/api/v1/movies", options)
         .then(res => res.json())
         .then(data => {
-            this.props.addToClub(club, data.movie)
+            this.props.addToClub(club, data.movie.id)
         })
     }
 

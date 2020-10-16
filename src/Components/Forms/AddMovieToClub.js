@@ -24,7 +24,6 @@ class AddMovieToClub extends React.Component {
     }
 
     render() {
-        console.log(this.state.selectedClub)
         return (
             <React.Fragment>
                 <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
