@@ -11,7 +11,6 @@ class MovieSearch extends React.Component {
     }
 
     searchHandler = (movTitle) => {
-        // console.log(movTitle)
         this.setState({
             title: movTitle
         })
@@ -49,13 +48,17 @@ class MovieSearch extends React.Component {
         })
     }
 
+    addToClub = (club, movie) => {
+        this.props.addToClub(club, movie)
+    }
+
     render() {
         return(
             <React.Fragment>
                 <div className="page-normal-margin">
                     <h1>Movie Search</h1>
                     <MovieSearchBar searchHandler={this.searchHandler} />
-                    {this.state.searchResults ? <MovieSearchResults addToClub={this.props.addToClub} clubWatchlistSubmit={this.props.clubWatchlistSubmit} watchlistHandler={this.watchlistHandler} movieShow={this.props.movieShow} searchResults={this.state.searchResults} user={this.props.user} /> : null }
+                    {this.state.searchResults ? <MovieSearchResults addToClub={this.addToClub} clubWatchlistSubmit={this.props.clubWatchlistSubmit} watchlistHandler={this.watchlistHandler} movieShow={this.props.movieShow} searchResults={this.state.searchResults} user={this.props.user} /> : null }
                 </div>
             </React.Fragment>
         )
