@@ -9,7 +9,6 @@ class ClubMeetingComponent extends React.Component {
     }
 
     render() {
-        console.log(this.props.club)
         return(
             <React.Fragment>
             {this.props.club ?

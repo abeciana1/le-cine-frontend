@@ -86,7 +86,6 @@ class ClubShow extends React.Component {
         }
         fetch("http://localhost:3000/api/v1/meetings", options)
         .then(res => res.json())
-        // .then(window.location.reload(false))
     }
 
     disbandHandler = (e) => {
@@ -101,8 +100,7 @@ class ClubShow extends React.Component {
     }
 
     updateHandler = (clubObj) => {
-        this.modalHandler()
-        this.renderAlert()
+        console.log(clubObj)
         const options = {
             method: 'PATCH',
             headers: {
@@ -115,7 +113,9 @@ class ClubShow extends React.Component {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            window.location.reload(false)
+            this.setState({club: data})
+            this.modalHandler()
+            this.renderAlert()
         })
     }
 
@@ -129,7 +129,7 @@ class ClubShow extends React.Component {
         return(
             <React.Fragment>
                     {this.state.showAlert ? 
-                    <Alert variant="success" style={{"textAlign":"center", "width":"100%", "marginLeft":"auto", "marginRight":"auto", "zIndex":"2"}}>Your changes have been saved!</Alert>
+                    <Alert variant="success" style={{"textAlign":"center", "width":"60%", "marginLeft":"auto", "marginRight":"auto", "zIndex":"2"}}>Your changes have been saved!</Alert>
                     :
                     null
                     }

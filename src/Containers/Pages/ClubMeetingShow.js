@@ -45,7 +45,8 @@ class ClubMeetingShow extends React.Component {
     }
 
     renderMovieMeetings = () => {
-        return this.state.movieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} />)
+        let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => a.created_at - b.created_at)
+        return sortedMovieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} />)
     }
 
     submitHandler = (movieMeetingObj) => {
@@ -77,10 +78,24 @@ class ClubMeetingShow extends React.Component {
     }
 
     updateHandler = (meetingObj) => {
-        this.renderAlert()
-        this.setState({
-            meeting: meetingObj
-        })
+        console.log(meetingObj)
+        // this.renderAlert()
+        // this.setState({
+        //     meeting: meetingObj
+        // })
+        // const options = {
+        //     method: 'PATCH',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json',
+        //     },
+        //     body: JSON.stringify(meetingObj)
+        // }
+        // fetch("http://localhost:3000/api/v1/meetings/" + meetingObj.id, options)
+        // .then(res => res.json())
+        // .then(data => {
+            
+        // })
     }
 
     renderAlert = () => {

@@ -15,20 +15,8 @@ class UpdateMovieMeetingModal extends React.Component {
     }
 
     updateHandler = (meetingObj) => {
+        this.props.updateHandler(meetingObj)
         this.modalHandler()
-        const options = {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify(meetingObj)
-        }
-        fetch("http://localhost:3000/api/v1/meetings/" + meetingObj.id, options)
-        .then(res => res.json())
-        .then(data => {
-            this.props.updateHandler(data)
-        })
     }
 
     render() {
