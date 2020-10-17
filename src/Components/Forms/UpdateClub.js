@@ -32,19 +32,6 @@ class CreateClub extends React.Component {
     submitHandler = (e) => {
         e.preventDefault()
         this.props.submitHandler(this.state)
-        this.setState({
-            id: 0,
-            name: "",
-            about: "",
-            city: "",
-            state: "",
-            country: "",
-            image: "",
-            member_count: 0,
-            member_capacity: 0,
-            privacy: false,
-            host_id: 0
-        })
     }
 
     render() {

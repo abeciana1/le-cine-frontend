@@ -19,7 +19,7 @@ class MovieMeeting extends React.Component {
             <React.Fragment>
             {this.props.movieMeeting ?
             <React.Fragment>
-            <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "50%", "textAlign": "left", "paddingTop": "20px", "paddingBottom": "20px", "paddingRight":"20px"}}>
+            <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "50%", "textAlign": "left", "paddingTop": "20px", "paddingBottom": "40px", "paddingRight":"20px"}}>
                         <h1>{this.props.movieMeeting.movie.title}</h1>
                 <div style={{"marginLeft": "20px", "marginTop": "20px", "marginRight": "20px", "width": "60%"}}>
                 {this.props.movieMeeting.discussion ? 
@@ -42,7 +42,7 @@ class MovieMeeting extends React.Component {
                 :
                 null
                 }
-                    <div style={{"margin": "auto", "width": "100%", "paddingBottom": "20px", "paddingTop":"45px"}}>
+                    <div style={{"margin": "auto", "width": "100%", "paddingBottom": "40px", "paddingTop":"40px"}}>
                         <img src={this.props.movieMeeting.movie.poster_path} alt={this.props.movieMeeting.movie.title} style={{"height":"250px","float":"left", "marginRight": "10px", "marginBottom": "5px", "padding": "2px"}}/>
                         <div style={{"marginLeft":"200px", "width":"100%", "top":"200px"}}>
                         {this.props.movieMeeting.movie.overview}
