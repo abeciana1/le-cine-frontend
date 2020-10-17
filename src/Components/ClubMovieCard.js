@@ -44,7 +44,6 @@ class ClubMovieCard extends React.Component {
     }
 
     deleteHandler = (e) => {
-        console.log("deleting")
         const options = {
             method: 'POST',
             headers: {
@@ -53,21 +52,14 @@ class ClubMovieCard extends React.Component {
             },
             body: JSON.stringify({
                 club_id: this.props.club.id,
-                movie_id: this.props.movie_id
+                movie_id: this.state.movie.id
             })
         }
         fetch("http://localhost:3000/api/v1/find-club-watchlist", options)
         .then(res => res.json())
         .then(data => {
-            this.deleteMovieFromClub(data.id)
+            this.props.deleteMovieFromClub(data)
         })
-    }
-
-    deleteMovieFromClub = (id) => {
-        const options = {method: 'DELETE'}
-        fetch("http://localhost:3000/api/v1/club_watchlists/" + id, options)
-        .then(res => res.json())
-        .then(window.location.reload(false))
     }
 
     render(){

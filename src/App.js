@@ -30,7 +30,6 @@ class App extends React.Component {
     selectedMovie: null,
     userWatchlistId: 0,
     userWatchlist: [], //! stretch - way to map over movie_id attributes and return movie objects found
-    // userLoggedOut: false,
     wrongCredentials: false
   }
 
@@ -151,18 +150,15 @@ class App extends React.Component {
   }
 
   deleteFromUserWatchlist = (id) => {
-    console.log(this.state)
+    let newArray = [...this.state.userWatchlist]
+    let foundWatchlist = newArray.find(watchlist => watchlist.id === id)
+    newArray.splice(newArray.indexOf(foundWatchlist), 1)
+    this.setState({
+      userWatchlist: newArray
+    })
     const options = {method: 'DELETE'}
     fetch("http://localhost:3000/api/v1/watchlists/" + id, options)
     .then(res => res.json())
-    .then(data => {
-      console.log(data)
-      let newArray = [...this.state.userWatchlist]
-      newArray.splice(newArray.indexOf(data), 1)
-      this.setState({
-      userWatchlist: newArray
-      })
-    })
   }
 
   addToClubWatchlist = (clubId, movie) => {

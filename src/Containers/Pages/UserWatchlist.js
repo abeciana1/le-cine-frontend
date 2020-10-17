@@ -5,10 +5,6 @@ import { Row } from 'react-bootstrap'
 
 class UserWatchlist extends React.Component {
 
-    state = {
-        movies: []
-    }
-
     deleteHandler = (id) => {
         this.props.deleteHandler(id)
     }
@@ -26,7 +22,6 @@ class UserWatchlist extends React.Component {
                     <Link to="/movies/search">
                         <button className="read-more-btn">Add Movies To Your Watchlist</button>
                     </Link>
-                    {/* {this.props.movies ? this.getWatchlist() : null} */}
                     <br />
                     <br />
                     <Row>

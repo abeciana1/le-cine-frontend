@@ -1,5 +1,6 @@
 import React from 'react'
 import { Col } from 'react-bootstrap'
+// import { Col, OverlayTrigger, Tooltip, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom';
 
 class WatchlistMovieCard extends React.Component {
@@ -49,7 +50,6 @@ class WatchlistMovieCard extends React.Component {
     }
 
     render(){
-        // console.log(this.props)
         return(
             <React.Fragment>
             {this.state.movie ?
