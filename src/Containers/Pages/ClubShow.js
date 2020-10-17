@@ -35,7 +35,6 @@ class ClubShow extends React.Component {
     }
 
     joinClubHandler = (e) => {
-        // console.log("join")
         const options = {
             method: 'POST',
             headers: {
@@ -87,7 +86,7 @@ class ClubShow extends React.Component {
         }
         fetch("http://localhost:3000/api/v1/meetings", options)
         .then(res => res.json())
-        .then(window.location.reload(false))
+        // .then(window.location.reload(false))
     }
 
     disbandHandler = (e) => {
@@ -176,7 +175,8 @@ class ClubShow extends React.Component {
                     <br />
                         <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
                             <h2 style={{"textAlign":"center"}}>Upcoming Meetings</h2>
-                            {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.upcomingMeetings} club={this.state.club} /> : null}
+                            {/* {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.upcomingMeetings} club={this.state.club} /> : null} */}
+                            {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.allMeetings} club={this.state.club} /> : null}
                         </div>
                     <br />
                     <br />

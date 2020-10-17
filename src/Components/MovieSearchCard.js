@@ -49,6 +49,9 @@ class MovieSearchCard extends React.Component {
         .then(res => res.json())
         .then(data => {
             this.props.addToClub(club, data.movie.id)
+            this.setState({
+                modalOpen: false
+            })
         })
     }
 

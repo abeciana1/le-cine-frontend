@@ -1,10 +1,14 @@
 import React from 'react'
 import ClubMeetingComponent from '../Components/ClubMeetingComponent'
+import moment from 'moment'
 
 class UpcomingMeetings extends React.Component {
 
     getMeetings = () => {
-        return this.props.meetings.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.props.club} meeting={meeting}/>)
+        let todayDate = moment().format('YYYY-MM-DD')
+        let upcoming = this.props.meetings.filter(meeting => moment(meeting.date).isAfter(todayDate))
+        console.log(upcoming)
+        return upcoming.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.props.club} meeting={meeting}/>)
     }
 
     render() {

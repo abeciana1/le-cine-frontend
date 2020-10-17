@@ -44,11 +44,12 @@ class MovieShow extends React.Component {
     }
 
     render() {
+        console.log(this.state.movie)
         return(
             <React.Fragment>
             {this.state.movie ?
                 <React.Fragment>
-                    <img className="movie-backdrop" src={"https://image.tmdb.org/t/p/original/" + this.state.movie.backdrop_path} alt={this.state.movie.title} style={{"height":"600px", "width": "1440px", "opacity":"0.5", "position": "relative", "top": "0", "left": "0"}} />
+                    <img className="movie-backdrop" src={"https://image.tmdb.org/t/p/original" + this.state.movie.backdrop_path} alt={this.state.movie.title} style={{"height":"600px", "width": "1440px", "opacity":"0.5", "position": "relative", "top": "0", "left": "0"}} />
                         <img src={"https://image.tmdb.org/t/p/w500" + this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "400px", "position": "absolute", "top":"400px", "left": "100px"}} />
                     <div style={{"marginLeft": "30%", "marginTop": "50px", "marginRight": "50px", "position":"absolute"}}>
                         <div className="mov-immediate" style={{"marginLeft": "50px"}}>
