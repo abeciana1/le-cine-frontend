@@ -31,7 +31,7 @@ class ClubsIndex extends React.Component {
             {this.props.user ? 
                 <div className="page-normal-margin">
                     <h1>Find A Club</h1>
-                    <h2>Here's a list of pulbic clubs to join</h2>
+                    <h2>Here's a list of public clubs to join</h2>
                     <br />
                     <br />
                     <Row>
