@@ -100,7 +100,6 @@ class ClubShow extends React.Component {
     }
 
     updateHandler = (clubObj) => {
-        console.log(clubObj)
         const options = {
             method: 'PATCH',
             headers: {
@@ -112,7 +111,6 @@ class ClubShow extends React.Component {
         fetch("http://localhost:3000/api/v1/clubs/" + clubObj.id, options)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             this.setState({club: data})
             this.modalHandler()
             this.renderAlert()
