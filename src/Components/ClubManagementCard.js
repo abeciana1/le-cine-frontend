@@ -1,24 +1,48 @@
 import React from 'react'
+// import { Alert } from 'react-bootstrap'
 
 class ClubManagementCard extends React.Component {
 
-    leaveClubHandler = (e) => {
-        this.props.leaveClubHandler(this.props.user, this.props.club)
+    state = {
+        club: null
     }
+
+    componentDidMount() {
+        fetch("http://localhost:3000/api/v1/clubs/" + this.props.clubId)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            this.setState({
+                club: data
+            })
+        })
+    }
+
+    leaveClubHandler = (e) => {
+        this.props.leaveClubHandler(this.props.userClubId)
+    }
+
+
 
     render() {
         return(
             <React.Fragment>
+            {this.state.club ?
+            <React.Fragment>
                 <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
                     <div className="card-white">
                         <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
-                            <img src={this.props.club.image} style={{"height":"100px", "float":"left", "position":"relative", "paddingRight":"40px"}} alt={this.props.club.name} />
-                                <h1>{this.props.club.name}</h1>
+                            <img src={this.state.club.image} style={{"height":"100px", "float":"left", "position":"relative", "paddingRight":"40px"}} alt={this.state.club.name} />
+                                <h1>{this.state.club.name}</h1>
                                 <button className="read-more-btn" onClick={this.leaveClubHandler}>Leave Club</button>
                         </div>
                     </div>
                     <br />
                 </div>
+            </React.Fragment>
+            :
+            null
+            }
             </React.Fragment>
         )
     }

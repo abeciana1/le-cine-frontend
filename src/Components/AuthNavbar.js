@@ -27,7 +27,7 @@ class AuthNavBar extends React.Component {
                     <Nav.Link href="/my-watchlist" >Watchlist</Nav.Link>
                     <NavDropdown title="Clubs" id="basic-nav-dropdown">
                         <NavDropdown.Item href="/clubs/index">Find a Club</NavDropdown.Item>
-                        <NavDropdown.Item href="/clubs/manage">Manage Clubs</NavDropdown.Item>
+                        <NavDropdown.Item href="/clubs/manage">Manage Memberships</NavDropdown.Item>
                     </NavDropdown>
                     <Nav.Link onClick={this.logout}>Logout</Nav.Link>
                     </Nav>

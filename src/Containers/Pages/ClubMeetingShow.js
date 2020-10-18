@@ -45,7 +45,9 @@ class ClubMeetingShow extends React.Component {
     }
 
     renderMovieMeetings = () => {
-        let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => a.created_at - b.created_at)
+        // let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => moment().format(a.created_at) - moment().format(b.created_at))
+        // let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => moment(a.created_at).format('LLL') - moment(b.created_at).format('LLL'))
+        let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => a.created_at.localeCompare(b.created_at))
         return sortedMovieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} />)
     }
 
@@ -78,24 +80,20 @@ class ClubMeetingShow extends React.Component {
     }
 
     updateHandler = (meetingObj) => {
-        console.log(meetingObj)
-        // this.renderAlert()
-        // this.setState({
-        //     meeting: meetingObj
-        // })
-        // const options = {
-        //     method: 'PATCH',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Accept': 'application/json',
-        //     },
-        //     body: JSON.stringify(meetingObj)
-        // }
-        // fetch("http://localhost:3000/api/v1/meetings/" + meetingObj.id, options)
-        // .then(res => res.json())
-        // .then(data => {
-            
-        // })
+        this.renderAlert()
+        this.setState({
+            meeting: meetingObj
+        })
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(meetingObj)
+        }
+        fetch("http://localhost:3000/api/v1/meetings/" + meetingObj.id, options)
+        .then(res => res.json())
     }
 
     renderAlert = () => {
@@ -133,15 +131,18 @@ class ClubMeetingShow extends React.Component {
                             </div>
                         </div>
                         <br />
-                        <UpdateMovieMeetingModal club={this.state.club} meeting={this.state.meeting} updateHandler={this.updateHandler} />
-                        <br />
-                        <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
+                        {this.state.club.host.id === this.props.user.id ?
+                            <>
+                            <UpdateMovieMeetingModal club={this.state.club} meeting={this.state.meeting} updateHandler={this.updateHandler} />
+                            <br />
+                            <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
+                            </>
+                            : null}
                     </div>
                     <div style={{"paddingTop": "50px"}}>
                     {this.state.movieMeetings.length === 0 ?
                         <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "50%", "textAlign": "center", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
                             <h2>There are no movies set for this meeting!</h2>
-                            <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
                         </div>
                         :
                         this.renderMovieMeetings()

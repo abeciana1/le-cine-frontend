@@ -30,7 +30,8 @@ class App extends React.Component {
     selectedMovie: null,
     userWatchlistId: 0,
     userWatchlist: [], //! stretch - way to map over movie_id attributes and return movie objects found
-    wrongCredentials: false
+    wrongCredentials: false,
+    userClubs: []
   }
 
   componentDidMount = () => {
@@ -46,7 +47,8 @@ class App extends React.Component {
         user: data.user,
         movies: data.user.movies,
         clubs: data.user.clubs,
-        userWatchlist: data.user.watchlists
+        userWatchlist: data.user.watchlists,
+        userClubs: data.user.user_clubs
       }))
     } 
       fetch("http://localhost:3000/api/v1/users")
@@ -178,6 +180,18 @@ class App extends React.Component {
     .then(console.log)
   }
 
+  deleteUserFromClub = (id) => {
+    let newArray = [...this.state.userClubs]
+    let foundClub = newArray.find(club => club.id === id)
+    newArray.splice(newArray.indexOf(foundClub), 1)
+    this.setState({
+      userClubs: newArray
+    })
+    const options = {method: 'DELETE'}
+    fetch("http://localhost:3000/api/v1/user_clubs/" + foundClub.id, options)
+    .then(res => res.json())
+  }
+
   render(){
     return (
       <React.Fragment>
@@ -201,7 +215,7 @@ class App extends React.Component {
               return <ClubWatchlist user={this.state.user} id={id} />
             }}/>
             <Route exact path="/clubs/index" render={() => <ClubsIndex user={this.state.user} />}/>
-            <Route exact path="/clubs/manage" render={() => <ClubsManage user={this.state.user} club={this.state.clubs} />}/>
+            <Route exact path="/clubs/manage" render={() => <ClubsManage user={this.state.user} clubs={this.state.clubs} userClubs={this.state.userClubs} deleteUserFromClub={this.deleteUserFromClub} />}/>
             <Route path="/clubs/:id" render={({match}) => {
               let id = parseInt(match.params.id)
               return <ClubShow user={this.state.user} id={id} />
