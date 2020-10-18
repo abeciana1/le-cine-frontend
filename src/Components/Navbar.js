@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class NavBar extends React.Component {
 
@@ -13,16 +13,27 @@ class NavBar extends React.Component {
         <React.Fragment>
             {this.props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
             <Navbar bg="white" expand="lg">
-                <Navbar.Brand href="/" style={{"color": "#FF3900"}}><strong>Le Cine</strong></Navbar.Brand>
+                <Navbar.Brand>
+                    <Link to="/" style={{"color": "#FF3900", "textDecoration": "none"}}><strong>Le Cine</strong></Link>
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
-                    <Nav.Link href="/about">About Us</Nav.Link>
-                    <Nav.Link href="/contact">Contact Us</Nav.Link>
-                    {this.props.user ? <Nav.Link href="/dashboard" >Dashboard</Nav.Link> : null}
-                    {this.props.user ? <Nav.Link onClick={this.logout}>Logout</Nav.Link> : <Nav.Link href="/login">Login</Nav.Link>}
-                    {this.props.user ? null : <Nav.Link href="/signup">Signup</Nav.Link>}
+                    <Nav.Link>
+                        <Link to="/" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Home</Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                        <Link to="/about" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>About Us</Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                        <Link to="/contact" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Contact Us</Link>
+                    </Nav.Link>
+                    {this.props.user ? <Nav.Link onClick={this.logout}>Logout</Nav.Link> : <Nav.Link>
+                        <Link to="/login" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Login</Link>
+                    </Nav.Link>}
+                    {this.props.user ? null : <Nav.Link href="/signup">
+                        <Link to="/signup" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Signup</Link>
+                    </Nav.Link>}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
