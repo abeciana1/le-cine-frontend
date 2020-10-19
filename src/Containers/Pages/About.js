@@ -17,10 +17,19 @@ const About = (props) => {
                 ADD COPY
             </div>
             <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation 
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit 
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat 
-                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Convallis posuere morbi leo urna molestie at elementum. Morbi enim nunc faucibus a pellentesque. Velit laoreet id donec ultrices tincidunt arcu non sodales. Ornare arcu odio ut sem nulla pharetra diam sit. Ultrices sagittis orci a scelerisque. Ac felis donec et odio pellentesque diam volutpat commodo sed. Pulvinar pellentesque habitant morbi tristique senectus. Elementum nisi quis eleifend quam adipiscing vitae proin sagittis. Ut consequat semper viverra nam libero justo. In vitae turpis massa sed elementum tempus egestas sed sed.
+            </div>
+            <div>
+            Sagittis vitae et leo duis ut diam. Venenatis cras sed felis eget velit aliquet. Quis eleifend quam adipiscing vitae proin sagittis nisl rhoncus mattis. Tincidunt ornare massa eget egestas purus viverra accumsan in. Sem viverra aliquet eget sit amet tellus. Euismod in pellentesque massa placerat duis ultricies lacus sed turpis. Eleifend quam adipiscing vitae proin. Id diam maecenas ultricies mi. Maecenas sed enim ut sem viverra aliquet eget. Elit duis tristique sollicitudin nibh sit. Duis convallis convallis tellus id interdum velit laoreet.
+            </div>
+            <div>
+                
+            </div>
+            <div>
+            Sit amet mattis vulputate enim nulla aliquet porttitor lacus. Vel risus commodo viverra maecenas accumsan lacus vel facilisis volutpat. Augue neque gravida in fermentum. Et netus et malesuada fames ac turpis egestas sed. Turpis nunc eget lorem dolor sed viverra ipsum. Vitae proin sagittis nisl rhoncus mattis rhoncus. Mollis nunc sed id semper risus in hendrerit gravida rutrum. Viverra nam libero justo laoreet. Orci a scelerisque purus semper eget duis at tellus at. Eu nisl nunc mi ipsum faucibus vitae aliquet nec ullamcorper. Aliquet lectus proin nibh nisl condimentum id venenatis. Nunc non blandit massa enim nec dui nunc.
+            </div>
+            <div>
+            Arcu bibendum at varius vel. Scelerisque eu ultrices vitae auctor eu augue ut lectus. Non arcu risus quis varius quam quisque id diam. Sit amet purus gravida quis blandit turpis cursus in hac. Sit amet venenatis urna cursus. Pellentesque dignissim enim sit amet venenatis urna cursus. Enim lobortis scelerisque fermentum dui faucibus in ornare. Nunc mi ipsum faucibus vitae aliquet. Sed lectus vestibulum mattis ullamcorper velit sed ullamcorper. Feugiat sed lectus vestibulum mattis ullamcorper velit sed. Diam in arcu cursus euismod quis viverra nibh cras pulvinar. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi tristique.
             </div>
         </div>
         <div className="page-right">

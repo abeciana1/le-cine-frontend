@@ -33,9 +33,9 @@ class AuthNavBar extends React.Component {
                                 Contact Us
                             </Link>
                         </NavDropdown.Item>
-                        <NavDropdown.Item >
+                        {/* <NavDropdown.Item >
                             <Link to="/settings" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Settings</Link>
-                        </NavDropdown.Item>
+                        </NavDropdown.Item> */}
                     </NavDropdown>
                     <Nav.Link>
                         <Link to="/dashboard" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Dashboard</Link>

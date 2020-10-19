@@ -19,6 +19,8 @@ import ClubWatchlist from './Containers/Pages/ClubWatchlist'
 import ClubMemberIndex from './Containers/Pages/ClubMemberIndex'
 import ClubMeetingsIndex from './Containers/Pages/ClubMeetingsIndex'
 import ClubMeetingShow from './Containers/Pages/ClubMeetingShow'
+import ClubsAll from './Containers/Pages/ClubsAll'
+import HostClubsAll from './Containers/Pages/HostClubsAll'
 
 class App extends React.Component {
 
@@ -31,7 +33,8 @@ class App extends React.Component {
     userWatchlistId: 0,
     userWatchlist: [], //! stretch - way to map over movie_id attributes and return movie objects found
     wrongCredentials: false,
-    userClubs: []
+    userClubs: [],
+    hostClubs: []
   }
 
   componentDidMount = () => {
@@ -43,13 +46,17 @@ class App extends React.Component {
           Authorization: `Bearer ${token}`},
         })
       .then(resp => resp.json())
-      .then(data => this.setState({
-        user: data.user,
-        movies: data.user.movies,
-        clubs: data.user.clubs,
-        userWatchlist: data.user.watchlists,
-        userClubs: data.user.user_clubs
-      }))
+      .then(data => {
+
+        this.setState({
+          user: data.user,
+          movies: data.user.movies,
+          clubs: data.user.clubs,
+          userWatchlist: data.user.watchlists,
+          userClubs: data.user.user_clubs,
+          hostClubs: data.user.host_clubs
+        })
+      })
     } 
       fetch("http://localhost:3000/api/v1/users")
       .then(resp => resp.json())
@@ -192,6 +199,12 @@ class App extends React.Component {
     .then(res => res.json())
   }
 
+  joinClubHandler = (userClubObj) => {
+    let newArray = [...this.state.userClubs, userClubObj]
+    newArray.reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [])
+    this.setState({ userClubs: newArray})
+  }
+
   render(){
     return (
       <React.Fragment>
@@ -215,16 +228,18 @@ class App extends React.Component {
               return <ClubWatchlist user={this.state.user} id={id} />
             }}/>
             <Route exact path="/clubs/index" render={() => <ClubsIndex user={this.state.user} />}/>
+            <Route exact path="/clubs/all" render={() => <ClubsAll user={this.state.user} userClubs={this.state.userClubs} />}/>
+            <Route exact path="/clubs/hosted-all" render={() => <HostClubsAll user={this.state.user} hostClubs={this.state.hostClubs} />}/>
             <Route exact path="/clubs/manage" render={() => <ClubsManage user={this.state.user} clubs={this.state.clubs} userClubs={this.state.userClubs} deleteUserFromClub={this.deleteUserFromClub} />}/>
             <Route path="/clubs/:id" render={({match}) => {
               let id = parseInt(match.params.id)
-              return <ClubShow user={this.state.user} id={id} />
+              return <ClubShow user={this.state.user} joinClubHandler={this.joinClubHandler} id={id} />
             }}/>
             <Route path="/movies/search/:id" render={({match}) => {
               let id = parseInt(match.params.id)
               return <MovieShow watchlistHandler={this.watchlistHandler} id={id} />
             }} /> 
-            <Route path="/dashboard" render={() => <Dashboard user={this.state.user}/>} />
+            <Route path="/dashboard" render={() => <Dashboard user={this.state.user} userClubs={this.state.userClubs} hostClubs={this.state.hostClubs} />} />
             <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
             <Route path="/movies/search" render={() => <MovieSearch addToClub={this.addToClubWatchlist} clubWatchlistSubmit={this.clubWatchlistSubmit} user={this.state.user} watchlistHandler={this.watchlistHandler} movieShow={this.goToMovieShow} />} />
             <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} userWatchlistId={this.state.userWatchlistId} userWatchlist={this.state.userWatchlist} deleteHandler={this.deleteFromUserWatchlist} />} />

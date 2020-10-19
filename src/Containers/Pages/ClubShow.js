@@ -48,6 +48,9 @@ class ClubShow extends React.Component {
         }
         fetch("http://localhost:3000/api/v1/user_clubs", options)
         .then(res => res.json())
+        .then(data => {
+            this.props.joinClubHandler(data.user_club)
+        })
         .then(this.props.history.push("/dashboard"))
     }
 

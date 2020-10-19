@@ -1,28 +1,30 @@
-import React from 'react';
+import React from 'react'
 import { Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
-class ClubComponent extends React.Component {
+class ClubIndexListing extends React.Component {
 
     state = {
         club: null
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         fetch("http://localhost:3000/api/v1/clubs/" + this.props.clubId)
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             this.setState({club: data})
         })
-    }
+    };
+    
 
-    render() {
-        return(
+    render () {
+        return (
             <React.Fragment>
             {this.state.club ?
             <React.Fragment>
-                <Col xs={3} style={{"paddingBottom":"20px"}}>
-                    <img src={this.state.club.image} alt={this.state.club.name} style={{"height": "200px", "width": "200px"}} />
+                <Col xs={3}>
+                    <img src={this.state.club.image} alt={this.state.club.name} style={{"height": "200px", "width": "200px", "paddingRight":"20px", "paddingBottom":"10px"}} />
                     <br />
                     <br />
                     <h6>{this.state.club.name}</h6>
@@ -31,10 +33,10 @@ class ClubComponent extends React.Component {
                     </Link>
                 </Col>
             </React.Fragment>
-            : null}
+            : null }
             </React.Fragment>
         )
     }
 }
 
-export default ClubComponent
+export default ClubIndexListing

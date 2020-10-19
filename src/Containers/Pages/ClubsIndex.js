@@ -22,7 +22,7 @@ class ClubsIndex extends React.Component {
     };
 
     getClubs = () => {
-        return this.state.publicClubs.map(club => <ClubComponent key={club.id} club={club}/>)
+        return this.state.publicClubs.map(club => <ClubComponent key={club.id} club={club} clubId={club.id}/>)
     }
 
     render(){

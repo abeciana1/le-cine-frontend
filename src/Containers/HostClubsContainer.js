@@ -2,6 +2,7 @@ import React from 'react'
 import { Row, Modal, Button } from 'react-bootstrap'
 import ClubComponent from '../Components/ClubComponent'
 import CreateClub from '../Components/Forms/CreateClub'
+import { Link } from 'react-router-dom'
 
 class HostClubsContainer extends React.Component {
 
@@ -17,12 +18,11 @@ class HostClubsContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({clubs: this.props.user.host_clubs})
+        this.setState({clubs: this.props.clubs})
     }
 
     getMyClubs = () => {
-        console.log(this.state.clubs)
-        return this.state.clubs.slice(0,5).map(club => <ClubComponent key={club.id} club={club}/>)
+        return this.state.clubs.slice(0,5).map(hostClub => <ClubComponent key={hostClub.id} hostClub={hostClub} clubId={hostClub.id}/>)
     }
 
     createClubHandler = (clubObj) => {
@@ -47,14 +47,14 @@ class HostClubsContainer extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "width": "60%", "paddingTop": "30px", "paddingBottom": "30px"}}>
+                <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "30px", "paddingBottom": "30px"}}>
                     <div style={{"marginLeft" : "20px", "marginRight": "20px"}}>
                         <h1>My Hosted Clubs</h1>
                         <Row>
                             {this.getMyClubs()}
                         </Row>
-                        {this.state.clubs.count > 4 ? <button className="read-more-btn">View All</button> : null }
-                        {this.state.clubs.count > 4 ? <button className="read-more-btn" style={{"marginLeft": "20px"}}>Find a Club</button> : <button className="read-more-btn" onClick={this.modalHandler}>Create a Club</button>}
+                        {this.state.clubs.length > 4 ? <Link to="clubs/hosted-all"><button className="read-more-btn">View All</button></Link> : null }
+                        {this.state.clubs.length > 4 ? <button className="read-more-btn" style={{"marginLeft": "20px"}}>Find a Club</button> : <button className="read-more-btn" onClick={this.modalHandler}>Create a Club</button>}
                     </div>
                 </div>
                 <>

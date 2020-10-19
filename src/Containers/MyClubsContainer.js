@@ -10,28 +10,26 @@ class MyClubsContainer extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3000/api/v1/users/" + this.props.user.id)
-        .then(res => res.json())
-        .then(user => {
-            this.setState({clubs: user.clubs})
-        })
+        this.setState({clubs: this.props.clubs})
     }
 
     getMyClubs = () => {
-        return this.state.clubs.slice(0,5).map(club => <ClubComponent key={club.id} club={club}/>)
+        return this.state.clubs.slice(0,5).map(userClub => <ClubComponent key={userClub.id} userClub={userClub} clubId={userClub.club_id} />)
     }
 
     render() {
+        // console.log(this.props)
+        console.log(this.state.clubs.length)
         return (
             <React.Fragment>
-                <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "width": "60%", "paddingTop": "30px", "paddingBottom": "30px"}}>
+                <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "30px", "paddingBottom": "30px"}}>
                     <div style={{"marginLeft" : "20px",}}>
                         <h1>My Clubs</h1>
                         <Row>
                             {this.getMyClubs()}
                         </Row>
-                        {this.state.clubs.count > 4 ? <button className="read-more-btn">View All</button> : null }
-                        {this.state.clubs.count > 4 ? <Link to="/clubs/index"><button className="read-more-btn" style={{"marginLeft": "20px"}}>Find a Club</button></Link> : <Link to="/clubs/index"><button className="read-more-btn">Find a Club</button></Link>}
+                        {this.state.clubs.length > 4 ? <Link to="clubs/all"><button className="read-more-btn">View All</button></Link> : null }
+                        {this.state.clubs.length > 4 ? <Link to="/clubs/index"><button className="read-more-btn" style={{"marginLeft": "20px"}}>Find a Club</button></Link> : <Link to="/clubs/index"><button className="read-more-btn">Find a Club</button></Link>}
                     </div>
                 </div>
             </React.Fragment>
