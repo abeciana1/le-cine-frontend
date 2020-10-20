@@ -66,7 +66,6 @@ class MovieShow extends React.Component {
 
     addToClubWatchlist = (clubId) => {
         let club = parseInt(clubId)
-        // console.log(club)
         const options = {
             method: 'POST',
             headers: {
@@ -78,7 +77,6 @@ class MovieShow extends React.Component {
         fetch("http://localhost:3000/api/v1/movies", options)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             this.props.addToClub(club, data.movie.id)
             this.setState({
                 modalOpen: false
@@ -87,7 +85,6 @@ class MovieShow extends React.Component {
     }
 
     render() {
-        console.log(this.state.movie)
         return(
             <React.Fragment>
             {this.state.movie ?
