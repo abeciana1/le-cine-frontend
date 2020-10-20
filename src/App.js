@@ -69,13 +69,11 @@ class App extends React.Component {
     localStorage.clear()
     this.setState({
       user: null //,
-      // userLoggedOut: true
-    }, () => this.props.history.push("/"))
+    })
+    this.props.history.push("/")
   }
 
   loginHandler = (userObj) => {
-    console.log(userObj)
-    // debugger
     const options = {
       method: 'POST',
       headers: {
@@ -92,8 +90,6 @@ class App extends React.Component {
     fetch("http://localhost:3000/api/v1/login", options)
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-      // debugger
       if(data.user){
         localStorage.setItem("token", data.jwt)
         this.setState({
@@ -184,9 +180,9 @@ class App extends React.Component {
     }
     fetch("http://localhost:3000/api/v1/club_watchlists", options)
     .then(resp => resp.json())
-    .then(data => {
-      console.log(data)
-    })
+    // .then(data => {
+    //   console.log(data)
+    // })
   }
 
   deleteUserFromClub = (id) => {

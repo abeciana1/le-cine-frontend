@@ -17,7 +17,8 @@ class ClubShow extends React.Component {
         members: [],
         meetingModalOpen: false,
         modalOpen: false,
-        showAlert: false
+        showAlert: false,
+        joined: false
     }
 
     componentDidMount = () => {
@@ -35,6 +36,7 @@ class ClubShow extends React.Component {
     }
 
     joinClubHandler = (e) => {
+        this.setState({joined: true})
         const options = {
             method: 'POST',
             headers: {
@@ -51,7 +53,6 @@ class ClubShow extends React.Component {
         .then(data => {
             this.props.joinClubHandler(data.user_club)
         })
-        .then(this.props.history.push("/dashboard"))
     }
 
     getNextMeeting = () => {
@@ -169,7 +170,8 @@ class ClubShow extends React.Component {
                                 {this.state.club.about}
                             </p>
                         </div>
-                            <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.joinClubHandler}>Join Our Club</button>
+                            {this.state.joined || this.props.user.clubs.some(club => club.id === this.state.club.id) ? <button className="read-more-btn" style={{"marginLeft": "20px", "color": "white", "backgroundColor": "#FF3900"}} disabled={true}>Joined</button> : <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.joinClubHandler}>Join Our Club</button>}
+                            {/* <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.joinClubHandler}>Join Our Club</button> */}
                     </div>
                     <br />
                     <br />

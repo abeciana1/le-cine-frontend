@@ -261,3 +261,11 @@ p, div, section {
 .hide {
   display: none;
 }
+
+.already-added {
+  border: 2px solid #FF3900;
+  border-radius: 5px;
+  padding: 5px 10px;
+  color: white; 
+  background-color: #FF3900;
+}

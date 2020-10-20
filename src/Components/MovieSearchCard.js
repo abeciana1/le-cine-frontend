@@ -8,7 +8,7 @@ class MovieSearchCard extends React.Component {
 
     state = {
         modalOpen: false,
-        addedToWatchlist: false
+        watchlistClick: false
     }
 
     trimOverview = () => {
@@ -23,7 +23,7 @@ class MovieSearchCard extends React.Component {
     }
 
     watchlistHandler = (e) => {
-        this.setState({addedToWatchlist: !this.state.addedToWatchlist})
+        this.setState({watchlistClick: !this.state.watchlistClick})
         this.props.watchlistHandler(this.props.movie)
     }
 
@@ -71,10 +71,10 @@ class MovieSearchCard extends React.Component {
                                 <Link to={"/movies/search/" + this.props.movie.id}>
                                     <button className="read-more-btn">View More</button>
                                 </Link>
-                                <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>
-                                {/* {this.state.addedToWatchlist ? <button className="read-more-btn" style={{"backgroundColor":"#FF3900", "color":"white"}}>Added!</button> : 
-                                <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>
-                                } */}
+                                {/* { <h2>true</h2> : console.log(false)} */}
+                                {/* {this.props.user.movies.some(movie => movie.mov_id === this.props.movie.id) ?  <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px", "color":"white", "backgroundColor": "#FF3900"}}>Already Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>} */}
+                                {/* {this.props.user.movies.some(movie => movie.mov_id === this.props.movie.id) ?  <button className="already-added" style={{"marginLeft":"20px"}} disabled={true}>Already Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>} */}
+                                {this.state.watchlistClick || this.props.user.movies.some(movie => movie.mov_id === this.props.movie.id) ?  <button className="already-added" style={{"marginLeft":"20px"}} disabled={true}>Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>}
                                 <button onClick={this.clubWatchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to a Club Watchlist</button>
                             </div>
                         </div>

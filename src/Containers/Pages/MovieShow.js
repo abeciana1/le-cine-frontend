@@ -9,7 +9,8 @@ class MovieShow extends React.Component {
     state = {
         movie: null,
         genres: [],
-        modalOpen: false
+        modalOpen: false,
+        watchlistClick: false
     }
 
     configGenres = () => {
@@ -49,6 +50,9 @@ class MovieShow extends React.Component {
     }
 
     watchlistHandler = (e) => {
+        this.setState({
+            watchlistClick: !this.state.watchlistClick
+        })
         const options = {
             method: 'POST',
             headers: {
@@ -97,7 +101,8 @@ class MovieShow extends React.Component {
                             <h3>{this.configGenres()} | Runtime: {this.configRuntime()}</h3>
                             <br />
                             <p>{this.state.movie.overview}</p>
-                            <button onClick={this.watchlistHandler} className="read-more-btn">Add to Watchlist</button>
+                            {/* <button onClick={this.watchlistHandler} className="read-more-btn">Add to Watchlist</button> */}
+                            {this.state.watchlistClick || this.props.user.movies.some(movie => movie.mov_id === this.state.movie.id) ?  <button className="already-added" style={{"marginLeft":"20px"}} disabled={true}>Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>}
                             <button onClick={this.clubWatchlistHandler} className="read-more-btn" style={{"marginLeft": "20px"}}>Add to a Club Watchlist</button>
                         </div>
                     </div>
