@@ -14,7 +14,7 @@ class MyClubsContainer extends React.Component {
     }
 
     getMyClubs = () => {
-        return this.state.clubs.slice(0,5).map(userClub => <ClubComponent key={userClub.id} userClub={userClub} clubId={userClub.club_id} />)
+        return this.state.clubs.slice(0,4).map(userClub => <ClubComponent key={userClub.id} userClub={userClub} clubId={userClub.club_id} />)
     }
 
     render() {

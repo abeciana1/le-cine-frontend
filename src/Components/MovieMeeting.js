@@ -9,12 +9,37 @@ class MovieMeeting extends React.Component {
         const options = {method: 'DELETE'}
         fetch("http://localhost:3000/api/v1/movie_meetings/" + this.props.movieMeeting.id, options)
         .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
+        // .then(data => {
+        //     console.log(data)
+        // })
+    }
+
+    streamingIconHanddler = () => {
+        console.log(this.props.movieMeeting)
+        switch(this.props.movieMeeting.source_name){
+            case "Netflix":
+                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/icons8-netflix-48.png"} alt="Netflix" /></a>
+            case "Hulu":
+                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/icons8-hulu-48.png"} alt="Hulu"/></a>
+            case "Amazon Prime":
+                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/icons8-amazon-prime-video-50.png"} alt="Amazon Prime"/></a>
+            case "Shudder":
+                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/shudder-logo.png"} alt="Shudder" style={{"height":"20px"}} /></a>
+            case "Mubi":
+                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/MUBI-logo.png"} alt="Mubi" style={{"height":"20px"}}/></a>
+            case "Tubi":
+                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/1280px-Tubi_logo.svg.png"} alt="Tubi" style={{"height":"20px"}}/></a>
+            case "HBOMax":
+                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/HBO_Max-Logo.wine.png"} alt="HBOMax" style={{"height":"20px"}}/></a>
+            case "Other":
+                return <a href={"https://" + this.props.movieMeeting.source_url} style={{"textDecoration": "none","color":"black"}}><img src={process.env.PUBLIC_URL + "/images/noun_TV_3399985.png"} alt="Other" style={{"height":"20px"}}/> Other Source</a>
+            default:
+                return <h6>Source Not Available</h6>
+        }
     }
 
     render(){
+        console.log(this.props.movieMeeting)
         return(
             <React.Fragment>
             {this.props.movieMeeting ?
@@ -46,6 +71,13 @@ class MovieMeeting extends React.Component {
                         <img src={this.props.movieMeeting.movie.poster_path} alt={this.props.movieMeeting.movie.title} style={{"height":"250px","float":"left", "marginRight": "10px", "marginBottom": "5px", "padding": "2px"}}/>
                         <div style={{"marginLeft":"200px", "width":"100%", "top":"200px"}}>
                         {this.props.movieMeeting.movie.overview}
+                        <br />
+                        <br />
+                        <div>
+                            <strong>You can watch {this.props.movieMeeting.title} here:</strong>
+                            <br />
+                            {this.streamingIconHanddler()}
+                        </div>
                         <br />
                         <br />
                         <p>

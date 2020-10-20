@@ -22,7 +22,7 @@ class HostClubsContainer extends React.Component {
     }
 
     getMyClubs = () => {
-        return this.state.clubs.slice(0,5).map(hostClub => <ClubComponent key={hostClub.id} hostClub={hostClub} clubId={hostClub.id}/>)
+        return this.state.clubs.slice(0,4).map(hostClub => <ClubComponent key={hostClub.id} hostClub={hostClub} clubId={hostClub.id}/>)
     }
 
     createClubHandler = (clubObj) => {
@@ -54,7 +54,7 @@ class HostClubsContainer extends React.Component {
                             {this.getMyClubs()}
                         </Row>
                         {this.state.clubs.length > 4 ? <Link to="clubs/hosted-all"><button className="read-more-btn">View All</button></Link> : null }
-                        {this.state.clubs.length > 4 ? <button className="read-more-btn" style={{"marginLeft": "20px"}}>Find a Club</button> : <button className="read-more-btn" onClick={this.modalHandler}>Create a Club</button>}
+                        {this.state.clubs.length > 4 ? <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.modalHandler}>Create a Club</button> : <button className="read-more-btn" onClick={this.modalHandler}>Create a Club</button>}
                     </div>
                 </div>
                 <>

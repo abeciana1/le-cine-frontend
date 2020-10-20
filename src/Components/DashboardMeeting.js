@@ -22,13 +22,15 @@ class DashboardMeeting extends React.Component {
 
     addClubName = () => {
         return(
-            <div style={{"fontSize":"30px"}}>{this.state.club.name}</div>
+            <h5>{this.state.club.name}</h5>
         )
     }
 
+    // <strong>{this.state.club.name}</strong> | 
+
     listMeetings = () => {
         if(this.state.club.meetings.length > 0){
-            return this.state.meetings.slice(0,1).map(meeting => <ListGroup.Item action href={"/clubs/" + this.state.club.id + "/meetings/" + meeting.id } className="meeting-list-item"> <strong>{this.state.club.name}</strong> | {meeting.title} | {meeting.date}, {meeting.time}</ListGroup.Item>)
+            return this.state.meetings.slice(0,1).map(meeting => <ListGroup.Item action href={"/clubs/" + this.state.club.id + "/meetings/" + meeting.id } className="meeting-list-item">{meeting.title} | {meeting.date}, {meeting.time}</ListGroup.Item>)
         } else {
             return <h6>This club has no upcoming meetings!</h6>
         }

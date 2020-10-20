@@ -1,5 +1,7 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
+import Select from 'react-select';
+
 
 class CreateMovieMeeting extends React.Component {
 
@@ -7,7 +9,9 @@ class CreateMovieMeeting extends React.Component {
         movie_id: 0,
         meeting_id: this.props.meeting.id,
         discussion: true,
-        watch_along: false
+        watch_along: false,
+        source_name: "",
+        source_url: ""
     }
 
     getMovieOptions = () => {
@@ -27,6 +31,16 @@ class CreateMovieMeeting extends React.Component {
         this.setState({movie_id: e.target.value})
     }
 
+    sourceSelection = (option) => {
+        // console.log(e)
+        // debugger
+        this.setState({source_name: option.value})
+    }
+
+    sourceUrlHandler = (e) => {
+        this.setState({source_url: e.target.value})
+    }
+
     submitHandler = (e) => {
         e.preventDefault()
         this.props.submitHandler(this.state)
@@ -35,6 +49,16 @@ class CreateMovieMeeting extends React.Component {
 
 
     render() {
+        const options = [
+            {value: 'Netflix', label: 'Netflix'},
+            {value: 'Hulu', label: 'Hulu'},
+            {value: 'Amazon Prime', label: 'Amazon Prime'},
+            {value: 'Tubi', label: 'Tubi'},
+            {value: 'Mubi', label: 'Mubi'},
+            {value: 'HBOMax', label: 'HBOMax'},
+            {value: 'Shudder', label: 'Shudder'},
+            {value: 'Other', label: 'Other'}
+        ]
         return(
             <React.Fragment>
                 <Form onSubmit={this.submitHandler}>
@@ -63,6 +87,17 @@ class CreateMovieMeeting extends React.Component {
                             name="privacy"
                             style={{"marginLeft": "5px"}}
                             />
+                    </Form.Group>
+                    <Form.Group>
+                            <Select 
+                                isClearable
+                                options={options}
+                                onChange={this.sourceSelection}
+                            />
+                    </Form.Group>
+                    <Form.Group>
+                        <Form.Label>Link to the movie:</Form.Label>
+                        <Form.Control type="text" value={this.state.source_url} onChange={this.sourceUrlHandler} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Text style={{"color":"red"}}>{this.state.movie_id === "- Choose One -" ? "This is not an option, the submit button has been disabled!" : null}</Form.Text>

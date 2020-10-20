@@ -10,6 +10,7 @@ class ClubMeetingShow extends React.Component {
 
     state = {
         club: null,
+        host: null,
         movies: null,
         meeting: null,
         movieMeetings: [],
@@ -23,7 +24,8 @@ class ClubMeetingShow extends React.Component {
         .then(data => {
             this.setState({
                 club: data,
-                movies: data.movies
+                movies: data.movies,
+                host: data.host
             })
         })
         fetch("http://localhost:3000/api/v1/meetings/" + this.props.meeting_id)
@@ -101,15 +103,11 @@ class ClubMeetingShow extends React.Component {
             showAlert: true
         })
     }
-    
-    // TODO - add email all button in member index page
-    // TODO - work on remove member button
-
 
     render() {
         return (
             <React.Fragment>
-            {this.state.club && this.state.meeting ? 
+            {this.state.club && this.state.meeting && this.props.user ? 
             <React.Fragment>
             <CalendarComponent meeting={this.state.meeting} />
             <div style={{"marginTop":"120px"}}>
@@ -131,12 +129,14 @@ class ClubMeetingShow extends React.Component {
                             </div>
                         </div>
                         <br />
-                        {this.state.club.host.id === this.props.user.id ?
+                        {this.state.club ?
+                        this.state.host.id === this.props.user.id ?
                             <>
                             <UpdateMovieMeetingModal club={this.state.club} meeting={this.state.meeting} updateHandler={this.updateHandler} />
                             <br />
                             <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
                             </>
+                            : null
                             : null}
                     </div>
                     <div style={{"paddingTop": "50px"}}>
