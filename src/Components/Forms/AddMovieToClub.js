@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap'
 class AddMovieToClub extends React.Component {
 
     state = {
+        selectedClub: null,
         selectedClubId: 0,
         disabled: false
     }
@@ -16,6 +17,17 @@ class AddMovieToClub extends React.Component {
         this.setState({
             selectedClubId: e.target.value
         })
+        // this.getSelectedClub(this.state.selectedClubId)
+        this.getSelectedClub(e.target.value)
+    }
+
+    getSelectedClub = (id) => {
+        // console.log(this.state.selectedClubId)
+        fetch("http://localhost:3000/api/v1/clubs/" + id)
+        .then(res => res.json())
+        .then(data => {
+            this.setState({selectedClub: data})
+        })
     }
 
     submitHandler = (e) => {
@@ -25,6 +37,7 @@ class AddMovieToClub extends React.Component {
 
     render() {
         console.log(this.props.user)
+        // console.log
         return (
             <React.Fragment>
                 <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
@@ -36,8 +49,14 @@ class AddMovieToClub extends React.Component {
                             {this.getClubOptions()}
                             </Form.Control>
                             <Form.Text style={{"color":"red"}}>{this.state.selectedClubId === "- Choose One -" ? "This is not an option, the submit button has been disabled!" : null}</Form.Text>
+                            {this.state.selectedClub ? 
+                                this.state.selectedClub.movies.some(movie => movie.mov_id === this.props.movie.id) ? <Form.Text style={{"color":"red"}}>This movie is already in this club's watchlist!</Form.Text> : null
+                            : null
+                            }
                         </Form.Group>
-                        {this.state.selectedClubId !== 0 ? <input type="submit" value="Add To Club Watchlist" className="read-more-btn" disabled={this.state.selectedClubId === "- Choose One -" ? true : false}/> : null}
+                        {this.state.selectedClub ?
+                        this.state.selectedClubId !== 0 || this.state.selectedClub.movies.some(movie => movie.mov_id === this.props.movie.id) ? <input type="submit" value="Add To Club Watchlist" className="read-more-btn" disabled={this.state.selectedClubId === "- Choose One -" ||this.state.selectedClub.movies.some(movie => movie.mov_id === this.props.movie.id) ? true : false}/> : null
+                        : null}
                     </Form>
                 </div>
             </React.Fragment>

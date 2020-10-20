@@ -91,7 +91,7 @@ class MovieSearchCard extends React.Component {
                         <Modal.Body>
                         <p style={{"textAlign": "center"}}>Woohoo, you're adding a movie to club's watchlist!</p>
                         <p>You chose: <strong>{this.props.movie.title}, {moment(this.props.movie.release_date).format("YYYY")}</strong></p>
-                        <AddMovieToClub clubWatchlistSubmit={this.addToClubWatchlist} user={this.props.user} />
+                        <AddMovieToClub clubWatchlistSubmit={this.addToClubWatchlist} user={this.props.user} movie={this.props.movie} />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button variant="secondary" onClick={this.clubWatchlistHandler}>

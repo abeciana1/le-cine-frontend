@@ -22,7 +22,7 @@ class MyMeetingsContainer extends React.Component {
                     <h1 style={{"textAlign": "center"}}>Upcoming Club Meetings</h1>
                     {this.getClubMeetings()}
                     <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
-                        <button className="read-more-btn">View All Upcoming Meetings</button>
+                        {this.state.clubs.length > 5 ? <button className="read-more-btn">View All Upcoming Meetings</button> : null}
                     </div>
                 </div>
             </React.Fragment>
