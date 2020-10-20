@@ -1,12 +1,15 @@
 import React from 'react'
 import moment from 'moment'
+import { Modal, Button } from 'react-bootstrap'
+import AddMovieToClub from '../../Components/Forms/AddMovieToClub'
 import RecommendationsContainer from '../RecommendationsContainer'
 
 class MovieShow extends React.Component {
 
     state = {
         movie: null,
-        genres: []
+        genres: [],
+        modalOpen: false
     }
 
     configGenres = () => {
@@ -39,8 +42,48 @@ class MovieShow extends React.Component {
         })
     }
 
+    clubWatchlistHandler = (e) => {
+        this.setState({
+            modalOpen: !this.state.modalOpen
+        })
+    }
+
     watchlistHandler = (e) => {
-        this.props.watchlistHandler(this.state.movie)
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(this.state.movie)
+        }
+        fetch("http://localhost:3000/api/v1/movies", options)
+        .then(res => res.json())
+        .then(data => {
+            this.props.watchlistHandler(data)
+        })
+    }
+
+    addToClubWatchlist = (clubId) => {
+        let club = parseInt(clubId)
+        // console.log(club)
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(this.state.movie)
+        }
+        fetch("http://localhost:3000/api/v1/movies", options)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            this.props.addToClub(club, data.movie.id)
+            this.setState({
+                modalOpen: false
+            })
+        })
     }
 
     render() {
@@ -58,7 +101,7 @@ class MovieShow extends React.Component {
                             <br />
                             <p>{this.state.movie.overview}</p>
                             <button onClick={this.watchlistHandler} className="read-more-btn">Add to Watchlist</button>
-                            <button className="read-more-btn" style={{"marginLeft": "20px"}}>Add to a Club Watchlist</button>
+                            <button onClick={this.clubWatchlistHandler} className="read-more-btn" style={{"marginLeft": "20px"}}>Add to a Club Watchlist</button>
                         </div>
                     </div>
                     {this.state.movie.trailer ? 
@@ -85,6 +128,23 @@ class MovieShow extends React.Component {
                         <h1>Recommendations</h1>
                         <RecommendationsContainer user={this.props.user} movies={this.state.movie.recommendations} />
                     </section>
+                    <>
+                    <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
+                        <Modal.Header closeButton onClick={this.clubWatchlistHandler}>
+                            <Modal.Title>Add To Your Club Watchlist</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <p style={{"textAlign": "center"}}>Woohoo, you're adding a movie to club's watchlist!</p>
+                        <p>You chose: <strong>{this.state.movie.title}, {moment(this.state.movie.release_date).format("YYYY")}</strong></p>
+                            <AddMovieToClub clubWatchlistSubmit={this.addToClubWatchlist} user={this.props.user} />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.clubWatchlistHandler}>
+                            Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    </>
                 </React.Fragment>
             :
             null

@@ -184,7 +184,9 @@ class App extends React.Component {
     }
     fetch("http://localhost:3000/api/v1/club_watchlists", options)
     .then(resp => resp.json())
-    .then(console.log)
+    .then(data => {
+      console.log(data)
+    })
   }
 
   deleteUserFromClub = (id) => {
@@ -237,7 +239,7 @@ class App extends React.Component {
             }}/>
             <Route path="/movies/search/:id" render={({match}) => {
               let id = parseInt(match.params.id)
-              return <MovieShow watchlistHandler={this.watchlistHandler} id={id} />
+              return <MovieShow addToClub={this.addToClubWatchlist} user={this.state.user} watchlistHandler={this.watchlistHandler} id={id} />
             }} /> 
             <Route path="/dashboard" render={() => <Dashboard user={this.state.user} userClubs={this.state.userClubs} hostClubs={this.state.hostClubs} />} />
             <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
