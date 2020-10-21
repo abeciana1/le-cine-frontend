@@ -16,11 +16,13 @@ class MovieCard extends React.Component {
     }
 
     render(){
+        console.log(this.props.movie)
         return(
             <React.Fragment>
                 <Col xs lg="2">
                     <a href={"/movies/search/" + this.props.movie.id} style={{"textDecoration": "none", "textColor": "black"}}>
-                        {this.props.movie.poster_path ? <img src={"https://image.tmdb.org/t/p/original" + this.props.movie.poster_path} alt={this.props.movie.title} style={{"height": "200px", "paddingRight": "20px", "paddingBottom": "10px"}} /> : <img src={"https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"} alt={this.props.movie.title} style={{"height": "200px", "float": "left"}} />}
+                        {this.props.movie.poster_path ? <img src={"https://image.tmdb.org/t/p/original" + this.props.movie.poster_path} alt={this.props.movie.title} style={{"height": "200px", "paddingRight": "20px", "paddingBottom": "10px"}} /> : <img src={"https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"} alt={this.props.movie.title} style={{"height": "200px", "paddingRight": "20px", "paddingBottom": "10px"}} />}
+                        <br />
                         <h6>{this.trimTitle()}</h6>
                     </a>
                 </Col>
