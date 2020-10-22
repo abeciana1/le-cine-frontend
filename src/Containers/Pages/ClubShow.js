@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom'
 import CreateMeeting from '../../Components/Forms/CreateMeeting'
 import UpdateClub from '../../Components/Forms/UpdateClub'
 
-
 class ClubShow extends React.Component {
 
     state = {
