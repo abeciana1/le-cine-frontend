@@ -35,7 +35,6 @@ class ClubMeetingsIndex extends React.Component {
 
     renderUpcomingMeeting = () => {
         if(this.state.upcomingMeetings.length !== 0){
-            // console.log(this.state.upcomingMeetings)
             return this.state.upcomingMeetings.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.state.club} deleteMeetingHandler={this.deleteMeetingHandler} meeting={meeting} />)
         }else {
             return <h3 style={{"textAlign": "center"}}>Sorry, there are no upcoming meetings!</h3>

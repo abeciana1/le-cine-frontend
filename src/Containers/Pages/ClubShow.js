@@ -129,6 +129,12 @@ class ClubShow extends React.Component {
         })
     }
 
+    deleteMeetingHandler = (meetingObj) => {
+        let newArray = [...this.state.upcomingMeetings]
+        newArray.splice(newArray.indexOf(meetingObj), 1)
+        this.setState({allMeetings: newArray})
+    }
+
     render() {
         return(
             <React.Fragment>
@@ -181,7 +187,7 @@ class ClubShow extends React.Component {
                         <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
                             <h2 style={{"textAlign":"center"}}>Upcoming Meetings</h2>
                             {/* {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.upcomingMeetings} club={this.state.club} /> : null} */}
-                            {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.allMeetings} club={this.state.club} /> : null}
+                            {this.state.upcomingMeetings ? <UpcomingMeetings meetings={this.state.allMeetings} club={this.state.club} deleteMeetingHandler={this.deleteMeetingHandler} /> : null}
                         </div>
                     <br />
                     <br />
