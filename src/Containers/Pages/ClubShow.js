@@ -76,10 +76,6 @@ class ClubShow extends React.Component {
 
     addMeetingToClub = (meetingObj) => {
         this.meetingModalHandler()
-        let newArray = [...this.state.allMeetings, meetingObj]
-        this.setState({
-            allMeetings: newArray
-        })
         const options = {
             method: 'POST',
             headers: {
@@ -90,6 +86,12 @@ class ClubShow extends React.Component {
         }
         fetch("http://localhost:3000/api/v1/meetings", options)
         .then(res => res.json())
+        .then(data => {
+            let newArray = [...this.state.allMeetings, data.meeting]
+            this.setState({
+                allMeetings: newArray
+            })
+        })
     }
 
     disbandHandler = (e) => {

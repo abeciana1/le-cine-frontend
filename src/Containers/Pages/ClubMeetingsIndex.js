@@ -35,7 +35,7 @@ class ClubMeetingsIndex extends React.Component {
 
     renderUpcomingMeeting = () => {
         if(this.state.upcomingMeetings.length !== 0){
-            console.log(this.state.upcomingMeetings)
+            // console.log(this.state.upcomingMeetings)
             return this.state.upcomingMeetings.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.state.club} deleteMeetingHandler={this.deleteMeetingHandler} meeting={meeting} />)
         }else {
             return <h3 style={{"textAlign": "center"}}>Sorry, there are no upcoming meetings!</h3>
@@ -47,17 +47,20 @@ class ClubMeetingsIndex extends React.Component {
     }
 
     deleteMeetingHandler = (meetingObj) => {
-        let newArray = [...this.state.allMeetings]
+        let todayDate = moment().format('YYYY-MM-DD')
+        
+        if(moment(meetingObj.date).isAfter(todayDate)){ //! for upcoming meetings
+            let newArray = [...this.state.upcomingMeetings]
             newArray.splice(newArray.indexOf(meetingObj), 1)
-            this.setState({ allMeetings: newArray})
-        console.log(meetingObj)
+            this.setState({upcomingMeetings: newArray})
+        } else if (moment(todayDate).isAfter(meetingObj.date)) { //! for previous meetings
+            let newArray = [...this.state.previousMeetings]
+            newArray.splice(newArray.indexOf(meetingObj), 1)
+            this.setState({previousMeetings: newArray})
+        }
         const options = {method: 'DELETE'}
         fetch("http://localhost:3000/api/v1/meetings/" + meetingObj.id, options)
         .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            window.location.reload(false)
-        })
     }
 
     render() {
