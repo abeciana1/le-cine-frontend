@@ -26,4 +26,4 @@ Thankfully, my friend Russell found this as an opportunity to create a safe esca
 
 <h2>Wireframes</h2>
 
-You can view my wireframe <a href="https://xd.adobe.com/view/c347cd9b-3254-4f38-bb39-312baee02ed4-9614/screen/8fe553df-8f31-49b9-bd79-18e607f57aaf?fullscreen">here</a>.
+You can view my wireframe <a href="https://xd.adobe.com/view/c347cd9b-3254-4f38-bb39-312baee02ed4-9614/screen/8fe553df-8f31-49b9-bd79-18e607f57aaf?fullscreen" alt="Le Cine Wireframes">here</a>.
