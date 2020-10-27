@@ -4,7 +4,8 @@ import CalendarComponent from '../../Components/CalendarComponent'
 import MovieMeeting from '../../Components/MovieMeeting'
 import MovieMeetingModal from '../../Components/MovieMeetingModal'
 import UpdateMovieMeetingModal from '../../Components/UpdateMovieMeetingModal'
-import { Alert } from 'react-bootstrap'
+// import Canvas from '../../Components/Canvas'
+import { Alert, Modal, Button } from 'react-bootstrap'
 
 class ClubMeetingShow extends React.Component {
 
@@ -15,7 +16,8 @@ class ClubMeetingShow extends React.Component {
         meeting: null,
         movieMeetings: [],
         movieMeetingId: [],
-        showAlert: false
+        showAlert: false,
+        nowPlayingModal: true
     }
 
     componentDidMount = () => {
@@ -104,7 +106,12 @@ class ClubMeetingShow extends React.Component {
         })
     }
 
+    nowPlayingModalHandler = () => {
+        this.setState({nowPlayingModal: !this.state.nowPlayingModal})
+    }
+
     render() {
+        console.log(this.state.meeting)
         return (
             <React.Fragment>
             {this.state.club && this.state.meeting && this.props.user ? 
@@ -149,6 +156,34 @@ class ClubMeetingShow extends React.Component {
                     }
                     </div>
                 </div>
+                <React.Fragment>
+                {this.state.nowPlayingModal ? 
+                    <Modal show={this.state.nowPlayingModal === true} close={this.state.nowPlayingModal === false} size="lg">
+                <Modal.Header closeButton onClick={this.nowPlayingModalHandler}>
+                    <Modal.Title>Blank Presents</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div style={{"textAlign": "center"}}>
+                        <img src={process.env.PUBLIC_URL + "/images/meeting-show-marquee.png"} alt="marquee" style={{"width": "100%", "position":"relative"}} />
+                        {this.state.meeting.movie_meetings[0].discussion ?  <div className="light-box" style={{"position":"absolute","top": "36%", "left": "10%", "fontSize":"310%", "color":"#2f3839"}}>DISCUSSION</div> : <div className="light-box" style={{"position":"absolute","top": "36%", "left": "10%", "fontSize":"200%", "color":"#a63b3b"}}>WATCHALONG</div>}
+                        <div className="light-box" style={{"position":"absolute","top": "46%", "left": "10%", "fontSize":"310%", "color":"#2f3839"}}>{`${this.state.meeting.movies[0].title}`}</div>
+                        {this.state.meeting.movie_meetings.length > 1 ?
+                        <>
+                            {this.state.meeting.movie_meetings[1].discussion ?  <div className="light-box" style={{"position":"absolute","top": "57%", "left": "10%", "fontSize":"310%", "color":"#2f3839"}}>DISCUSSION</div> : <div className="light-box" style={{"position":"absolute","top": "57%", "left": "10%", "fontSize":"310%", "color":"#a63b3b"}}>WATCHALONG</div>}
+                            <div className="light-box" style={{"position":"absolute","top": "68%", "left": "10%", "fontSize":"310%", "color":"#2f3839"}}>{`${this.state.meeting.movies[1].title}`}</div>
+                        </>
+                            : null}
+                        {/* this.state.meeting.movie_meetings.length > 2 ? <div className="light-box" style={{"position":"absolute","top": "48%", "left": "10%", "fontSize":"200%", "color":"#a63b3b", "textAlign": "center"}}>...AND MORE!</div> : null} */}
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={this.nowPlayingModalHandler}>
+                    Close
+                    </Button>
+                </Modal.Footer>
+                </Modal>
+                : null}
+                </React.Fragment>
             </React.Fragment>
             :
             null

@@ -269,3 +269,7 @@ p, div, section {
   color: white; 
   background-color: #FF3900;
 }
+
+.light-box {
+  font-family: 'Anton', sans-serif;
+}
