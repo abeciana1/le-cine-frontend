@@ -2,15 +2,10 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { withRouter, Link } from 'react-router-dom';
 
-
-const logout = (e) => {
-    this.props.logoutHandler()
-}
-
-const AuthNavBar = () => {
+const AuthNavBar = (props) => {
         return(
         <React.Fragment>
-        {this.props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
+        {props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
             <Navbar bg="white" expand="lg">
                 <Navbar.Brand>
                     <Link to="/" style={{"color": "#FF3900", "textDecoration": "none"}}>
@@ -47,7 +42,7 @@ const AuthNavBar = () => {
                             <Link to="/clubs/manage" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Manage Memberships</Link>
                         </NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link onClick={logout}>Logout</Nav.Link>
+                    <Nav.Link onClick={() => props.logoutHandler()}>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

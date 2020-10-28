@@ -10,7 +10,7 @@ const logout = (e) => {
 const NavBar = (props) => {
         return(
         <React.Fragment>
-            {this.props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
+            {props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
             <Navbar bg="white" expand="lg">
                 <Navbar.Brand>
                     <Link to="/" style={{"color": "#FF3900", "textDecoration": "none"}}><strong>Le Cine</strong></Link>
@@ -27,10 +27,10 @@ const NavBar = (props) => {
                     <Nav.Link>
                         <Link to="/contact" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Contact Us</Link>
                     </Nav.Link>
-                    {this.props.user ? <Nav.Link onClick={logout}>Logout</Nav.Link> : <Nav.Link>
+                    {props.user ? <Nav.Link onClick={logout}>Logout</Nav.Link> : <Nav.Link>
                         <Link to="/login" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Login</Link>
                     </Nav.Link>}
-                    {this.props.user ? null : <Nav.Link href="/signup">
+                    {props.user ? null : <Nav.Link href="/signup">
                         <Link to="/signup" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Signup</Link>
                     </Nav.Link>}
                     </Nav>
