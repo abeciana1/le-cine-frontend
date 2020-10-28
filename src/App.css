@@ -120,7 +120,7 @@ aside {
   margin-right: auto; */
 }
 
-@media (max-width: 1224px) {                                  
+@media (max-width: 990px) {                                  
   .page-left {
     display: none;
   }
@@ -128,10 +128,10 @@ aside {
   #lightbulb-gif {
     display: none;
   }
-/* 
+
   .site-logo {
     display: none;
-  } */
+  }
 
   .movie-backdrop {
     display: none;

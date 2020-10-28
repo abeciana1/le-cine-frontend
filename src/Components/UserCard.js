@@ -9,7 +9,6 @@ const UserCard = (props) => {
             <br />
             <h3>{props.user.first_name} {props.user.last_name}</h3>
             <h4>{moment(props.user.birthday).format('MMMM Do')}</h4>
-            {/* ADD BIRTHDAY HERE */}
         </React.Fragment>
     )
 }

@@ -3,17 +3,15 @@ import { Link } from 'react-router-dom';
 import { Alert } from 'react-bootstrap'
 import MediaQuery from 'react-responsive'
 
+const Home = (props) => {
 
-class Home extends React.Component {
-
-    render(){
         return(
             <React.Fragment>
             <MediaQuery maxWidth={990}>
             <div style={{"marginLeft":"20px", "marginRight":"20px"}}>
-                {this.props.user ? 
+                {props.user ? 
                     <Alert variant={"success"} style={{"width": "100%"}}>
-                    Welcome {this.props.user.first_name}, you're currently logged in!
+                    Welcome {props.user.first_name}, you're currently logged in!
                     </Alert>
                 :
                 null
@@ -63,16 +61,9 @@ class Home extends React.Component {
             </MediaQuery>
             <MediaQuery minWidth={1000}>
             <div className="page-normal-margin">
-                {/* {this.props.loggedOut ? 
-                <Alert variant={"success"} style={{"width": "50%"}}>
-                You have been successfully logged out!
-                </Alert>
-                :
-                null
-                } */}
-                {this.props.user ? 
+                {props.user ? 
                     <Alert variant={"success"} style={{"width": "50%"}}>
-                    Welcome {this.props.user.first_name}, you're currently logged in!
+                    Welcome {props.user.first_name}, you're currently logged in!
                     </Alert>
                 :
                 null}
@@ -118,7 +109,6 @@ class Home extends React.Component {
             </MediaQuery>
             </React.Fragment>
         )
-    }
 }
 
 export default Home

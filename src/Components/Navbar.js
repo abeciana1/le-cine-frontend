@@ -2,13 +2,12 @@ import React from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import { withRouter, Link } from 'react-router-dom';
 
-class NavBar extends React.Component {
 
-    logout = (e) => {
-        this.props.logoutHandler()
-    }
+const logout = (e) => {
+    this.props.logoutHandler()
+}
 
-    render() {
+const NavBar = (props) => {
         return(
         <React.Fragment>
             {this.props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
@@ -28,7 +27,7 @@ class NavBar extends React.Component {
                     <Nav.Link>
                         <Link to="/contact" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Contact Us</Link>
                     </Nav.Link>
-                    {this.props.user ? <Nav.Link onClick={this.logout}>Logout</Nav.Link> : <Nav.Link>
+                    {this.props.user ? <Nav.Link onClick={logout}>Logout</Nav.Link> : <Nav.Link>
                         <Link to="/login" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Login</Link>
                     </Nav.Link>}
                     {this.props.user ? null : <Nav.Link href="/signup">
@@ -40,6 +39,5 @@ class NavBar extends React.Component {
         </React.Fragment>
         )
     }
-}
 
 export default withRouter(NavBar)

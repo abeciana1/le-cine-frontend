@@ -4,7 +4,6 @@ import CalendarComponent from '../../Components/CalendarComponent'
 import MovieMeeting from '../../Components/MovieMeeting'
 import MovieMeetingModal from '../../Components/MovieMeetingModal'
 import UpdateMovieMeetingModal from '../../Components/UpdateMovieMeetingModal'
-// import Canvas from '../../Components/Canvas'
 import { Alert, Modal, Button } from 'react-bootstrap'
 
 class ClubMeetingShow extends React.Component {
@@ -49,8 +48,6 @@ class ClubMeetingShow extends React.Component {
     }
 
     renderMovieMeetings = () => {
-        // let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => moment().format(a.created_at) - moment().format(b.created_at))
-        // let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => moment(a.created_at).format('LLL') - moment(b.created_at).format('LLL'))
         let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => a.created_at.localeCompare(b.created_at))
         return sortedMovieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} />)
     }
@@ -111,7 +108,6 @@ class ClubMeetingShow extends React.Component {
     }
 
     render() {
-        console.log(this.state.meeting)
         return (
             <React.Fragment>
             {this.state.club && this.state.meeting && this.props.user ? 
@@ -120,8 +116,8 @@ class ClubMeetingShow extends React.Component {
             <div style={{"marginTop":"120px"}}>
                 <ClubNav club={this.state.club} />
             </div>
-                <div style={{"marginLeft": "300px", "marginTop": "40px", "marginRight": "100px", "width": "100%"}}>
-                    <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "50%", "textAlign": "left", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
+                <div style={{"marginLeft": "20%", "marginTop": "40px","width": "80%"}}>
+                    <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "75%", "textAlign": "left", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
                     {this.state.showAlert ? 
                     <Alert variant="success" style={{"textAlign":"center", "width":"100%", "marginLeft":"auto", "marginRight":"auto", "zIndex":"2"}}>Your changes have been saved!</Alert>
                     :
@@ -162,19 +158,64 @@ class ClubMeetingShow extends React.Component {
                 <Modal.Header closeButton onClick={this.nowPlayingModalHandler}>
                     <Modal.Title>Blank Presents</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
-                    <div style={{"textAlign": "center"}}>
-                        <img src={process.env.PUBLIC_URL + "/images/meeting-show-marquee.png"} alt="marquee" style={{"width": "100%", "position":"relative"}} />
-                        {this.state.meeting.movie_meetings[0].discussion ?  <div className="light-box" style={{"position":"absolute","top": "36%", "left": "10%", "fontSize":"310%", "color":"#2f3839"}}>DISCUSSION</div> : <div className="light-box" style={{"position":"absolute","top": "36%", "left": "10%", "fontSize":"200%", "color":"#a63b3b"}}>WATCHALONG</div>}
-                        <div className="light-box" style={{"position":"absolute","top": "46%", "left": "10%", "fontSize":"310%", "color":"#2f3839"}}>{`${this.state.meeting.movies[0].title}`}</div>
-                        {this.state.meeting.movie_meetings.length > 1 ?
+                {/* <Modal.Body> */}
+                <Modal.Body style={{"margin": "0px", backgroundImage: `url(${process.env.PUBLIC_URL + "/images/meeting-show-marquee.png"})`, "backgroundPosition": 'center',
+                    "top": "0px",
+                    "position":"relative",
+                    "width": "100%",
+                    "height": "75vh",
+                    "backgroundSize": '100%',
+                    "backgroundRepeat": 'no-repeat'}}>
+                    <div style={{"textAlign":"center", "marginTop":"22.5%", "position":"absolute", "left":"35%", "top":"3%"}}>
+                    {this.state.meeting.movie_meetings.length > 0 ?
                         <>
-                            {this.state.meeting.movie_meetings[1].discussion ?  <div className="light-box" style={{"position":"absolute","top": "57%", "left": "10%", "fontSize":"310%", "color":"#2f3839"}}>DISCUSSION</div> : <div className="light-box" style={{"position":"absolute","top": "57%", "left": "10%", "fontSize":"310%", "color":"#a63b3b"}}>WATCHALONG</div>}
-                            <div className="light-box" style={{"position":"absolute","top": "68%", "left": "10%", "fontSize":"310%", "color":"#2f3839"}}>{`${this.state.meeting.movies[1].title}`}</div>
+                        {this.state.meeting.movie_meetings[0].discussion ?  <div className="light-box" style={{"fontSize":"3vw", "color":"#a63b3b", "textAlign":"center"}}>DISCUSSION</div> : <div className="light-box" style={{"fontSize":"3vw", "color":"#a63b3b", "textAlign":"center"}}>WATCHALONG</div>}
+                        <div className="light-box" style={{"fontSize":"3vw", "color":"#2f3839", "textAlign":"center"}}>{`${this.state.meeting.movies[0].title}`}</div>
                         </>
+                        :
+                        <div style={{"marginTop": "5%"}}>
+                            <div style={{"marginLeft":"100px", "marginRight":"100px"}}>
+                                <div className="light-box" style={{"fontSize":"3.5vw", "color":"#2f3839", "textAlign":"center"}}>Sorry, no movies have been added to this meeting</div>
+                            </div>
+                        </div>}
+                        {this.state.meeting.movie_meetings.length > 1 ?
+                        <div>
+                            {this.state.meeting.movie_meetings[1].discussion ?  <div className="light-box" style={{"fontSize":"3vw", "color":"#a63b3b", "textAlign":"center"}}>DISCUSSION</div> : <div className="light-box" style={{"fontSize":"3vw", "color":"#a63b3b", "textAlign":"center"}}>WATCHALONG</div>}
+                            <div className="light-box" style={{"fontSize":"3vw", "color":"#2f3839", "textAlign":"center"}}>{`${this.state.meeting.movies[1].title}`}</div>
+                        </div>
                             : null}
-                        {/* this.state.meeting.movie_meetings.length > 2 ? <div className="light-box" style={{"position":"absolute","top": "48%", "left": "10%", "fontSize":"200%", "color":"#a63b3b", "textAlign": "center"}}>...AND MORE!</div> : null} */}
+                        {this.state.meeting.movie_meetings.length > 2 ?
+                            <div>
+                                <div className="light-box" style={{"fontSize":"3vw", "color":"#a63b3b", "textAlign": "center"}}>...AND MORE !</div> 
+                            </div>
+                        : null}
                     </div>
+                    {/* <img src={process.env.PUBLIC_URL + "/images/meeting-show-marquee.png"} alt="marquee" style={{"width": "100%"}} /> */}
+                    {/* <div style={{"textAlign": "center"}}> */}
+
+                        {/* {this.state.meeting.movie_meetings.length > 0 ?
+                        <div style={{"marginTop": "25%"}}>
+                            {this.state.meeting.movie_meetings[0].discussion ?  <div className="light-box" style={{"fontSize":"2.6vw", "color":"#2f3839", "textAlign":"center"}}>DISCUSSION</div> : <div className="light-box" style={{"fontSize":"2.6vw", "color":"#a63b3b", "textAlign":"center"}}>WATCHALONG</div>}
+                            <div className="light-box" style={{"fontSize":"2.6vw", "color":"#2f3839", "textAlign":"center"}}>{`${this.state.meeting.movies[0].title}`}</div>
+                        </div>
+                        : 
+                        <div style={{"marginTop": "5%"}}>
+                            <div style={{"marginLeft":"100px", "marginRight":"100px"}}>
+                                <div className="light-box" style={{"fontSize":"3.5vw", "color":"#2f3839", "textAlign":"center"}}>Sorry, no movies have been added to this meeting</div>
+                            </div>
+                        </div>}
+                        {this.state.meeting.movie_meetings.length > 1 ?
+                        <div style={{"marginTop": "5%"}}>
+                            {this.state.meeting.movie_meetings[1].discussion ?  <div className="light-box" style={{"fontSize":"2.6vw", "color":"#2f3839", "textAlign":"center"}}>DISCUSSION</div> : <div className="light-box" style={{"fontSize":"2.6vw", "color":"#a63b3b", "textAlign":"center"}}>WATCHALONG</div>}
+                            <div className="light-box" style={{"fontSize":"2.6vw", "color":"#2f3839", "textAlign":"center"}}>{`${this.state.meeting.movies[1].title}`}</div>
+                        </div>
+                            : null}
+                        {this.state.meeting.movie_meetings.length > 2 ?
+                        <div>
+                            <div className="light-box" style={{"fontSize":"2.5vw", "color":"#a63b3b", "textAlign": "center"}}>...AND MORE!</div> 
+                        </div>
+                            : null} */}
+                    {/* </div> */}
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.nowPlayingModalHandler}>

@@ -16,6 +16,7 @@ class MyMeetingsContainer extends React.Component {
     }
 
     render() {
+        console.log(this.state.clubs)
         return(
             <React.Fragment>
                 <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "30px", "paddingBottom": "30px"}}>

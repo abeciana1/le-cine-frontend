@@ -2,13 +2,12 @@ import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { withRouter, Link } from 'react-router-dom';
 
-class AuthNavBar extends React.Component {
 
-    logout = (e) => {
-        this.props.logoutHandler()
-    }
+const logout = (e) => {
+    this.props.logoutHandler()
+}
 
-    render() {
+const AuthNavBar = () => {
         return(
         <React.Fragment>
         {this.props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
@@ -48,13 +47,12 @@ class AuthNavBar extends React.Component {
                             <Link to="/clubs/manage" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Manage Memberships</Link>
                         </NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link onClick={this.logout}>Logout</Nav.Link>
+                    <Nav.Link onClick={logout}>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
         </React.Fragment>
         )
     }
-}
 
 export default withRouter(AuthNavBar)

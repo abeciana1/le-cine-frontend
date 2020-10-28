@@ -5,27 +5,26 @@ import HostClubsContainer from '../HostClubsContainer'
 import MyMeetingsContainer from '../MyMeetingsContainer'
 import { Row, Col } from 'react-bootstrap'
 
-class Dashboard extends React.Component {
+const Dashboard = (props) => {
 
-    render() {
         return(
             <React.Fragment>
-            {this.props.user ? 
+            {props.user ? 
                 <div className="page-normal-margin">
                     <Row>
                         <Col xs={6}>
-                            <UserContainer user={this.props.user} />
+                            <UserContainer user={props.user} />
                         </Col>
                         <Col xs={6}>
-                            <MyMeetingsContainer user={this.props.user} clubs={this.props.userClubs} />
+                            <MyMeetingsContainer user={props.user} clubs={props.userClubs} />
                         </Col>
                     </Row>
                     <br />
                     <br />
-                    <MyClubsContainer user={this.props.user} clubs={this.props.userClubs}/>
+                    <MyClubsContainer user={props.user} clubs={props.userClubs}/>
                     <br />
                     <br />
-                    <HostClubsContainer user={this.props.user} clubs={this.props.hostClubs} createClubHandler={this.createClubHandler} />
+                    <HostClubsContainer user={props.user} clubs={props.hostClubs}/>
                     <div style={{"paddingTop": "100px"}}></div>
                 </div>
                 :
@@ -34,6 +33,5 @@ class Dashboard extends React.Component {
             </React.Fragment>
         )
     }
-}
 
 export default Dashboard

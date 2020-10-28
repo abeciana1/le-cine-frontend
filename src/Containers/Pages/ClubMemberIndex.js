@@ -49,7 +49,7 @@ class ClubMemberIndex extends React.Component {
     render() {
         return(
             <React.Fragment>
-            {this.state.club ?
+            {this.state.club && this.props.user ?
             <React.Fragment>
                 <ClubNav club={this.state.club} />
                 <div className="index-heading">
@@ -57,11 +57,13 @@ class ClubMemberIndex extends React.Component {
                     <br />
                     <div className="index-container">
                     <div style={{"textAlign":"center"}}>
+                    {this.state.club.host_id === this.props.user.id ?
                         <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
                             <a href={"mailto:" + this.state.emails.join(',')}>
                                 <button onClick={this.emailAllHandler} className="read-more-btn">Email All Members</button>
                             </a>
                         </div>
+                        : null}
                     </div>
                     <br />
                     <br />

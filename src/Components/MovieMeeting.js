@@ -9,13 +9,9 @@ class MovieMeeting extends React.Component {
         const options = {method: 'DELETE'}
         fetch("http://localhost:3000/api/v1/movie_meetings/" + this.props.movieMeeting.id, options)
         .then(res => res.json())
-        // .then(data => {
-        //     console.log(data)
-        // })
     }
 
     streamingIconHanddler = () => {
-        console.log(this.props.movieMeeting)
         switch(this.props.movieMeeting.source_name){
             case "Netflix":
                 return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/icons8-netflix-48.png"} alt="Netflix" /></a>
@@ -39,12 +35,11 @@ class MovieMeeting extends React.Component {
     }
 
     render(){
-        console.log(this.props.movieMeeting)
         return(
             <React.Fragment>
             {this.props.movieMeeting ?
             <React.Fragment>
-            <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "50%", "textAlign": "left", "paddingTop": "20px", "paddingBottom": "40px", "paddingRight":"20px"}}>
+            <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "75%", "textAlign": "left", "paddingTop": "20px", "paddingBottom": "40px", "paddingRight":"20px"}}>
                         <h1>{this.props.movieMeeting.movie.title}</h1>
                 <div style={{"marginLeft": "20px", "marginTop": "20px", "marginRight": "20px", "width": "60%"}}>
                 {this.props.movieMeeting.discussion ? 

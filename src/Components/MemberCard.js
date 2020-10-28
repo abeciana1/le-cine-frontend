@@ -34,10 +34,10 @@ class MemberCard extends React.Component {
                                     </Col>
                                     <Col sm={2}></Col>
                                     <Col>
-                                        <h2>{this.state.member.first_name} {this.state.member.last_name}</h2>
-                                        <br />
                                         {this.props.club.host_id === this.props.user.id ? 
                                         <div>
+                                        <h2>{this.state.member.first_name} {this.state.member.last_name}</h2>
+                                        <br />
                                             <p>{this.state.member.email}</p>
                                             <a href={"mailto:" + this.state.member.email}>
                                                 <button className="read-more-btn">Email {this.state.member.first_name}</button>
@@ -45,7 +45,11 @@ class MemberCard extends React.Component {
                                             <button onClick={this.removeHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Remove Member</button>
                                         </div>
                                         :
-                                        null
+                                        <>
+                                        <br />
+                                        <br />
+                                        <h2>{this.state.member.first_name} {this.state.member.last_name}</h2>
+                                        </>
                                         }
                                     </Col>
                                 </Row>
