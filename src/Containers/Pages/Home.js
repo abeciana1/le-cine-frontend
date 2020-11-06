@@ -7,7 +7,7 @@ const Home = (props) => {
 
         return(
             <React.Fragment>
-            <MediaQuery maxWidth={990}>
+            <MediaQuery maxWidth={999}>
             <div style={{"marginLeft":"20px", "marginRight":"20px"}}>
                 {props.user ? 
                     <Alert variant={"success"} style={{"width": "100%"}}>

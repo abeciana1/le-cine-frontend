@@ -30,7 +30,7 @@ class ClubsIndex extends React.Component {
             <React.Fragment>
             {this.props.user ? 
                 <div className="page-normal-margin">
-                    <h1>Find A Club</h1>
+                    <h1 style={{"fontSize":"3em"}}>Find A Club</h1>
                     <h2>Here's a list of public clubs to join</h2>
                     <br />
                     <br />

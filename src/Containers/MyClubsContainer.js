@@ -18,12 +18,10 @@ class MyClubsContainer extends React.Component {
     }
 
     render() {
-        // console.log(this.props)
-        console.log(this.state.clubs.length)
         return (
             <React.Fragment>
-                <div style={{"zIndex": "3", "backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "30px", "paddingBottom": "30px"}}>
-                    <div style={{"marginLeft" : "20px",}}>
+                <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "30px", "paddingBottom": "30px"}}>
+                    <div style={{"marginLeft" : "20px", "marginRight": "20px"}}>
                         <h1>My Clubs</h1>
                         <Row>
                             {this.getMyClubs()}

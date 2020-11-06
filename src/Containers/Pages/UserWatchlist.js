@@ -10,8 +10,6 @@ class UserWatchlist extends React.Component {
     }
 
     getMovies = () => {
-        // let newArray = this.props.userWatchlist
-        // newArray.reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [])
         return this.props.userWatchlist.map(watchlist => <WatchlistMovieCard key={watchlist.id} watchlistId={watchlist.id} movieId={watchlist.movie_id} deleteHandler={this.deleteHandler}/>)
     }
 

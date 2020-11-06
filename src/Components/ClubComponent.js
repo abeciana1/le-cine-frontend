@@ -22,7 +22,7 @@ class ClubComponent extends React.Component {
             {this.state.club ?
             <React.Fragment>
                 <Col xs={3} style={{"paddingBottom":"20px"}}>
-                    <img src={this.state.club.image} alt={this.state.club.name} style={{"height": "200px", "width": "200px"}} />
+                    <img src={this.state.club.image} alt={this.state.club.name} style={{"width": "20vw"}} />
                     <br />
                     <br />
                     <h6>{this.state.club.name}</h6>

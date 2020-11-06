@@ -153,13 +153,13 @@ class ClubMeetingShow extends React.Component {
                     </div>
                 </div>
                 <React.Fragment>
-                {this.state.nowPlayingModal ? 
+                {/* {this.state.nowPlayingModal ? 
                     <Modal show={this.state.nowPlayingModal === true} close={this.state.nowPlayingModal === false} size="lg">
                 <Modal.Header closeButton onClick={this.nowPlayingModalHandler}>
                     <Modal.Title>Blank Presents</Modal.Title>
                 </Modal.Header>
                 {/* <Modal.Body> */}
-                <Modal.Body style={{"margin": "0px", backgroundImage: `url(${process.env.PUBLIC_URL + "/images/meeting-show-marquee.png"})`, "backgroundPosition": 'center',
+                {/* <Modal.Body style={{"margin": "0px", backgroundImage: `url(${process.env.PUBLIC_URL + "/images/meeting-show-marquee.png"})`, "backgroundPosition": 'center',
                     "top": "0px",
                     "position":"relative",
                     "width": "100%",
@@ -189,7 +189,7 @@ class ClubMeetingShow extends React.Component {
                                 <div className="light-box" style={{"fontSize":"3vw", "color":"#a63b3b", "textAlign": "center"}}>...AND MORE !</div> 
                             </div>
                         : null}
-                    </div>
+                    </div> */}
                     {/* <img src={process.env.PUBLIC_URL + "/images/meeting-show-marquee.png"} alt="marquee" style={{"width": "100%"}} /> */}
                     {/* <div style={{"textAlign": "center"}}> */}
 
@@ -216,14 +216,14 @@ class ClubMeetingShow extends React.Component {
                         </div>
                             : null} */}
                     {/* </div> */}
-                </Modal.Body>
+                {/* </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.nowPlayingModalHandler}>
                     Close
                     </Button>
                 </Modal.Footer>
                 </Modal>
-                : null}
+                : null} */}
                 </React.Fragment>
             </React.Fragment>
             :
