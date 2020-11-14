@@ -1,5 +1,6 @@
 import React from 'react'
 import MovieSearchCard from '../Components/MovieSearchCard'
+import MediaQuery from 'react-responsive'
 
 class MovieSearchResults extends React.Component {
 
@@ -10,6 +11,16 @@ class MovieSearchResults extends React.Component {
     render() {
         return(
             <React.Fragment>
+            <MediaQuery maxWidth={999}>
+            {this.props.searchResults ? 
+                <div style={{"zIndex": "3", "width": "100%", "paddingTop": "40px", "paddingBottom": "40px"}}>
+                    {this.getSearchResults()}
+                </div>
+                :
+                null
+            }
+            </MediaQuery>
+            <MediaQuery minWidth={1000}>
             {this.props.searchResults ? 
                 <div style={{"zIndex": "3", "width": "80%", "paddingTop": "40px", "paddingBottom": "40px"}}>
                     {this.getSearchResults()}
@@ -17,6 +28,7 @@ class MovieSearchResults extends React.Component {
                 :
                 null
             }
+            </MediaQuery>
             </React.Fragment>
         )
     }

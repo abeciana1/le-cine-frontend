@@ -3,6 +3,7 @@ import ClubMovieCard from '../../Components/ClubMovieCard'
 import ClubNav from '../../Components/ClubNav'
 import { Link, withRouter } from 'react-router-dom';
 import { Row } from 'react-bootstrap'
+import MediaQuery from 'react-responsive'
 
 class ClubWatchlist extends React.Component {
 
@@ -43,6 +44,22 @@ class ClubWatchlist extends React.Component {
             <React.Fragment>
             {this.state.club ?
             <React.Fragment>
+            <MediaQuery maxWidth={999}>
+                <ClubNav club={this.state.club} />
+                <div style={{"marginLeft":"20px", "marginRight":"20px", "paddingTop":"30px"}}>
+                    <h1>Club Watchlist</h1>
+                    <br />
+                    <Link to="/movies/search">
+                        <button className="read-more-btn">Add Movies To Your Club's Watchlist</button>
+                    </Link>
+                    <br />
+                    <br />
+                    <Row>
+                    {this.getMovies()}
+                    </Row>
+                </div>
+            </MediaQuery>
+            <MediaQuery minWidth={1000}>
                 <ClubNav club={this.state.club} />
                 <div className="index-heading">
                     <h1>Club Watchlist</h1>
@@ -56,6 +73,7 @@ class ClubWatchlist extends React.Component {
                     {this.getMovies()}
                     </Row>
                 </div>
+                </MediaQuery>
             </React.Fragment>
             :
             null}

@@ -3,6 +3,7 @@ import ClubNav from '../../Components/ClubNav'
 import ClubMeetingComponent from '../../Components/ClubMeetingComponent'
 import moment from 'moment'
 import { withRouter } from 'react-router-dom'
+import MediaQuery from 'react-responsive'
 
 class ClubMeetingsIndex extends React.Component {
 
@@ -67,6 +68,35 @@ class ClubMeetingsIndex extends React.Component {
             <React.Fragment>
             {this.state.club ?
             <React.Fragment>
+            <MediaQuery maxWidth={999}>
+            <ClubNav club={this.state.club} />
+            <div style={{"marginLeft": "20px", "marginRight": "20px", "paddingTop":"20px"}}>
+                <h1>Club Meetings</h1>
+                <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "30px", "paddingBottom": "30px", "marginTop":"50px"}}>
+                    <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
+                        <h2>Upcoming Meetings</h2>
+                    </div>
+                </div>
+                <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
+                    <div style={{"backgroundColor": "white", "paddingTop":"20px", "paddingBottom":"20px", "marginLeft":"20px", "marginRight":"20px"}}>
+                        {this.renderUpcomingMeeting()}
+                    </div>
+                </div>
+                <br />
+                <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
+                        <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
+                            <h2>Previous Meetings</h2>
+                        </div>
+                </div>
+                <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
+                    <div className="internal-card-white">
+                        {this.renderPreviousMeeting()}
+                    </div>
+                </div>
+                <br />
+            </div>
+            </MediaQuery>
+            <MediaQuery minWidth={1000}>
             <ClubNav club={this.state.club} />
             <div className="index-heading">
                 <h1>Club Meetings</h1>
@@ -94,6 +124,7 @@ class ClubMeetingsIndex extends React.Component {
                 </div>
                 <br />
             </div>
+            </MediaQuery>
             </React.Fragment>
             :
             null

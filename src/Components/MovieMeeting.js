@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import MediaQuery from 'react-responsive'
 
 class MovieMeeting extends React.Component {
 
@@ -39,6 +40,10 @@ class MovieMeeting extends React.Component {
             <React.Fragment>
             {this.props.movieMeeting ?
             <React.Fragment>
+            <MediaQuery maxWidth={999}>
+                
+            </MediaQuery>
+            <MediaQuery minWidth={1000}>
             <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "75%", "textAlign": "left", "paddingTop": "20px", "paddingBottom": "40px", "paddingRight":"20px"}}>
                         <h1>{this.props.movieMeeting.movie.title}</h1>
                 <div style={{"marginLeft": "20px", "marginTop": "20px", "marginRight": "20px", "width": "60%"}}>
@@ -89,6 +94,7 @@ class MovieMeeting extends React.Component {
             </div>
             <br />
             <br />
+            </MediaQuery>
             </React.Fragment>
             :
             null

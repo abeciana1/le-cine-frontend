@@ -3,6 +3,7 @@ import moment from 'moment'
 import { Modal, Button } from 'react-bootstrap'
 import AddMovieToClub from '../../Components/Forms/AddMovieToClub'
 import RecommendationsContainer from '../RecommendationsContainer'
+import MediaQuery from 'react-responsive'
 
 class MovieShow extends React.Component {
 
@@ -93,6 +94,67 @@ class MovieShow extends React.Component {
             <React.Fragment>
             {this.state.movie ?
                 <React.Fragment>
+                <MediaQuery maxWidth={999}>
+                    <div style={{"textAlign": "center"}}>
+                        <img src={"https://image.tmdb.org/t/p/w500" + this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "400px"}} />
+                    </div>
+                    <div>
+                        <div className="mov-immediate" style={{"marginLeft": "30px"}}>
+                            <h1>{this.state.movie.title} {moment(this.state.movie.release_date).format('YYYY')}</h1>
+                            <h3>{this.configGenres()} | Runtime: {this.configRuntime()}</h3>
+                            <br />
+                            <p style={{"fontSize":"1.25rem"}}>{this.state.movie.overview}</p>
+                            {this.state.watchlistClick || this.props.user.movies.some(movie => movie.mov_id === this.state.movie.id) ?  <button className="already-added" style={{"marginLeft":"20px"}} disabled={true}>Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>}
+                            <br />
+                            <br />
+                            <button onClick={this.clubWatchlistHandler} className="read-more-btn" style={{"marginLeft": "20px"}}>Add to a Club Watchlist</button>
+                        </div>
+                    </div>
+                    {this.state.movie.trailer ? 
+                    <section style={{"paddingTop": "20px", "marginLeft": "30px"}}>
+                        <h1>Trailer</h1>
+                        <div>
+                            <iframe title={this.state.movie.title} width="90%" src={"https://www.youtube.com/embed/" + this.state.movie.trailer.key} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+                        </div>
+                    </section>
+                    :
+                    <section>
+                    </section>
+                    }
+                    {this.state.movie.trailer ?
+                    <section style={{"paddingTop": "20px", "marginLeft": "30px"}}>
+                        <h1>Cast</h1>
+                        CAST CONTAINER HERE -- STRETCH
+                    </section>
+                    :
+                    <section style={{"paddingTop": "20px", "marginLeft": "30px"}}>
+                        <h1>Cast</h1>
+                        CAST CONTAINER HERE -- STRETCH
+                    </section>
+                    }
+                    <section style={{"paddingTop": "20px", "marginLeft": "30px", "marginRight": "30px"}}>
+                        <h1>Recommendations</h1>
+                        <RecommendationsContainer user={this.props.user} movies={this.state.movie.recommendations} />
+                    </section>
+                    <>
+                    <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
+                        <Modal.Header closeButton onClick={this.clubWatchlistHandler}>
+                            <Modal.Title>Add To Your Club Watchlist</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <p style={{"textAlign": "center"}}>Woohoo, you're adding a movie to club's watchlist!</p>
+                        <p>You chose: <strong>{this.state.movie.title}, {moment(this.state.movie.release_date).format("YYYY")}</strong></p>
+                            <AddMovieToClub clubWatchlistSubmit={this.addToClubWatchlist} user={this.props.user} movie={this.state.movie} />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.clubWatchlistHandler}>
+                            Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    </>
+                </MediaQuery>
+                <MediaQuery minWidth={1000}>
                     <img className="movie-backdrop" src={"https://image.tmdb.org/t/p/original" + this.state.movie.backdrop_path} alt={this.state.movie.title} style={{"height":"600px", "width": "1440px", "opacity":"0.5", "position": "relative", "top": "0", "left": "0"}} />
                         <img src={"https://image.tmdb.org/t/p/w500" + this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "400px", "position": "absolute", "top":"400px", "left": "100px"}} />
                     <div style={{"marginLeft": "30%", "marginTop": "50px", "marginRight": "50px", "position":"absolute"}}>
@@ -147,6 +209,7 @@ class MovieShow extends React.Component {
                         </Modal.Footer>
                     </Modal>
                     </>
+                    </MediaQuery>
                 </React.Fragment>
             :
             null

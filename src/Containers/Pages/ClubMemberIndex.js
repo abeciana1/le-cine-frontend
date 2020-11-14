@@ -1,6 +1,7 @@
 import React from 'react'
 import ClubNav from '../../Components/ClubNav'
 import MemberCard from '../../Components/MemberCard'
+import MediaQuery from 'react-responsive'
 
 class ClubMemberIndex extends React.Component {
 
@@ -51,6 +52,28 @@ class ClubMemberIndex extends React.Component {
             <React.Fragment>
             {this.state.club && this.props.user ?
             <React.Fragment>
+            <MediaQuery maxWidth={999}>
+                <ClubNav club={this.state.club} />
+                <div style={{"marginLeft": "20px", "marginRight": "20px", "paddingTop":"20px"}}>
+                    <h1>Club Members</h1>
+                    <br />
+                    <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop": "20px"}}>
+                    <div style={{"textAlign":"center"}}>
+                    {this.state.club.host_id === this.props.user.id ?
+                        <div style={{"marginLeft": "20px", "marginRight": "20px"}}>
+                            <a href={"mailto:" + this.state.emails.join(',')}>
+                                <button onClick={this.emailAllHandler} className="read-more-btn">Email All Members</button>
+                            </a>
+                        </div>
+                        : null}
+                    </div>
+                    <br />
+                    <br />
+                        {this.getMembers()}
+                    </div>
+                </div>
+            </MediaQuery>
+            <MediaQuery minWidth={1000}>
                 <ClubNav club={this.state.club} />
                 <div className="index-heading">
                     <h1>Club Members</h1>
@@ -70,6 +93,7 @@ class ClubMemberIndex extends React.Component {
                         {this.getMembers()}
                     </div>
                 </div>
+                </MediaQuery>
             </React.Fragment>
             :
             null

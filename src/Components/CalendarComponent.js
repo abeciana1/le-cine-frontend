@@ -4,7 +4,7 @@ import moment from 'moment'
 const CalendarComponent = (props) => {
         return (
             <React.Fragment>
-                <div style={{"width": "15%", "marginLeft":"20px", "marginTop": "50px","position":"absolute", "top":"40px"}}>
+                <div style={{"width": "15%", "marginLeft":"20px", "marginTop": "50px"}}>
                     <div style={{"border": "1px solid black"}}>
                         <div style={{"color":"white", "backgroundColor": "red", "textAlign":"center"}}>
                             <h4><strong>{moment(props.meeting.date).format('MMMM YYYY')}</strong></h4>

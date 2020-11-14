@@ -1,7 +1,7 @@
 import React from 'react'
 import { Col } from 'react-bootstrap'
-// import { Col, OverlayTrigger, Tooltip, Button } from 'react-bootstrap'
 import { withRouter } from 'react-router-dom';
+import MediaQuery from 'react-responsive'
 
 class WatchlistMovieCard extends React.Component {
 
@@ -54,15 +54,28 @@ class WatchlistMovieCard extends React.Component {
             <React.Fragment>
             {this.state.movie ?
                 <React.Fragment>
+                <MediaQuery maxWidth={999}>
                 <Col xs={6} md={4} lg={3}>
                     <a className="a" href={"/movies/search/" + this.state.movie.mov_id} style={{"textDecoration": "none", "textColor": "black"}}>
-                        {this.state.movie.poster_path ? <img onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className={this.state.className} src={this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "200px", "paddingRight": "30px", "paddingLeft":"5px" ,"paddingBottom": "10px"}} /> : <img onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} src={"https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"} alt={this.state.movie.title} style={{"height": "200px", "float": "left"}} />}
+                        {this.state.movie.poster_path ? <img onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className={this.state.className} src={this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "200px", "paddingRight": "10px","paddingBottom": "10px"}} /> : <img onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} src={"https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"} alt={this.state.movie.title} style={{"height": "200px", "float": "left"}} />}
                         <h6>{this.trimTitle()}</h6>
                     </a>
                     <button onClick={this.deleteHandler} className="read-more-btn">Remove</button>
                     <br />
                     <br />
                 </Col>
+                </MediaQuery>
+                <MediaQuery minWidth={1000}>
+                <Col xs={6} md={4} lg={3}>
+                    <a className="a" href={"/movies/search/" + this.state.movie.mov_id} style={{"textDecoration": "none", "textColor": "black"}}>
+                        {this.state.movie.poster_path ? <img onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} className={this.state.className} src={this.state.movie.poster_path} alt={this.state.movie.title} style={{"height": "200px", "paddingRight": "30px","paddingBottom": "10px"}} /> : <img onMouseEnter={this.mouseEnter} onMouseLeave={this.mouseLeave} src={"https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"} alt={this.state.movie.title} style={{"height": "200px", "float": "left"}} />}
+                        <h6>{this.trimTitle()}</h6>
+                    </a>
+                    <button onClick={this.deleteHandler} className="read-more-btn">Remove</button>
+                    <br />
+                    <br />
+                </Col>
+                </MediaQuery>
             </React.Fragment>
             : 
             null}

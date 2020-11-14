@@ -3,6 +3,7 @@ import moment from 'moment'
 import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap'
 import AddMovieToClub from './Forms/AddMovieToClub'
+import MediaQuery from 'react-responsive'
 
 class MovieSearchCard extends React.Component {
 
@@ -60,6 +61,50 @@ class MovieSearchCard extends React.Component {
             <React.Fragment>
             {this.props.movie ? 
                 <React.Fragment>
+                <MediaQuery maxWidth={999}>
+                <div style={{"border": "2px solid black", "borderRadius": "30px"}}>
+                        <div style={{"marginLeft": "30px", "marginRight": "30px", "marginTop": "20px"}}>
+                        {this.props.movie.poster_path ? <img src={"https://image.tmdb.org/t/p/w500" + this.props.movie.poster_path} alt={this.props.movie.title} style={{"height": "200px"}} /> : <img src={"https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"} alt={this.props.movie.title} style={{"height": "200px"}} />}
+                            <div>
+                                <h3>{this.props.movie.title}</h3>
+                                <span style={{"color":"gray"}}>{moment(this.props.movie.release_date).format("MMM Do YYYY")}</span>
+                                <br />
+                                <p>{this.trimOverview()}</p>
+                                <Link to={"/movies/search/" + this.props.movie.id}>
+                                    <button className="read-more-btn">View More</button>
+                                </Link>
+                                <br />
+                                <br />
+                                {this.state.watchlistClick || this.props.user.movies.some(movie => movie.mov_id === this.props.movie.id) ?  <button className="already-added" disabled={true}>Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn">Add to Watchlist</button>}
+                                <br />
+                                <br />
+                                <button onClick={this.clubWatchlistHandler} className="read-more-btn" >Add to a Club Watchlist</button>
+                            </div>
+                        </div>
+                    <br />
+                    <br />
+                    <br />
+                    </div>
+                    <br />
+                    <>
+                    <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
+                        <Modal.Header closeButton onClick={this.clubWatchlistHandler}>
+                            <Modal.Title>Add To Your Club Watchlist</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                        <p style={{"textAlign": "center"}}>Woohoo, you're adding a movie to club's watchlist!</p>
+                        <p>You chose: <strong>{this.props.movie.title}, {moment(this.props.movie.release_date).format("YYYY")}</strong></p>
+                        <AddMovieToClub clubWatchlistSubmit={this.addToClubWatchlist} user={this.props.user} movie={this.props.movie} />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={this.clubWatchlistHandler}>
+                            Close
+                            </Button>
+                        </Modal.Footer>
+                    </Modal>
+                    </>
+                </MediaQuery>
+                <MediaQuery minWidth={1000}>
                     <div style={{"marginLeft": "20px", "marginRight": "20px", "border": "2px solid black", "borderRadius": "30px"}}>
                         <div style={{"marginLeft": "30px", "marginTop": "20px"}}>
                         {this.props.movie.poster_path ? <img src={"https://image.tmdb.org/t/p/w500" + this.props.movie.poster_path} alt={this.props.movie.title} style={{"height": "200px", "float": "left", "paddingRight": "20px"}} /> : <img src={"https://www.theprintworks.com/wp-content/themes/psBella/assets/img/film-poster-placeholder.png"} alt={this.props.movie.title} style={{"height": "200px", "float": "left"}} />}
@@ -100,6 +145,7 @@ class MovieSearchCard extends React.Component {
                         </Modal.Footer>
                     </Modal>
                     </>
+                    </MediaQuery>
                 </React.Fragment>
             :
             <h1>Loading...</h1>
