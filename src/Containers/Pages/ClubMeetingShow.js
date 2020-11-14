@@ -114,8 +114,8 @@ class ClubMeetingShow extends React.Component {
             {this.state.club && this.state.meeting && this.props.user ? 
             <React.Fragment>
             <MediaQuery maxWidth={999}>
+            <ClubNav club={this.state.club} />
             <CalendarComponent meeting={this.state.meeting} />
-                <ClubNav club={this.state.club} />
                 <div style={{"marginTop": "40px","width": "100%"}}>
                     <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "textAlign": "left", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
                     {this.state.showAlert ? 
