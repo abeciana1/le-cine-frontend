@@ -41,7 +41,58 @@ class MovieMeeting extends React.Component {
             {this.props.movieMeeting ?
             <React.Fragment>
             <MediaQuery maxWidth={999}>
-                
+            <div style={{"paddingLeft": "20px", "paddingRight":"20px", "backgroundColor": "#EFEFEF", "width": "100%", "textAlign": "left", "paddingTop": "20px", "paddingBottom": "40px"}}>
+                        <h1>{this.props.movieMeeting.movie.title}</h1>
+                <div style={{"marginLeft": "20px", "marginTop": "20px", "marginRight": "20px", "width": "100%"}}>
+                {this.props.movieMeeting.discussion ? 
+                        <React.Fragment>
+                            <div style={{"backgroundColor":"white" , "paddingLeft":"10px", "width":"50%"}}>
+                                <p style={{"textAlign": "center"}}><b>Discussion</b></p>
+                            </div>
+                        </React.Fragment>
+                        :
+                        <React.Fragment>
+                            <div style={{"backgroundColor":"white", "paddingLeft":"10px", "width":"50%"}}>
+                                <p style={{"textAlign":"center"}}><b>Watchalong</b></p>
+                            </div>
+                        </React.Fragment>
+                        }
+                {this.props.movieMeeting.discussion && this.props.movieMeeting.watch_along ? 
+                    <div style={{"backgroundColor":"white" , "paddingLeft":"10px", "width":"50%"}}>
+                        <p style={{"textAlign": "center"}}><b>Discussion</b></p>
+                    </div>
+                :
+                null
+                }
+                    <div style={{"marginRight": "40px", "width": "100%", "paddingBottom": "40px", "paddingTop":"40px"}}>
+                        <img src={this.props.movieMeeting.movie.poster_path} alt={this.props.movieMeeting.movie.title} style={{"height":"250px"}}/>
+                        <br />
+                        <br />
+                        <div>
+                        {this.props.movieMeeting.movie.overview}
+                        <br />
+                        <br />
+                        <div>
+                            <strong>You can watch <em>{this.props.movieMeeting.movie.title}</em> here:</strong>
+                            <br />
+                            {this.streamingIconHanddler()}
+                        </div>
+                        <br />
+                        <br />
+                        <p>
+                        <strong>{moment(this.props.movieMeeting.movie.release_date).format("MMM Do YYYY")}</strong>
+                        </p>
+                        <br />
+                        <Link to={"/movies/search/" + this.props.movieMeeting.movie.mov_id}>
+                            <button className="read-more-btn">View Details</button>
+                        </Link>
+                        <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <br />
             </MediaQuery>
             <MediaQuery minWidth={1000}>
             <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "75%", "textAlign": "left", "paddingTop": "20px", "paddingBottom": "40px", "paddingRight":"20px"}}>
@@ -74,7 +125,7 @@ class MovieMeeting extends React.Component {
                         <br />
                         <br />
                         <div>
-                            <strong>You can watch {this.props.movieMeeting.title} here:</strong>
+                            <strong>You can watch <em>{this.props.movieMeeting.movie.title}</em> here:</strong>
                             <br />
                             {this.streamingIconHanddler()}
                         </div>
