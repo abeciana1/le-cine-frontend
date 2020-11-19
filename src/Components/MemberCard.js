@@ -9,11 +9,11 @@ class MemberCard extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3000/api/v1/users/" + this.props.memberId)
-        .then(res => res.json())
-        .then(data => {
-            this.setState({ member: data})
-        })
+        fetch("https://le-cine-backend.herokuapp.com/users/" + this.props.memberId)
+          .then((res) => res.json())
+          .then((data) => {
+            this.setState({ member: data });
+          });
     }
 
     removeHandler = (e) => {

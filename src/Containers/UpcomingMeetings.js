@@ -23,8 +23,9 @@ class UpcomingMeetings extends React.Component {
     deleteMeetingHandler = (meetingObj) => {
         this.props.deleteMeetingHandler(meetingObj)
         const options = {method: 'DELETE'}
-        fetch("http://localhost:3000/api/v1/meetings/" + meetingObj.id, options)
-        .then(res => res.json())
+        fetch("https://le-cine-backend.herokuapp.com/meetings/" + meetingObj.id,
+          options
+        ).then((res) => res.json());
     }
 
     render() {

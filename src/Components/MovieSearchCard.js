@@ -46,14 +46,14 @@ class MovieSearchCard extends React.Component {
             },
             body: JSON.stringify(this.props.movie)
         }
-        fetch("http://localhost:3000/api/v1/movies", options)
-        .then(res => res.json())
-        .then(data => {
-            this.props.addToClub(club, data.movie.id)
+        fetch("https://le-cine-backend.herokuapp.com/movies", options)
+          .then((res) => res.json())
+          .then((data) => {
+            this.props.addToClub(club, data.movie.id);
             this.setState({
-                modalOpen: false
-            })
-        })
+              modalOpen: false,
+            });
+          });
     }
 
     render(){

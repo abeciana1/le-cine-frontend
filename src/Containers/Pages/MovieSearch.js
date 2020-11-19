@@ -22,13 +22,13 @@ class MovieSearch extends React.Component {
             },
             body: JSON.stringify({title: movTitle})
         }
-        fetch("http://localhost:3000/api/v1/search", options)
-        .then(res => res.json())
-        .then(data => {
+        fetch("https://le-cine-backend.herokuapp.com/search", options)
+          .then((res) => res.json())
+          .then((data) => {
             this.setState({
-                searchResults: data
-            })
-        })
+              searchResults: data,
+            });
+          });
     }
 
     watchlistHandler = (movieObj) => {
@@ -41,11 +41,11 @@ class MovieSearch extends React.Component {
             },
             body: JSON.stringify(movieObj)
         }
-        fetch("http://localhost:3000/api/v1/movies", options)
-        .then(res => res.json())
-        .then(data => {
-            this.props.watchlistHandler(data)
-        })
+        fetch("https://le-cine-backend.herokuapp.com/movies", options)
+          .then((res) => res.json())
+          .then((data) => {
+            this.props.watchlistHandler(data);
+          });
     }
 
     addToClub = (club, movie) => {

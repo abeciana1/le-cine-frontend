@@ -40,29 +40,29 @@ class App extends React.Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token")
     if(token){
-      fetch("http://localhost:3000/api/v1/profile", {
+      fetch("https://le-cine-backend.herokuapp.com/profile", {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`},
-        })
-      .then(resp => resp.json())
-      .then(data => {
-
-        this.setState({
-          user: data.user,
-          movies: data.user.movies,
-          clubs: data.user.clubs,
-          userWatchlist: data.user.watchlists,
-          userClubs: data.user.user_clubs,
-          hostClubs: data.user.host_clubs
-        })
+          Authorization: `Bearer ${token}`,
+        },
       })
+        .then((resp) => resp.json())
+        .then((data) => {
+          this.setState({
+            user: data.user,
+            movies: data.user.movies,
+            clubs: data.user.clubs,
+            userWatchlist: data.user.watchlists,
+            userClubs: data.user.user_clubs,
+            hostClubs: data.user.host_clubs,
+          });
+        });
     } 
-      fetch("http://localhost:3000/api/v1/users")
-      .then(resp => resp.json())
-      .then(data => {
-        this.setState({ allUsers: data})
-      })
+      fetch("https://le-cine-backend.herokuapp.com/users")
+        .then((resp) => resp.json())
+        .then((data) => {
+          this.setState({ allUsers: data });
+        });
     };
 
   logoutHandler = () => {
@@ -87,20 +87,26 @@ class App extends React.Component {
         }
       })
     }
-    fetch("http://localhost:3000/api/v1/login", options)
-    .then(res => res.json())
-    .then(data => {
-      if(data.user){
-        localStorage.setItem("token", data.jwt)
-        this.setState({
-          user: data.user
-        }, () => this.props.history.push("/"))
-      } else {
-        this.setState({
-          wrongCredentials: true
-        }, () => localStorage.clear())
-      }
-    })
+    fetch("https://le-cine-backend.herokuapp.com/login", options)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.user) {
+          localStorage.setItem("token", data.jwt);
+          this.setState(
+            {
+              user: data.user,
+            },
+            () => this.props.history.push("/")
+          );
+        } else {
+          this.setState(
+            {
+              wrongCredentials: true,
+            },
+            () => localStorage.clear()
+          );
+        }
+      });
   }
 
   signupHandler = (userObj) => {
@@ -112,14 +118,17 @@ class App extends React.Component {
       },
       body: JSON.stringify(userObj)
     }
-    fetch("http://localhost:3000/api/v1/users", options)
-    .then(res => res.json())
-    .then(data => {
-      localStorage.setItem("token", data.jwt)
-      this.setState({
-        user: data.user
-      }, () => this.props.history.push("/"))
-    })
+    fetch("https://le-cine-backend.herokuapp.com/users", options)
+      .then((res) => res.json())
+      .then((data) => {
+        localStorage.setItem("token", data.jwt);
+        this.setState(
+          {
+            user: data.user,
+          },
+          () => this.props.history.push("/")
+        );
+      });
   }
 
   //! Used for user watchlist
@@ -142,16 +151,16 @@ class App extends React.Component {
         movie_id: movieObj.movie.id
       })
     }
-    fetch("http://localhost:3000/api/v1/watchlists", options)
-    .then(res => res.json())
-    .then(data => {
-      data.watchlist.movie.backdrop_path = `https://image.tmdb.org/t/p/original${data.watchlist.movie.backdrop_path}`
-      data.watchlist.movie.mov_id = this.state.selectedMovie.mov_id
-      let newArray = [...this.state.userWatchlist, data.watchlist]
-      this.setState({
-        userWatchlist: newArray
-      })
-    })
+    fetch("https://le-cine-backend.herokuapp.com/watchlists", options)
+      .then((res) => res.json())
+      .then((data) => {
+        data.watchlist.movie.backdrop_path = `https://image.tmdb.org/t/p/original${data.watchlist.movie.backdrop_path}`;
+        data.watchlist.movie.mov_id = this.state.selectedMovie.mov_id;
+        let newArray = [...this.state.userWatchlist, data.watchlist];
+        this.setState({
+          userWatchlist: newArray,
+        });
+      });
   }
 
   deleteFromUserWatchlist = (id) => {
@@ -162,8 +171,10 @@ class App extends React.Component {
       userWatchlist: newArray
     })
     const options = {method: 'DELETE'}
-    fetch("http://localhost:3000/api/v1/watchlists/" + id, options)
-    .then(res => res.json())
+    fetch(
+      "https://le-cine-backend.herokuapp.com/watchlists/" + id,
+      options
+    ).then((res) => res.json());
   }
 
   addToClubWatchlist = (clubId, movie) => {
@@ -178,8 +189,10 @@ class App extends React.Component {
         movie_id: movie
       })
     }
-    fetch("http://localhost:3000/api/v1/club_watchlists", options)
-    .then(resp => resp.json())
+    fetch(
+      "https://le-cine-backend.herokuapp.com/club_watchlists",
+      options
+    ).then((resp) => resp.json());
     // .then(data => {
     //   console.log(data)
     // })
@@ -193,8 +206,10 @@ class App extends React.Component {
       userClubs: newArray
     })
     const options = {method: 'DELETE'}
-    fetch("http://localhost:3000/api/v1/user_clubs/" + foundClub.id, options)
-    .then(res => res.json())
+    fetch(
+      "https://le-cine-backend.herokuapp.com/user_clubs/" + foundClub.id,
+      options
+    ).then((res) => res.json());
   }
 
   joinClubHandler = (userClubObj) => {

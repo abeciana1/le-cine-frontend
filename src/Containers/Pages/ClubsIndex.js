@@ -10,15 +10,15 @@ class ClubsIndex extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("http://localhost:3000/api/v1/clubs")
-        .then(res => res.json())
-        .then(data =>{
-            console.log(data)
-            let notPrivate = data.filter(club => club.privacy === false)
+        fetch("https://le-cine-backend.herokuapp.com/clubs")
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            let notPrivate = data.filter((club) => club.privacy === false);
             this.setState({
-                publicClubs: notPrivate
-            })
-        })
+              publicClubs: notPrivate,
+            });
+          });
     };
 
     getClubs = () => {

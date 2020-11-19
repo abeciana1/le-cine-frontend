@@ -15,15 +15,15 @@ class ClubMeetingsIndex extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("http://localhost:3000/api/v1/clubs/" + this.props.id)
-        .then(res => res.json())
-        .then(data => {
+        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.id)
+          .then((res) => res.json())
+          .then((data) => {
             this.setState({
-                club: data,
-                allMeetings: data.meetings
-            })
-            this.getMeetings()
-        })
+              club: data,
+              allMeetings: data.meetings,
+            });
+            this.getMeetings();
+          });
     }
 
     getMeetings = () => {
@@ -59,8 +59,9 @@ class ClubMeetingsIndex extends React.Component {
             this.setState({previousMeetings: newArray})
         }
         const options = {method: 'DELETE'}
-        fetch("http://localhost:3000/api/v1/meetings/" + meetingObj.id, options)
-        .then(res => res.json())
+        fetch("https://le-cine-backend.herokuapp.com/meetings/" + meetingObj.id,
+          options
+        ).then((res) => res.json());
     }
 
     render() {

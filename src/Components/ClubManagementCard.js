@@ -8,14 +8,15 @@ class ClubManagementCard extends React.Component {
     }
 
     componentDidMount() {
-        fetch("http://localhost:3000/api/v1/clubs/" + this.props.clubId)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
+        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.clubId
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
             this.setState({
-                club: data
-            })
-        })
+              club: data,
+            });
+          });
     }
 
     leaveClubHandler = (e) => {

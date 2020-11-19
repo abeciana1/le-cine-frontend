@@ -35,13 +35,13 @@ class HostClubsContainer extends React.Component {
             },
             body: JSON.stringify(clubObj)
         }
-        fetch("http://localhost:3000/api/v1/clubs", options)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            let newArray = [...this.state.clubs, data.club]
-            this.setState({clubs: newArray})
-        })
+        fetch("https://le-cine-backend.herokuapp.com/clubs", options)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            let newArray = [...this.state.clubs, data.club];
+            this.setState({ clubs: newArray });
+          });
     }
 
     render() {

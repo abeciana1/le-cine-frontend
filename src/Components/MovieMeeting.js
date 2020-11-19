@@ -8,8 +8,10 @@ class MovieMeeting extends React.Component {
     removeMovieMeeting = (e) => {
         this.props.removeMovieMeeting(this.props.movieMeeting)
         const options = {method: 'DELETE'}
-        fetch("http://localhost:3000/api/v1/movie_meetings/" + this.props.movieMeeting.id, options)
-        .then(res => res.json())
+        fetch("https://le-cine-backend.herokuapp.com/movie_meetings/" +
+            this.props.movieMeeting.id,
+          options
+        ).then((res) => res.json());
     }
 
     streamingIconHanddler = () => {

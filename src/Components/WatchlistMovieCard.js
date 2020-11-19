@@ -11,13 +11,13 @@ class WatchlistMovieCard extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("http://localhost:3000/api/v1/movies/" + this.props.movieId)
-        .then(res => res.json())
-        .then(data => {
+        fetch("https://le-cine-backend.herokuapp.com/movies/" + this.props.movieId)
+          .then((res) => res.json())
+          .then((data) => {
             this.setState({
-                movie: data
-            })
-        })
+              movie: data,
+            });
+          });
     };
     
 

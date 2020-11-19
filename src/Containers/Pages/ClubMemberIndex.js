@@ -13,16 +13,16 @@ class ClubMemberIndex extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("http://localhost:3000/api/v1/clubs/" + this.props.id)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
+        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.id)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
             this.setState({
-                club: data,
-                userClubs: data.user_clubs,
-                member: data.members
-            })
-        })
+              club: data,
+              userClubs: data.user_clubs,
+              member: data.members,
+            });
+          });
     }
 
     removeHandler = (id) => {
@@ -33,8 +33,10 @@ class ClubMemberIndex extends React.Component {
             userClubs: newArray
         })
         const options = {method: 'DELETE'}
-        fetch("http://localhost:3000/api/v1/user_clubs/" + foundUserClub.id, options)
-        .then(res => res.json())
+        fetch("https://le-cine-backend.herokuapp.com/user_clubs/" +
+            foundUserClub.id,
+          options
+        ).then((res) => res.json());
     }
 
     getMembers = () => {

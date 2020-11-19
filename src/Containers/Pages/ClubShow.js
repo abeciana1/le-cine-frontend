@@ -22,17 +22,17 @@ class ClubShow extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("http://localhost:3000/api/v1/clubs/" + this.props.id)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
+        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.id)
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
             this.setState({
-                club: data,
-                allMeetings: data.meetings,
-                members: data.users
-            })
-            this.getNextMeeting()
-        })
+              club: data,
+              allMeetings: data.meetings,
+              members: data.users,
+            });
+            this.getNextMeeting();
+          });
     }
 
     joinClubHandler = (e) => {
@@ -48,11 +48,11 @@ class ClubShow extends React.Component {
                 club_id: this.state.club.id
             })
         }
-        fetch("http://localhost:3000/api/v1/user_clubs", options)
-        .then(res => res.json())
-        .then(data => {
-            this.props.joinClubHandler(data.user_club)
-        })
+        fetch("https://le-cine-backend.herokuapp.com/user_clubs", options)
+          .then((res) => res.json())
+          .then((data) => {
+            this.props.joinClubHandler(data.user_club);
+          });
     }
 
     getNextMeeting = () => {
@@ -84,25 +84,28 @@ class ClubShow extends React.Component {
             },
             body: JSON.stringify(meetingObj)
         }
-        fetch("http://localhost:3000/api/v1/meetings", options)
-        .then(res => res.json())
-        .then(data => {
-            let newArray = [...this.state.allMeetings, data.meeting]
+        fetch("https://le-cine-backend.herokuapp.com/meetings", options)
+          .then((res) => res.json())
+          .then((data) => {
+            let newArray = [...this.state.allMeetings, data.meeting];
             this.setState({
-                allMeetings: newArray
-            })
-        })
+              allMeetings: newArray,
+            });
+          });
     }
 
     disbandHandler = (e) => {
         console.log("disband")
         const options = {method: 'DELETE'}
-        fetch("http://localhost:3000/api/v1/clubs/" + this.state.club.id, options)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            this.props.history.push('/clubs')
-        })
+        fetch(
+          "https://le-cine-backend.herokuapp.com/clubs/" + this.state.club.id,
+          options
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            this.props.history.push("/clubs");
+          });
     }
 
     updateHandler = (clubObj) => {
@@ -114,13 +117,15 @@ class ClubShow extends React.Component {
             },
             body: JSON.stringify(clubObj)
         }
-        fetch("http://localhost:3000/api/v1/clubs/" + clubObj.id, options)
-        .then(res => res.json())
-        .then(data => {
-            this.setState({club: data})
-            this.modalHandler()
-            this.renderAlert()
-        })
+        fetch("https://le-cine-backend.herokuapp.com/clubs/" + clubObj.id,
+          options
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.setState({ club: data });
+            this.modalHandler();
+            this.renderAlert();
+          });
     }
 
     renderAlert = () => {

@@ -11,13 +11,14 @@ class ClubMovieCard extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("http://localhost:3000/api/v1/movies/" + this.props.movieId)
-        .then(res => res.json())
-        .then(data => {
+        fetch("https://le-cine-backend.herokuapp.com/movies/" + this.props.movieId
+        )
+          .then((res) => res.json())
+          .then((data) => {
             this.setState({
-                movie: data
-            })
-        })
+              movie: data,
+            });
+          });
     };
     
 
@@ -56,11 +57,13 @@ class ClubMovieCard extends React.Component {
                 movie_id: this.state.movie.id
             })
         }
-        fetch("http://localhost:3000/api/v1/find-club-watchlist", options)
-        .then(res => res.json())
-        .then(data => {
-            this.props.deleteMovieFromClub(data)
-        })
+        fetch("https://le-cine-backend.herokuapp.com//find-club-watchlist",
+          options
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            this.props.deleteMovieFromClub(data);
+          });
     }
 
     render(){
