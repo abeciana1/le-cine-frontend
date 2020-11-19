@@ -155,7 +155,7 @@ class ClubMeetingShow extends React.Component {
             </MediaQuery>
             <MediaQuery minWidth={1000}>
             <CalendarComponent meeting={this.state.meeting} />
-            <div style={{"marginTop":"120px"}}>
+            <div>
                 <ClubNav club={this.state.club} />
             </div>
                 <div style={{"marginLeft": "20%", "marginTop": "40px","width": "80%"}}>
