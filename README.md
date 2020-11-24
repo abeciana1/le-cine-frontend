@@ -1,40 +1,40 @@
 <h3>Table of Contents</h3>
 <dl>
 <dt>
-<a href="#le-cine">1. Le Cine</a>
+<a href="/#le-cine">1. Le Cine</a>
 </dt>
 <dd>
-<a href="#tech-specs" style="marginLeft: 50px">1.a Tech Specs</a>
+<a href="/#tech-specs" style="marginLeft: 50px">1.a Tech Specs</a>
 </dd>
 <dd>
-<a href="#installation">1.b Installation Instructions</a>
+<a href="/#installation">1.b Installation Instructions</a>
 </dd>
 <dt>
-<a href="#why">2. Why?</a>
+<a href="/#why">2. Why?</a>
 </dt>
 <dt>
-<a href="getting-started">3. Getting Started</a>
+<a href="/#getting-started">3. Getting Started</a>
 </dt>
 <dd>
-<a href="#dashboard">3.a Dashboard</a>
+<a href="/#dashboard">3.a Dashboard</a>
 </dd>
 <dd>
-<a href="#watchlist">3.b Watchlist</a>
+<a href="/#watchlist">3.b Watchlist</a>
 </dd>
 <dt>
-<a href="design-art">4. Design and Art</a>
+<a href="/#design-art">4. Design and Art</a>
 </dt>
 <dd>
-<a href="design-with">4.a Designed With</a>
+<a href="/#design-with">4.a Designed With</a>
 </dd>
 <dd>
-<a href="wireframes">4.b Wireframes</a>
+<a href="/#wireframes">4.b Wireframes</a>
 </dd>
 <dd>
-<a href="bauhaus">4.c About Bauhaus Design</a>
+<a href="/#bauhaus">4.c About Bauhaus Design</a>
 </dd>
 <dt>
-<a href="future-goals">5. Future Goals</a>
+<a href="/#future-goals">5. Future Goals</a>
 </dt>
 </dl>
 
