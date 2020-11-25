@@ -22,7 +22,9 @@ class ClubShow extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.id)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/clubs/" + this.props.id
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -48,7 +50,10 @@ class ClubShow extends React.Component {
                 club_id: this.state.club.id
             })
         }
-        fetch("https://le-cine-backend.herokuapp.com/user_clubs", options)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/user_clubs",
+          options
+        )
           .then((res) => res.json())
           .then((data) => {
             this.props.joinClubHandler(data.user_club);
@@ -84,7 +89,7 @@ class ClubShow extends React.Component {
             },
             body: JSON.stringify(meetingObj)
         }
-        fetch("https://le-cine-backend.herokuapp.com/meetings", options)
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/meetings", options)
           .then((res) => res.json())
           .then((data) => {
             let newArray = [...this.state.allMeetings, data.meeting];
@@ -98,7 +103,8 @@ class ClubShow extends React.Component {
         console.log("disband")
         const options = {method: 'DELETE'}
         fetch(
-          "https://le-cine-backend.herokuapp.com/clubs/" + this.state.club.id,
+          "https://le-cine-backend.herokuapp.com/api/v1/clubs/" +
+            this.state.club.id,
           options
         )
           .then((res) => res.json())
@@ -117,7 +123,8 @@ class ClubShow extends React.Component {
             },
             body: JSON.stringify(clubObj)
         }
-        fetch("https://le-cine-backend.herokuapp.com/clubs/" + clubObj.id,
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/clubs/" + clubObj.id,
           options
         )
           .then((res) => res.json())

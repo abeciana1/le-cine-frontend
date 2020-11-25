@@ -23,11 +23,11 @@ class AddMovieToClub extends React.Component {
 
     getSelectedClub = (id) => {
         // console.log(this.state.selectedClubId)
-        fetch("http://localhost:3000/api/v1/clubs/" + id)
-        .then(res => res.json())
-        .then(data => {
-            this.setState({selectedClub: data})
-        })
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/clubs/" + id)
+          .then((res) => res.json())
+          .then((data) => {
+            this.setState({ selectedClub: data });
+          });
     }
 
     submitHandler = (e) => {

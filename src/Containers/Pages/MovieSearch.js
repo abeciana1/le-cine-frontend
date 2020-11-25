@@ -22,7 +22,7 @@ class MovieSearch extends React.Component {
             },
             body: JSON.stringify({title: movTitle})
         }
-        fetch("https://le-cine-backend.herokuapp.com/search", options)
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/search", options)
           .then((res) => res.json())
           .then((data) => {
             this.setState({
@@ -41,7 +41,7 @@ class MovieSearch extends React.Component {
             },
             body: JSON.stringify(movieObj)
         }
-        fetch("https://le-cine-backend.herokuapp.com/movies", options)
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/movies", options)
           .then((res) => res.json())
           .then((data) => {
             this.props.watchlistHandler(data);

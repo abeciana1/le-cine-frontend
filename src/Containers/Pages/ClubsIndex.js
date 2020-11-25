@@ -10,7 +10,7 @@ class ClubsIndex extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/clubs")
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/clubs")
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

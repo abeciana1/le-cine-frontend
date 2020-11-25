@@ -9,7 +9,10 @@ class MemberCard extends React.Component {
     }
 
     componentDidMount() {
-        fetch("https://le-cine-backend.herokuapp.com/users/" + this.props.memberId)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/users/" +
+            this.props.memberId
+        )
           .then((res) => res.json())
           .then((data) => {
             this.setState({ member: data });

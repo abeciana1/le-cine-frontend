@@ -15,7 +15,9 @@ class ClubMeetingsIndex extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.id)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/clubs/" + this.props.id
+        )
           .then((res) => res.json())
           .then((data) => {
             this.setState({
@@ -59,7 +61,9 @@ class ClubMeetingsIndex extends React.Component {
             this.setState({previousMeetings: newArray})
         }
         const options = {method: 'DELETE'}
-        fetch("https://le-cine-backend.herokuapp.com/meetings/" + meetingObj.id,
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/meetings/" +
+            meetingObj.id,
           options
         ).then((res) => res.json());
     }

@@ -11,7 +11,9 @@ class ClubMovieCard extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/movies/" + this.props.movieId
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/movies/" +
+            this.props.movieId
         )
           .then((res) => res.json())
           .then((data) => {
@@ -57,7 +59,8 @@ class ClubMovieCard extends React.Component {
                 movie_id: this.state.movie.id
             })
         }
-        fetch("https://le-cine-backend.herokuapp.com//find-club-watchlist",
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/find-club-watchlist",
           options
         )
           .then((res) => res.json())

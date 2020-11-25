@@ -13,7 +13,9 @@ class ClubMemberIndex extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.id)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/clubs/" + this.props.id
+        )
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
@@ -33,7 +35,8 @@ class ClubMemberIndex extends React.Component {
             userClubs: newArray
         })
         const options = {method: 'DELETE'}
-        fetch("https://le-cine-backend.herokuapp.com/user_clubs/" +
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/user_clubs/" +
             foundUserClub.id,
           options
         ).then((res) => res.json());

@@ -35,7 +35,7 @@ class HostClubsContainer extends React.Component {
             },
             body: JSON.stringify(clubObj)
         }
-        fetch("https://le-cine-backend.herokuapp.com/clubs", options)
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/clubs", options)
           .then((res) => res.json())
           .then((data) => {
             console.log(data);

@@ -11,7 +11,10 @@ class WatchlistMovieCard extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/movies/" + this.props.movieId)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/movies/" +
+            this.props.movieId
+        )
           .then((res) => res.json())
           .then((data) => {
             this.setState({

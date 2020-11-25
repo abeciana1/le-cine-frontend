@@ -46,7 +46,7 @@ class MovieSearchCard extends React.Component {
             },
             body: JSON.stringify(this.props.movie)
         }
-        fetch("https://le-cine-backend.herokuapp.com/movies", options)
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/movies", options)
           .then((res) => res.json())
           .then((data) => {
             this.props.addToClub(club, data.movie.id);

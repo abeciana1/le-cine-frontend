@@ -21,7 +21,9 @@ class ClubMeetingShow extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.club_id
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/clubs/" +
+            this.props.club_id
         )
           .then((res) => res.json())
           .then((data) => {
@@ -31,7 +33,8 @@ class ClubMeetingShow extends React.Component {
               host: data.host,
             });
           });
-        fetch("https://le-cine-backend.herokuapp.com/meetings/" +
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/meetings/" +
             this.props.meeting_id
         )
           .then((res) => res.json())
@@ -41,7 +44,7 @@ class ClubMeetingShow extends React.Component {
             });
             for (const movieMeeting of data.movie_meetings) {
               fetch(
-                "https://le-cine-backend.herokuapp.com/movie_meetings/" +
+                "https://le-cine-backend.herokuapp.com/api/v1/movie_meetings/" +
                   movieMeeting.id
               )
                 .then((res) => res.json())
@@ -68,7 +71,10 @@ class ClubMeetingShow extends React.Component {
             },
             body: JSON.stringify(movieMeetingObj)
         }
-        fetch("https://le-cine-backend.herokuapp.com/movie_meetings", options)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/movie_meetings",
+          options
+        )
           .then((res) => res.json())
           .then((data) => {
             this.setState({
@@ -103,7 +109,9 @@ class ClubMeetingShow extends React.Component {
             },
             body: JSON.stringify(meetingObj)
         }
-        fetch("https://le-cine-backend.herokuapp.com/meetings/" + meetingObj.id,
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/meetings/" +
+            meetingObj.id,
           options
         ).then((res) => res.json());
     }

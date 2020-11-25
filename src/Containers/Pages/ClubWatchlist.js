@@ -13,7 +13,9 @@ class ClubWatchlist extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.id)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/clubs/" + this.props.id
+        )
           .then((res) => res.json())
           .then((data) => {
             this.setState({
@@ -35,7 +37,8 @@ class ClubWatchlist extends React.Component {
         this.setState({clubWatchlist: newArray})
 
         const options = {method: 'DELETE'}
-        fetch("https://le-cine-backend.herokuapp.com/club_watchlists/" +
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/club_watchlists/" +
             foundWatchlist.id,
           options
         ).then((res) => res.json());

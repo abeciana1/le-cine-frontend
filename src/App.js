@@ -44,7 +44,7 @@ class App extends React.Component {
   componentDidMount = () => {
     const token = localStorage.getItem("token")
     if(token){
-      fetch("https://le-cine-backend.herokuapp.com/profile", {
+      fetch("https://le-cine-backend.herokuapp.com/api/v1/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ class App extends React.Component {
           });
         });
     } 
-      fetch("https://le-cine-backend.herokuapp.com/users")
+      fetch("https://le-cine-backend.herokuapp.com/api/v1/users")
         .then((resp) => resp.json())
         .then((data) => {
           this.setState({ allUsers: data });
@@ -122,7 +122,7 @@ class App extends React.Component {
       },
       body: JSON.stringify(userObj)
     }
-    fetch("https://le-cine-backend.herokuapp.com/users", options)
+    fetch("https://le-cine-backend.herokuapp.com/api/v1/users", options)
       .then((res) => res.json())
       .then((data) => {
         localStorage.setItem("token", data.jwt);
@@ -155,7 +155,7 @@ class App extends React.Component {
         movie_id: movieObj.movie.id
       })
     }
-    fetch("https://le-cine-backend.herokuapp.com/watchlists", options)
+    fetch("https://le-cine-backend.herokuapp.com/api/v1/watchlists", options)
       .then((res) => res.json())
       .then((data) => {
         data.watchlist.movie.backdrop_path = `https://image.tmdb.org/t/p/original${data.watchlist.movie.backdrop_path}`;
@@ -176,7 +176,7 @@ class App extends React.Component {
     })
     const options = {method: 'DELETE'}
     fetch(
-      "https://le-cine-backend.herokuapp.com/watchlists/" + id,
+      "https://le-cine-backend.herokuapp.com/api/v1/watchlists/" + id,
       options
     ).then((res) => res.json());
   }
@@ -194,7 +194,7 @@ class App extends React.Component {
       })
     }
     fetch(
-      "https://le-cine-backend.herokuapp.com/club_watchlists",
+      "https://le-cine-backend.herokuapp.com/api/v1/club_watchlists",
       options
     ).then((resp) => resp.json());
     // .then(data => {
@@ -211,7 +211,7 @@ class App extends React.Component {
     })
     const options = {method: 'DELETE'}
     fetch(
-      "https://le-cine-backend.herokuapp.com/user_clubs/" + foundClub.id,
+      "https://le-cine-backend.herokuapp.com/api/v1/user_clubs/" + foundClub.id,
       options
     ).then((res) => res.json());
   }

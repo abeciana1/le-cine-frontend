@@ -10,7 +10,10 @@ class DashboardMeeting extends React.Component {
     }
 
     componentDidMount = () => {
-        fetch("https://le-cine-backend.herokuapp.com/clubs/" + this.props.clubId)
+        fetch(
+          "https://le-cine-backend.herokuapp.com/api/v1/clubs/" +
+            this.props.clubId
+        )
           .then((res) => res.json())
           .then((data) => {
             this.setState({
