@@ -91,7 +91,7 @@ class App extends React.Component {
         }
       })
     }
-    fetch("https://le-cine-backend.herokuapp.com/login", options)
+    fetch("https://le-cine-backend.herokuapp.com/api/v1/login", options)
       .then((res) => res.json())
       .then((data) => {
         if (data.user) {
