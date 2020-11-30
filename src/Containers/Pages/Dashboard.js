@@ -7,7 +7,7 @@ import { Row, Col } from 'react-bootstrap'
 import MediaQuery from 'react-responsive'
 
 const Dashboard = (props) => {
-
+    
         return(
             <React.Fragment>
             <MediaQuery maxWidth={999}>

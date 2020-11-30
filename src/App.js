@@ -100,7 +100,7 @@ class App extends React.Component {
             {
               user: data.user,
             },
-            () => this.props.history.push("/")
+            () => this.props.history.push("/dashboard")
           );
         } else {
           this.setState(
