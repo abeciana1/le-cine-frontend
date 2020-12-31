@@ -27,6 +27,9 @@ const NavBar = (props) => {
                     <Nav.Link>
                         <Link to="/contact" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Contact Us</Link>
                     </Nav.Link>
+                    <Nav.Link>
+                        <Link to="/pandemic-film-club" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Pandemic Film Club</Link>
+                    </Nav.Link>
                     {props.user ? <Nav.Link onClick={logout}>Logout</Nav.Link> : <Nav.Link>
                         <Link to="/login" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Login</Link>
                     </Nav.Link>}

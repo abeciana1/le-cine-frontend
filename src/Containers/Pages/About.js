@@ -6,7 +6,8 @@ const About = (props) => {
     return (
         <React.Fragment>
         <MediaQuery maxWidth={999}>
-            <div style={{"width":"80%", "marginLeft":"auto", "marginRight":"auto", "fontSize":"1rem", "display":"inline"}}>
+                <div style={{ "width": "80%", "marginLeft": "auto", "marginRight": "auto", "fontSize": "1rem", "display": "inline" }}>
+                <h1>About Us</h1>
                 <div>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Convallis posuere morbi leo urna molestie at elementum. Morbi enim nunc faucibus a pellentesque. Velit laoreet id donec ultrices tincidunt arcu non sodales. Ornare arcu odio ut sem nulla pharetra diam sit. Ultrices sagittis orci a scelerisque. Ac felis donec et odio pellentesque diam volutpat commodo sed. Pulvinar pellentesque habitant morbi tristique senectus. Elementum nisi quis eleifend quam adipiscing vitae proin sagittis. Ut consequat semper viverra nam libero justo. In vitae turpis massa sed elementum tempus egestas sed sed.
                 </div>

@@ -41,7 +41,10 @@ const AuthNavBar = (props) => {
                         <NavDropdown.Item>
                             <Link to="/clubs/manage" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Manage Memberships</Link>
                         </NavDropdown.Item>
-                    </NavDropdown>
+                            </NavDropdown>
+                    <Nav.Link>
+                        <Link to="/pandemic-film-club" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Pandemic Film Club</Link>
+                    </Nav.Link>
                     <Nav.Link onClick={() => props.logoutHandler()}>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
