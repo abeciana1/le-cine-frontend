@@ -1,9 +1,11 @@
 import React from 'react'
 
-class NotifyCMST extends React.Component {
+class NotifyCMS extends React.Component {
     render() {
         return (
             <h1>CMS to notify members</h1>
         )
     }
 }
+
+export default NotifyCMS

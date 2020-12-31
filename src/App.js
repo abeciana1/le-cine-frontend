@@ -5,6 +5,7 @@ import NavBar from './Components/Navbar'
 import AuthNavBar from './Components/AuthNavbar'
 import Home from './Containers/Pages/Home'
 import PFC from './Containers/Pages/PFC'
+import NotifyCMS from './Containers/Pages/NotifyCMS'
 import About from './Containers/Pages/About'
 import Contact from './Containers/Pages/Contact'
 import Signup from './Containers/Pages/Signup'
@@ -264,7 +265,8 @@ class App extends React.Component {
             <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} wrongCredentials={this.state.wrongCredentials} />} />
             <Route path="/contact" component={Contact}/>
             <Route path="/about" component={About} />
-            <Route path="/pandemic-film-club" component={PFC} />
+            <Route path="/pandemic-film-club" render={()=> <PFC user={this.state.user} />} />
+            <Route path="/admin/notify-cms" render={() => <NotifyCMS user={this.state.user} />} />
             <Route path="/" render={()=> <Home user={this.state.user} loggedOut={this.state.userLoggedOut} />} />
           </Switch>
       </React.Fragment>
