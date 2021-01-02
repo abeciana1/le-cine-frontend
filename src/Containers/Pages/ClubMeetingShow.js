@@ -6,6 +6,8 @@ import MovieMeetingModal from '../../Components/MovieMeetingModal'
 import UpdateMovieMeetingModal from '../../Components/UpdateMovieMeetingModal'
 import { Alert } from 'react-bootstrap'
 import MediaQuery from 'react-responsive'
+import ReactHtmlParser from "react-html-parser"; 
+
 
 class ClubMeetingShow extends React.Component {
 
@@ -122,103 +124,206 @@ class ClubMeetingShow extends React.Component {
         })
     }
 
+  convertToHTML = () => {
+    ReactHtmlParser(this.state.meeting.about);
+  }
+
     nowPlayingModalHandler = () => {
         this.setState({nowPlayingModal: !this.state.nowPlayingModal})
     }
 
-    render() {
+  render() {
+    // console.log(this.state);
+    // debugger
         return (
-            <React.Fragment>
-            {this.state.club && this.state.meeting && this.props.user ? 
-            <React.Fragment>
-            <MediaQuery maxWidth={999}>
-            <ClubNav club={this.state.club} />
-            <CalendarComponent meeting={this.state.meeting} />
-                <div style={{"marginTop": "40px","width": "100%"}}>
-                    <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "textAlign": "left", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
-                    {this.state.showAlert ? 
-                    <Alert variant="success" style={{"textAlign":"center", "width":"100%", "marginLeft":"auto", "marginRight":"auto", "zIndex":"2"}}>Your changes have been saved!</Alert>
-                    :
-                    null
-                    }
-                        <h1>{this.state.meeting.title}</h1>
-                        <h3>{this.state.meeting.time}</h3>
-                        <br />
-                        <div style={{"marginLeft":"20px", "marginRight":"20px", "backgroundColor":"white", "paddingTop":"20px", "paddingBottom":"20px"}}>
-                            <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
-                                <h5>{this.state.meeting.about}</h5>
-                            </div>
+          <React.Fragment>
+            {this.state.club && this.state.meeting && this.props.user ? (
+              <React.Fragment>
+                <MediaQuery maxWidth={999}>
+                  <ClubNav club={this.state.club} />
+                  <CalendarComponent meeting={this.state.meeting} />
+                  <div style={{ marginTop: "40px", width: "100%" }}>
+                    <div
+                      style={{
+                        paddingLeft: "20px",
+                        backgroundColor: "#EFEFEF",
+                        textAlign: "left",
+                        paddingTop: "40px",
+                        paddingBottom: "40px",
+                        paddingRight: "20px",
+                      }}
+                    >
+                      {this.state.showAlert ? (
+                        <Alert
+                          variant="success"
+                          style={{
+                            textAlign: "center",
+                            width: "100%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            zIndex: "2",
+                          }}
+                        >
+                          Your changes have been saved!
+                        </Alert>
+                      ) : null}
+                      <h1>{this.state.meeting.title}</h1>
+                      <h3>{this.state.meeting.time}</h3>
+                      <br />
+                      <div
+                        style={{
+                          marginLeft: "20px",
+                          marginRight: "20px",
+                          backgroundColor: "white",
+                          paddingTop: "20px",
+                          paddingBottom: "20px",
+                        }}
+                      >
+                        <div
+                          style={{ marginLeft: "20px", paddingRight: "40px" }}
+                        >
+                          {/* <div> {ReactHtmlParser(this.state.meeting.about)} </div> */}
+                          {/* <p>{this.state.meeting.about}</p> */}
                         </div>
-                        <br />
-                        {this.state.club ?
-                        this.state.host.id === this.props.user.id ?
-                            <>
-                            <UpdateMovieMeetingModal club={this.state.club} meeting={this.state.meeting} updateHandler={this.updateHandler} />
+                      </div>
+                      <br />
+                      {this.state.club ? (
+                        this.state.host.id === this.props.user.id ? (
+                          <>
+                            <UpdateMovieMeetingModal
+                              club={this.state.club}
+                              meeting={this.state.meeting}
+                              updateHandler={this.updateHandler}
+                            />
                             <br />
-                            <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
-                            </>
-                            : null
-                            : null}
+                            <MovieMeetingModal
+                              club={this.state.club}
+                              movies={this.state.movies}
+                              meeting={this.state.meeting}
+                              submitHandler={this.submitHandler}
+                            />
+                          </>
+                        ) : null
+                      ) : null}
                     </div>
-                    <div style={{"paddingTop": "50px"}}>
-                    {this.state.movieMeetings.length === 0 ?
-                        <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "100%", "textAlign": "center", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
-                            <h2>There are no movies scheduled for this meeting!</h2>
+                    <div style={{ paddingTop: "50px" }}>
+                      {this.state.movieMeetings.length === 0 ? (
+                        <div
+                          style={{
+                            paddingLeft: "20px",
+                            backgroundColor: "#EFEFEF",
+                            width: "100%",
+                            textAlign: "center",
+                            paddingTop: "40px",
+                            paddingBottom: "40px",
+                            paddingRight: "20px",
+                          }}
+                        >
+                          <h2>
+                            There are no movies scheduled for this meeting!
+                          </h2>
                         </div>
-                        :
+                      ) : (
                         this.renderMovieMeetings()
-                    }
+                      )}
                     </div>
-                </div>
-            </MediaQuery>
-            <MediaQuery minWidth={1000}>
-            <CalendarComponent meeting={this.state.meeting} />
-            <div>
-                <ClubNav club={this.state.club} />
-            </div>
-                <div style={{"marginLeft": "20%", "marginTop": "40px","width": "80%"}}>
-                    <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "75%", "textAlign": "left", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
-                    {this.state.showAlert ? 
-                    <Alert variant="success" style={{"textAlign":"center", "width":"100%", "marginLeft":"auto", "marginRight":"auto", "zIndex":"2"}}>Your changes have been saved!</Alert>
-                    :
-                    null
-                    }
-                        <h1>{this.state.meeting.title}</h1>
-                        <h3>{this.state.meeting.time}</h3>
-                        <br />
-                        <div className="internal-card-white">
-                            <div style={{"marginLeft": "20px", "paddingRight": "40px"}}>
-                                <h5>{this.state.meeting.about}</h5>
-                            </div>
-                        </div>
-                        <br />
-                        {this.state.club ?
-                        this.state.host.id === this.props.user.id ?
-                            <>
-                            <UpdateMovieMeetingModal club={this.state.club} meeting={this.state.meeting} updateHandler={this.updateHandler} />
-                            <br />
-                            <MovieMeetingModal club={this.state.club} movies={this.state.movies} meeting={this.state.meeting} submitHandler={this.submitHandler} />
-                            </>
-                            : null
-                            : null}
-                    </div>
-                    <div style={{"paddingTop": "50px"}}>
-                    {this.state.movieMeetings.length === 0 ?
-                        <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "width": "50%", "textAlign": "center", "paddingTop": "40px", "paddingBottom": "40px", "paddingRight":"20px"}}>
-                            <h2>There are no movies scheduled for this meeting!</h2>
-                        </div>
-                        :
-                        this.renderMovieMeetings()
-                    }
-                    </div>
-                </div>
+                  </div>
                 </MediaQuery>
-            </React.Fragment>
-            :
-            null
-            }
-            </React.Fragment>
-        )
+                <MediaQuery minWidth={1000}>
+                  <CalendarComponent meeting={this.state.meeting} />
+                  <div>
+                    <ClubNav club={this.state.club} />
+                  </div>
+                  <div
+                    style={{
+                      marginLeft: "20%",
+                      marginTop: "40px",
+                      width: "80%",
+                    }}
+                  >
+                    <div
+                      style={{
+                        paddingLeft: "20px",
+                        backgroundColor: "#EFEFEF",
+                        width: "75%",
+                        textAlign: "left",
+                        paddingTop: "40px",
+                        paddingBottom: "40px",
+                        paddingRight: "20px",
+                      }}
+                    >
+                      {this.state.showAlert ? (
+                        <Alert
+                          variant="success"
+                          style={{
+                            textAlign: "center",
+                            width: "100%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            zIndex: "2",
+                          }}
+                        >
+                          Your changes have been saved!
+                        </Alert>
+                      ) : null}
+                      <h1>{this.state.meeting.title}</h1>
+                      <h3>{this.state.meeting.time}</h3>
+                      <br />
+                      <div className="internal-card-white">
+                        <div
+                          style={{ marginLeft: "20px", paddingRight: "40px" }}
+                        >
+                          {/* <h5>{this.state.meeting.about}</h5> */}
+                          <div> {ReactHtmlParser(this.state.meeting.about)} </div>
+                        </div>
+                      </div>
+                      <br />
+                      {this.state.club ? (
+                        this.state.host.id === this.props.user.id ? (
+                          <>
+                            <UpdateMovieMeetingModal
+                              club={this.state.club}
+                              meeting={this.state.meeting}
+                              updateHandler={this.updateHandler}
+                            />
+                            <br />
+                            <MovieMeetingModal
+                              club={this.state.club}
+                              movies={this.state.movies}
+                              meeting={this.state.meeting}
+                              submitHandler={this.submitHandler}
+                            />
+                          </>
+                        ) : null
+                      ) : null}
+                    </div>
+                    <div style={{ paddingTop: "50px" }}>
+                      {this.state.movieMeetings.length === 0 ? (
+                        <div
+                          style={{
+                            paddingLeft: "20px",
+                            backgroundColor: "#EFEFEF",
+                            width: "50%",
+                            textAlign: "center",
+                            paddingTop: "40px",
+                            paddingBottom: "40px",
+                            paddingRight: "20px",
+                          }}
+                        >
+                          <h2>
+                            There are no movies scheduled for this meeting!
+                          </h2>
+                        </div>
+                      ) : (
+                        this.renderMovieMeetings()
+                      )}
+                    </div>
+                  </div>
+                </MediaQuery>
+              </React.Fragment>
+            ) : null}
+          </React.Fragment>
+        );
     }
 }
 
