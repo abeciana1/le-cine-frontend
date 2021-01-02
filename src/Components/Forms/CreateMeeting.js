@@ -21,7 +21,7 @@ class CreateMeeting extends React.Component {
     }
 
     aboutHandler = (description) => {
-        // console.log(description)
+        console.log(description)
         // debugger
         this.setState({
             about: description

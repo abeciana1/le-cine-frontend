@@ -124,10 +124,6 @@ class ClubMeetingShow extends React.Component {
         })
     }
 
-  convertToHTML = () => {
-    ReactHtmlParser(this.state.meeting.about);
-  }
-
     nowPlayingModalHandler = () => {
         this.setState({nowPlayingModal: !this.state.nowPlayingModal})
     }
@@ -182,8 +178,7 @@ class ClubMeetingShow extends React.Component {
                         <div
                           style={{ marginLeft: "20px", paddingRight: "40px" }}
                         >
-                          {/* <div> {ReactHtmlParser(this.state.meeting.about)} </div> */}
-                          {/* <p>{this.state.meeting.about}</p> */}
+                          <div> {ReactHtmlParser(this.state.meeting.about)} </div>
                         </div>
                       </div>
                       <br />

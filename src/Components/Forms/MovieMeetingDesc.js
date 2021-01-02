@@ -23,8 +23,10 @@ class MovieMeetingDesc extends React.Component {
 
     descChange = (e) => {
         let draftRef = this.refs.draftRef; 
+        console.log(draftRef)
         let draftDom = ReactDOM.findDOMNode( draftRef );
-        let html = draftDom.querySelector("div[data-block] div[data-offset-key]").innerHTML;
+        let html = draftDom.querySelectorAll("[data-contents]")[0].innerHTML;
+        // debugger
         this.props.aboutHandler(html)
         this.setState({desc: html})
 
@@ -34,7 +36,6 @@ class MovieMeetingDesc extends React.Component {
         console.log(this.state.desc)
         return (
         <React.Fragment>
-                <h1>description</h1>
                 <Editor
                     toolbarClassName="toolbarClassName"
                     wrapperClassName="wrapperClassName"
