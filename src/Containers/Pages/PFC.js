@@ -13,6 +13,7 @@ const PFC = () => {
                 <h1>area to signup for sms and/or email notifications</h1>
                 ================================================================
                 <h1>area to promote next meeting
+                        <br />
                     <em>if signed in user - can see link and enter meeting page</em> 
                 </h1>
                 ================================================================                

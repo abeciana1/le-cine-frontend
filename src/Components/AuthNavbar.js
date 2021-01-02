@@ -3,6 +3,7 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { withRouter, Link } from 'react-router-dom';
 
 const AuthNavBar = (props) => {
+    console.log(props)
         return(
         <React.Fragment>
         {props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
@@ -45,6 +46,12 @@ const AuthNavBar = (props) => {
                     <Nav.Link>
                         <Link to="/pandemic-film-club" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Pandemic Film Club</Link>
                     </Nav.Link>
+                    {props.user.admin ? 
+                    <Nav.Link>
+                        <Link to="admin/notify-cms">Notify CMS</Link>
+                    </Nav.Link>
+                    : null
+                    }
                     <Nav.Link onClick={() => props.logoutHandler()}>Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
