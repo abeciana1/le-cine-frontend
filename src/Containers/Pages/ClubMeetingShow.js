@@ -129,8 +129,6 @@ class ClubMeetingShow extends React.Component {
     }
 
   render() {
-    // console.log(this.state);
-    // debugger
         return (
           <React.Fragment>
             {this.state.club && this.state.meeting && this.props.user ? (
@@ -298,7 +296,7 @@ class ClubMeetingShow extends React.Component {
                           style={{
                             paddingLeft: "20px",
                             backgroundColor: "#EFEFEF",
-                            width: "50%",
+                            width: "75%",
                             textAlign: "center",
                             paddingTop: "40px",
                             paddingBottom: "40px",

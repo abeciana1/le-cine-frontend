@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form } from 'react-bootstrap'
-import MovieMeetingDesc from "./MovieMeetingDesc";
+import MovieMeetingDescCreate from "./MovieMeetingDescCreate";
 
 class CreateMeeting extends React.Component {
 
@@ -75,7 +75,7 @@ class CreateMeeting extends React.Component {
                 <Form.Label>
                   Please provide a description for your meeting:
                 </Form.Label>
-                <MovieMeetingDesc aboutHandler={this.aboutHandler} />
+                <MovieMeetingDescCreate aboutHandler={this.aboutHandler} html={""} />
                 {/* <Form.Control required as="textarea" rows={3} name="about" value={this.state.about} onChange={this.changeHandler} placeholder="Meeting Description" /> */}
               </Form.Group>
               <Form.Group controlId="meetingDate">
