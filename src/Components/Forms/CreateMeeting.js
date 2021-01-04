@@ -21,7 +21,7 @@ class CreateMeeting extends React.Component {
     }
 
     aboutHandler = (description) => {
-        console.log(description)
+        // console.log(description)
         // debugger
         this.setState({
             about: description
@@ -71,13 +71,13 @@ class CreateMeeting extends React.Component {
                   placeholder="Meeting Excerpt"
                 />
               </Form.Group>
-              <Form.Group controlId="meetingAbout">
+              {/* <Form.Group controlId="meetingAbout"> */}
                 <Form.Label>
                   Please provide a description for your meeting:
                 </Form.Label>
                 <MovieMeetingDescCreate aboutHandler={this.aboutHandler} html={""} />
                 {/* <Form.Control required as="textarea" rows={3} name="about" value={this.state.about} onChange={this.changeHandler} placeholder="Meeting Description" /> */}
-              </Form.Group>
+              {/* </Form.Group> */}
               <Form.Group controlId="meetingDate">
                 <Form.Label>Choose the date of your meeting:</Form.Label>
                 <Form.Control

@@ -1,30 +1,48 @@
 import React from "react";
-import { EditorState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { Editor } from "@tinymce/tinymce-react";
+require("dotenv").config();
 
 class MovieMeetingDescUpdate extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { content: this.props.html };
 
-    state = {
-        editorState: EditorState.createEmpty()
-    };
-    
-    onEditorStateChange = (editorState) => {
-        this.setState({ editorState })
-        // debugger
-        //   console.log(this.refs.editor.refs.editor.innerHTML);
+    this.handleChange = this.handleChange.bind(this);
+  }
 
-    }
+  handleChange(content, editor) {
+    console.log(content);
+    console.log(editor);
+    this.setState({ content });
+  }
 
     render() {
-        return (
-        <React.Fragment>
-                <Editor
-                    editorState={this.state.editorState}
-                />
-        </React.Fragment>
-        );
-    }
+    return (
+      <React.Fragment>
+        {/* <h4>rich text editor</h4> */}
+        <Editor
+          apiKey={process.env.REACT_APP_TINY_RTE_API_KEY}
+          initialValue="<p>Create a description for your meeting</p>"
+          value={this.state.content}
+          init={{
+                height: 500,
+            menubar: false,
+            // plugins: "link image code",
+            plugins: [
+              "advlist autolink lists",
+              "charmap print preview anchor help",
+              "searchreplace visualblocks code",
+              "insertdatetime media table paste wordcount",
+            ],
+            toolbar:
+              "undo redo | formatselect	| bold italic underline	| alignleft aligncenter alignright | link image mceCodeEditor |bullist numlist outdent indent strikethrough media | help",
+            media_scripts: [{ filter: "http://media1.example.com" }],
+          }}
+          onEditorChange={this.handleChange}
+        />
+      </React.Fragment>
+    );
+  }
 }
 
-export default MovieMeetingDescUpdate;
+export default MovieMeetingDescUpdate
