@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, Button } from 'react-bootstrap'
+// import { Modal, Button } from 'react-bootstrap'
 import UpdateMeeting from './Forms/UpdateMeeting'
 
 class UpdateMovieMeetingModal extends React.Component {
@@ -25,19 +25,28 @@ class UpdateMovieMeetingModal extends React.Component {
                 <div style={{"paddingLeft": "20px","backgroundColor": "#EFEFEF", "textAlign": "center", "paddingRight":"20px"}}>
                     <button onClick={this.modalHandler} className="read-more-btn">Update Your Meeting</button>
                 </div>
-            <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
+                {this.state.modalOpen ?
+                    <div style={{"width":"60%"}}>
+                        <div style={{"textAlign": "center"}}>
+                            <h1>Update Your Meeting</h1>
+                            <UpdateMeeting updateHandler={this.updateHandler} club={this.props.club} meeting={this.props.meeting} />
+                        </div>
+                    </div>
+                : null}
+
+            {/* <Modal show={this.state.modalOpen === true} close={this.state.modalOpen === false} >
                 <Modal.Header closeButton onClick={this.modalHandler}>
-                    <Modal.Title>Update Your Meeting</Modal.Title>
+                    <Modal.Title></Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <UpdateMeeting updateHandler={this.updateHandler} club={this.props.club} meeting={this.props.meeting} />
+                    
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={this.modalHandler}>
                     Close
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
             </>
         )
     }

@@ -11,32 +11,24 @@ class MovieMeetingDescUpdate extends React.Component {
   }
 
   handleChange(content, editor) {
-    console.log(content);
-    console.log(editor);
     this.setState({ content });
+    this.props.aboutHandler(content);
   }
 
     render() {
     return (
       <React.Fragment>
-        {/* <h4>rich text editor</h4> */}
         <Editor
           apiKey={process.env.REACT_APP_TINY_RTE_API_KEY}
-          initialValue="<p>Create a description for your meeting</p>"
+          hasFocus={true}
           value={this.state.content}
           init={{
-                height: 500,
-            menubar: false,
-            // plugins: "link image code",
-            plugins: [
-              "advlist autolink lists",
-              "charmap print preview anchor help",
-              "searchreplace visualblocks code",
-              "insertdatetime media table paste wordcount",
-            ],
+            selector: ["textarea.tox-textarea", "div.tox-textfield"],
+            height: 500,
+            plugins:
+              "advlist autolink lists code image media charmap print preview anchor help searchreplace visualblocks insertdatetime table paste wordcount",
             toolbar:
-              "undo redo | formatselect	| bold italic underline	| alignleft aligncenter alignright | link image mceCodeEditor |bullist numlist outdent indent strikethrough media | help",
-            media_scripts: [{ filter: "http://media1.example.com" }],
+              "undo redo | formatselect fontsizeselect | removeformat | bold italic underline	| alignleft aligncenter alignright | link image mceCodeEditor |bullist numlist outdent indent strikethrough media code image | help",
           }}
           onEditorChange={this.handleChange}
         />

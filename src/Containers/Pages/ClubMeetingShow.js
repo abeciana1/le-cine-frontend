@@ -152,7 +152,7 @@ class ClubMeetingShow extends React.Component {
                           variant="success"
                           style={{
                             textAlign: "center",
-                            width: "100%",
+                            width: "17%",
                             marginLeft: "auto",
                             marginRight: "auto",
                             zIndex: "2",

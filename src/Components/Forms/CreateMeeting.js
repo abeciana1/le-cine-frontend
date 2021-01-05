@@ -42,12 +42,12 @@ class CreateMeeting extends React.Component {
         })
     }
 
-    render() {
+  render() {
+      console.log(this.state)
         return (
           <React.Fragment>
             <form onSubmit={this.submitHandler}>
               <Form.Group controlId="meetingTitle">
-                {/* <Form.Label><strong>Give your meeting a title:</strong></Form.Label> */}
                 <Form.Label>Give your meeting a title:</Form.Label>
                 <Form.Control
                   required

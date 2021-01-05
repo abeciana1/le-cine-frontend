@@ -17,7 +17,6 @@ class UpdateMeeting extends React.Component {
 
     aboutHandler = (description) => {
         console.log(description)
-        // debugger
         this.setState({
             about: description
         })
@@ -35,7 +34,8 @@ class UpdateMeeting extends React.Component {
         
     }
 
-    render() {
+  render() {
+      console.log(this.state)
         return (
           <React.Fragment>
             <Form onSubmit={this.updateHandler}>
@@ -63,13 +63,13 @@ class UpdateMeeting extends React.Component {
                   placeholder="Meeting Excerpt"
                 />
               </Form.Group>
-              <Form.Group controlId="meetingAbout">
+              {/* <Form.Group controlId="meetingAbout"> */}
                 <Form.Label>
                   Please provide a description for your meeting:
                 </Form.Label>
                 <MovieMeetingDescUpdate aboutHandler={this.aboutHandler} html={this.state.about} />
                 {/* <Form.Control required as="textarea" rows={3} name="about" value={this.state.about} onChange={this.changeHandler} placeholder="Meeting Description" /> */}
-              </Form.Group>
+              {/* </Form.Group> */}
               <Form.Group controlId="meetingDate">
                 <Form.Label>Choose the date of your meeting:</Form.Label>
                 <Form.Control
