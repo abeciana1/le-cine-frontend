@@ -1,14 +1,12 @@
 import React from 'react'
-import { Col, Row, Alert } from 'react-bootstrap'
+import { Col, Row, Alert, Modal, Button } from 'react-bootstrap'
 import moment from 'moment'
 import UpcomingMeetings from '../UpcomingMeetings'
 import ClubNav from '../../Components/ClubNav'
 import { withRouter } from 'react-router-dom'
-// import CreateMeeting from '../../Components/Forms/CreateMeeting'
-// import UpdateClub from '../../Components/Forms/UpdateClub'
+import UpdateClub from '../../Components/Forms/UpdateClub'
 import MediaQuery from 'react-responsive'
 import MeetingCreationPage from './MeetingCreationPage'
-// import MovieMeetingDescCreate from "../../Components/Forms/MovieMeetingDescCreate";
 
 class ClubShow extends React.Component {
 
@@ -86,7 +84,7 @@ class ClubShow extends React.Component {
     }
 
     addMeetingToClub = (meetingObj) => {
-        this.meetingModalHandler()
+        this.addMeetingShowHandler()
         const options = {
             method: 'POST',
             headers: {
@@ -136,7 +134,7 @@ class ClubShow extends React.Component {
           .then((res) => res.json())
           .then((data) => {
             this.setState({ club: data });
-            this.modalHandler();
+            this.updateClubShowHandler();
             this.renderAlert();
           });
     }
@@ -288,6 +286,12 @@ class ClubShow extends React.Component {
                         </button>
                       )}
                     </div>
+                    {this.state.addMeetingShow ? (
+                      <MeetingCreationPage
+                        club={this.state.club}
+                        submitHandler={this.addMeetingToClub}
+                      />
+                    ) : null}
                     <div
                       style={{
                         backgroundColor: "#EFEFEF",
@@ -319,10 +323,37 @@ class ClubShow extends React.Component {
                       <h3>Email to contact {this.state.club.host.email}</h3>
                     </div>
                   </div>
-                  <MeetingCreationPage
-                    club={this.state.club}
-                    submitHandler={this.addMeetingToClub}
-                  />
+                  <>
+                    <Modal
+                      show={this.state.updateClubShow === true}
+                      close={this.state.updateClubShow === false}
+                    >
+                      <Modal.Header
+                        closeButton
+                        onClick={this.updateClubShowHandler}
+                      >
+                        <Modal.Title>Update Your Club</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <p style={{ textAlign: "center" }}>
+                          Feel free to update your club!
+                        </p>
+                        <UpdateClub
+                          club={this.state.club}
+                          user={this.props.user}
+                          submitHandler={this.updateHandler}
+                        />
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={this.updateClubShowHandler}
+                        >
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </>
                 </React.Fragment>
               ) : null}
             </MediaQuery>
@@ -468,6 +499,12 @@ class ClubShow extends React.Component {
                     </div>
                     <br />
                     <br />
+                    {this.state.addMeetingShow ? (
+                      <MeetingCreationPage
+                        club={this.state.club}
+                        submitHandler={this.addMeetingToClub}
+                      />
+                    ) : null}
                     <br />
                     <div
                       style={{
@@ -500,10 +537,37 @@ class ClubShow extends React.Component {
                       <h3>Email to contact {this.state.club.host.email}</h3>
                     </div>
                   </div>
-                  <MeetingCreationPage
-                    club={this.state.club}
-                    submitHandler={this.addMeetingToClub}
-                  />
+                  <>
+                    <Modal
+                      show={this.state.updateClubShow === true}
+                      close={this.state.updateClubShow === false}
+                    >
+                      <Modal.Header
+                        closeButton
+                        onClick={this.updateClubShowHandler}
+                      >
+                        <Modal.Title>Update Your Club</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <p style={{ textAlign: "center" }}>
+                          Feel free to update your club!
+                        </p>
+                        <UpdateClub
+                          club={this.state.club}
+                          user={this.props.user}
+                          submitHandler={this.updateHandler}
+                        />
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={this.updateClubShowHandler}
+                        >
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </>
                 </React.Fragment>
               ) : null}
             </MediaQuery>
@@ -651,6 +715,12 @@ class ClubShow extends React.Component {
                     {/* <MovieMeetingDescCreate /> */}
                     <br />
                     <br />
+                    {this.state.addMeetingShow ? (
+                      <MeetingCreationPage
+                        club={this.state.club}
+                        submitHandler={this.addMeetingToClub}
+                      />
+                    ) : null}
                     <br />
                     <div
                       style={{
@@ -683,10 +753,37 @@ class ClubShow extends React.Component {
                       <h3>Email to contact {this.state.club.host.email}</h3>
                     </div>
                   </div>
-                  <MeetingCreationPage
-                    club={this.state.club}
-                    submitHandler={this.addMeetingToClub}
-                  />
+                  <>
+                    <Modal
+                      show={this.state.updateClubShow === true}
+                      close={this.state.updateClubShow === false}
+                    >
+                      <Modal.Header
+                        closeButton
+                        onClick={this.updateClubShowHandler}
+                      >
+                        <Modal.Title>Update Your Club</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        <p style={{ textAlign: "center" }}>
+                          Feel free to update your club!
+                        </p>
+                        <UpdateClub
+                          club={this.state.club}
+                          user={this.props.user}
+                          submitHandler={this.updateHandler}
+                        />
+                      </Modal.Body>
+                      <Modal.Footer>
+                        <Button
+                          variant="secondary"
+                          onClick={this.updateClubShowHandler}
+                        >
+                          Close
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
+                  </>
                 </React.Fragment>
               ) : null}
             </MediaQuery>

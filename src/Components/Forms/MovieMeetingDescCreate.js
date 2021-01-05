@@ -10,9 +10,7 @@ class MovieMeetingDescCreate extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-    handleChange(e, content, editor) {
-        console.log(e)
-        debugger
+    handleChange(content, editor) {
         this.setState({ content });
         this.props.aboutHandler(content)
   }
