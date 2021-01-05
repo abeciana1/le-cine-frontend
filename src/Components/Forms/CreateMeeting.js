@@ -45,7 +45,7 @@ class CreateMeeting extends React.Component {
     render() {
         return (
           <React.Fragment>
-            <Form onSubmit={this.submitHandler}>
+            <form onSubmit={this.submitHandler}>
               <Form.Group controlId="meetingTitle">
                 {/* <Form.Label><strong>Give your meeting a title:</strong></Form.Label> */}
                 <Form.Label>Give your meeting a title:</Form.Label>
@@ -120,7 +120,7 @@ class CreateMeeting extends React.Component {
                   style={{ width: "100%" }}
                 />
               </Form.Group>
-            </Form>
+            </form>
           </React.Fragment>
         );
     }

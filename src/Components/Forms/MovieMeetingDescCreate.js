@@ -10,7 +10,9 @@ class MovieMeetingDescCreate extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(content, editor) {
+    handleChange(e, content, editor) {
+        console.log(e)
+        debugger
         this.setState({ content });
         this.props.aboutHandler(content)
   }
@@ -23,7 +25,6 @@ class MovieMeetingDescCreate extends React.Component {
         <Editor
             apiKey={process.env.REACT_APP_TINY_RTE_API_KEY}
             hasFocus={true}    
-          //   initialValue="<p>Create a description for your meeting</p>"
           value={this.state.content}
           init={{
             selector: ["textarea.tox-textarea", "div.tox-textfield"],
@@ -41,3 +42,18 @@ class MovieMeetingDescCreate extends React.Component {
 }
 
 export default MovieMeetingDescCreate
+
+// import React from "react";
+
+// class MovieMeetingDescCreate extends React.Component {
+
+
+
+//     render() {
+//         return (
+//             <h4>text editor</h4>
+//         )
+//     }
+// }
+
+// export default MovieMeetingDescCreate
