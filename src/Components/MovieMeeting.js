@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import MediaQuery from 'react-responsive'
+import { withRouter } from "react-router-dom";
 
 class MovieMeeting extends React.Component {
 
@@ -9,9 +10,9 @@ class MovieMeeting extends React.Component {
         this.props.removeMovieMeeting(this.props.movieMeeting)
         const options = {method: 'DELETE'}
         fetch(
-          "https://le-cine-backend.herokuapp.com/api/v1/movie_meetings/" +
+            "https://le-cine-backend.herokuapp.com/api/v1/movie_meetings/" +
             this.props.movieMeeting.id,
-          options
+            options
         ).then((res) => res.json());
     }
 
@@ -38,7 +39,8 @@ class MovieMeeting extends React.Component {
         }
     }
 
-    render(){
+    render() {
+        console.log(this.props);
         return(
             <React.Fragment>
             {this.props.movieMeeting ?
@@ -89,7 +91,12 @@ class MovieMeeting extends React.Component {
                         <Link to={"/movies/search/" + this.props.movieMeeting.movie.mov_id}>
                             <button className="read-more-btn">View Details</button>
                         </Link>
-                        <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button>
+                        {this.props.location.pathname === "/pandemic-film-club" ?
+                        null
+                        : 
+                        this.props.club.host.id !== this.props.user.id ?
+                        <button button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button>
+                        : null}
                         </div>
                     </div>
                 </div>
@@ -141,7 +148,13 @@ class MovieMeeting extends React.Component {
                         <Link to={"/movies/search/" + this.props.movieMeeting.movie.mov_id}>
                             <button className="read-more-btn">View Details</button>
                         </Link>
-                        <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button>
+                        {this.props.location.pathname === "/pandemic-film-club" ?
+                        null
+                        : 
+                        this.props.club.host.id !== this.props.user.id ?
+                        <button button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button>
+                        : null}
+                        {/* <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button> */}
                         </div>
                     </div>
                 </div>
@@ -158,4 +171,4 @@ class MovieMeeting extends React.Component {
     }
 }
 
-export default MovieMeeting
+export default withRouter(MovieMeeting)

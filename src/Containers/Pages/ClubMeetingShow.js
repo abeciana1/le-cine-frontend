@@ -41,6 +41,7 @@ class ClubMeetingShow extends React.Component {
         )
           .then((res) => res.json())
           .then((data) => {
+            console.log(data.movie_meetings)
             this.setState({
               meeting: data, //,
             });
@@ -61,7 +62,7 @@ class ClubMeetingShow extends React.Component {
 
     renderMovieMeetings = () => {
         let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => a.created_at.localeCompare(b.created_at))
-        return sortedMovieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} />)
+      return sortedMovieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} user={this.props.user} club={this.state.club} />)
     }
 
     submitHandler = (movieMeetingObj) => {
@@ -129,6 +130,7 @@ class ClubMeetingShow extends React.Component {
     }
 
   render() {
+    console.log(this.props)
         return (
           <React.Fragment>
             {this.state.club && this.state.meeting && this.props.user ? (
