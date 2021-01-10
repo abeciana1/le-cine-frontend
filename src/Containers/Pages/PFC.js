@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment'
 import ReactHtmlParser from "react-html-parser";
 import MovieMeeting from "../../Components/MovieMeeting";
+import NotificationSignupForm from "../../Components/Forms/NotificationSignupForm"
 
 class PFC extends React.Component{
 
@@ -66,17 +67,17 @@ class PFC extends React.Component{
                 <div className="page-normal-margin">
                     <h1>Pandemic Film Club</h1>
                 </div>
-                <div style={{"textAlign": "center", "marginTop":"50px", "zIndex": "1"}}>
-                    <img src={process.env.PUBLIC_URL + '../../../images/pandemic-film-club.gif'} alt="Pandemic Film Club intro" style={{"width":"600px"}} />
+                <div style={{ "textAlign": "center", "marginTop": "50px", "zIndex": "1" }}>
+                    <h1>new PFC logo</h1>
+                    {/* <img src={process.env.PUBLIC_URL + '../../../images/pandemic-film-club.gif'} alt="Pandemic Film Club intro" style={{"width":"600px"}} /> */}
                 </div>
-                <div style={{"marginLeft": "auto", "marginRight": "auto" }}>
-                    <h1>area to signup for sms and/or email notifications</h1>
+                <div style={{ "marginLeft": "auto", "marginRight": "auto" }}>
+                    <br />
                     ================================================================
-                    <h1>area to promote next meeting
-                            <br />
-                        <em>if signed in user - can see link and enter meeting page</em> 
-                    </h1>
-                    ===
+                    <br />
+                    <NotificationSignupForm />
+                    {/* <h1>area to signup for sms and/or email notifications</h1> */}
+                    ================================================================
                     {this.state.nextMeeting ?
                         <div style={{"textAlign": "center"}}>
                             <h1>{this.state.nextMeeting.title}</h1>
@@ -84,11 +85,12 @@ class PFC extends React.Component{
                                 <h3>{moment(this.state.nextMeeting.date).format("MMM Do YY")} | {moment(this.state.nextMeeting.time, "HH:mm:ss").format("hh:mm A")}</h3>
                             </div>
                             <br />
-                            {this.props.user ?
+                            <h4 style={{"color":"blue"}}>Please use the form above to signup up for notifications</h4>
+                            {/* {this.props.user ?
                                 <h4><a href={"http://" + this.state.nextMeeting.link}>Meeting Link</a></h4>    
                             :
                                 <h4>Please <a href="/login">login</a> to find the link to this meeting</h4>    
-                            }
+                            } */}
                             <br />
                             {ReactHtmlParser(this.state.nextMeeting.about)}
                             <br />
@@ -98,8 +100,8 @@ class PFC extends React.Component{
                             </div>
                         </div>        
                     :null}
-                    ================================================================                
-                    <h1>Blasts from the Past</h1>
+                    {/* ================================================================                
+                    <h1>films posters linked film pages from past meetings</h1> */}
                 </div>
             </>
         )
