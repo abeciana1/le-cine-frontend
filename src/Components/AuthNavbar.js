@@ -6,7 +6,7 @@ const AuthNavBar = (props) => {
     console.log(props)
         return(
         <React.Fragment>
-        {props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
+        {props.location.pathname.match("/movies/search/") || props.location.pathname.match("/pandemic-film-club") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
             <Navbar bg="white" expand="lg">
                 <Navbar.Brand>
                     <Link to="/" style={{"color": "#FF3900", "textDecoration": "none"}}>

@@ -104,10 +104,15 @@ class MovieShow extends React.Component {
                             <h3>{this.configGenres()} | Runtime: {this.configRuntime()}</h3>
                             <br />
                             <p style={{"fontSize":"1.25rem"}}>{this.state.movie.overview}</p>
-                            {this.state.watchlistClick || this.props.user.movies.some(movie => movie.mov_id === this.state.movie.id) ?  <button className="already-added" style={{"marginLeft":"20px"}} disabled={true}>Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>}
+                                    {this.props.user ?
+                                        this.state.watchlistClick || this.props.user.movies.some(movie => movie.mov_id === this.state.movie.id) ? <button className="already-added" style={{ "marginLeft": "20px" }} disabled={true}>Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{ "marginLeft": "20px" }}>Add to Watchlist</button>
+                                        : null}
                             <br />
                             <br />
+                                    {this.props.user ? 
                             <button onClick={this.clubWatchlistHandler} className="read-more-btn" style={{"marginLeft": "20px"}}>Add to a Club Watchlist</button>
+                            : null
+                            }
                         </div>
                     </div>
                     {this.state.movie.trailer ? 
@@ -164,8 +169,11 @@ class MovieShow extends React.Component {
                             <br />
                             <p>{this.state.movie.overview}</p>
                             {/* <button onClick={this.watchlistHandler} className="read-more-btn">Add to Watchlist</button> */}
-                            {this.state.watchlistClick || this.props.user.movies.some(movie => movie.mov_id === this.state.movie.id) ?  <button className="already-added" style={{"marginLeft":"20px"}} disabled={true}>Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{"marginLeft":"20px"}}>Add to Watchlist</button>}
+                                    {this.props.user ?
+                                        this.state.watchlistClick || this.props.user.movies.some(movie => movie.mov_id === this.state.movie.id) ? <button className="already-added" style={{ "marginLeft": "20px" }} disabled={true}>Added!</button> : <button onClick={this.watchlistHandler} className="read-more-btn" style={{ "marginLeft": "20px" }}>Add to Watchlist</button> : null}
+                            {this.props.user ?
                             <button onClick={this.clubWatchlistHandler} className="read-more-btn" style={{"marginLeft": "20px"}}>Add to a Club Watchlist</button>
+                            : null}
                         </div>
                     </div>
                     {this.state.movie.trailer ? 

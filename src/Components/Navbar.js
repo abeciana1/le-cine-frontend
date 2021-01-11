@@ -10,7 +10,7 @@ const logout = (e) => {
 const NavBar = (props) => {
         return(
         <React.Fragment>
-            {props.location.pathname.match("/movies/search/") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
+            {props.location.pathname.match("/movies/search/") || props.location.pathname.match("/pandemic-film-club") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
             <Navbar bg="white" expand="lg">
                 <Navbar.Brand>
                     <Link to="/" style={{"color": "#FF3900", "textDecoration": "none"}}><strong>Le Cine</strong></Link>
@@ -29,6 +29,9 @@ const NavBar = (props) => {
                     </Nav.Link>
                     <Nav.Link>
                         <Link to="/pandemic-film-club" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Pandemic Film Club</Link>
+                    </Nav.Link>
+                    <Nav.Link>
+                        <Link to="/movies/search/" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Movie Search</Link>
                     </Nav.Link>
                     {props.user ? <Nav.Link onClick={logout}>Logout</Nav.Link> : <Nav.Link>
                         <Link to="/login" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Login</Link>
