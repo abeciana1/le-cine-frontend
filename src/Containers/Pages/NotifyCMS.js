@@ -1,11 +1,13 @@
 import React from 'react'
 import NotificationSendOut from '../../Components/Forms/NotificationSendOut'
+import {Alert} from 'react-bootstrap'
 
 class NotifyCMS extends React.Component {
 
     state = {
         immediateMessage: false,
-        scheduledMessage: false
+        scheduledMessage: false,
+        messageSentOut: false
     }
 
     immediateMessageShow = () => {
@@ -14,9 +16,15 @@ class NotifyCMS extends React.Component {
         })
     }
 
-    scheduledMessage = () => {
+    scheduledMessageShow = () => {
         this.setState({
             scheduledMessage: !this.state.scheduledMessage
+        })
+    }
+
+    messageSentOutAlert = () => {
+        this.setState({
+            messageSentOut: !this.state.messageSentOut
         })
     }
 
@@ -29,8 +37,15 @@ class NotifyCMS extends React.Component {
                     <br />
                     <br />
                     <button className="read-more-btn" onClick={this.immediateMessageShow}>Send Immediate Message</button>
+                {this.state.messageSentOut ? 
+                <Alert variant="success" style={{"width": "50%", "marginLeft":"auto", "marginRight":"auto"}}>
+                    SMS Notification has been sent!
+                </Alert>
+                : null}
                     {this.state.immediateMessage ?
-                        <NotificationSendOut immediateMessageShow={this.immediateMessageShow} />
+                        <div style={{"paddingTop":"15px"}}>
+                            <NotificationSendOut immediateMessageShow={this.immediateMessageShow} messageSentOutAlert={this.messageSentOutAlert} />
+                        </div>
                         : null}
                     <br />
                     <br />
