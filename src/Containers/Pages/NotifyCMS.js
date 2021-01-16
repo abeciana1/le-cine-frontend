@@ -1,4 +1,5 @@
 import React from 'react'
+import NotificationSendOut from '../../Components/Forms/NotificationSendOut'
 
 class NotifyCMS extends React.Component {
 
@@ -29,7 +30,7 @@ class NotifyCMS extends React.Component {
                     <br />
                     <button className="read-more-btn" onClick={this.immediateMessageShow}>Send Immediate Message</button>
                     {this.state.immediateMessage ?
-                        
+                        <NotificationSendOut immediateMessageShow={this.immediateMessageShow} />
                         : null}
                     <br />
                     <br />
