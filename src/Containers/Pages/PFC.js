@@ -40,10 +40,24 @@ class PFC extends React.Component{
                 return new Date(a.date) - new Date(b.date);
             })
 
-            //! separate
+            //! separate meetings past and upcoming
 
+            let past = []
+            let upcoming = []
+
+            let todayDate = moment().format('YYYY-MM-DD')
+            for (let meetingObj of sortedMeetings) {
+                if(moment(meetingObj.date).isAfter(todayDate)){ //! for upcoming meetings
+                    upcoming.push(meetingObj)
+                } else if (moment(todayDate).isAfter(meetingObj.date)) { //! for previous meetings
+                    past.push(meetingObj)
+                }
+            }
+            
+            console.log("past", past)
+            console.log("upcoming",upcoming)
             this.setState({
-                nextMeeting: sortedMeetings[0]
+                nextMeeting: upcoming[0]
             })
 
         fetch("https://le-cine-backend.herokuapp.com/api/v1/meetings/" + sortedMeetings[0].id)

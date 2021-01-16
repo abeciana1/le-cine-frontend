@@ -48,7 +48,7 @@ const AuthNavBar = (props) => {
                     </Nav.Link>
                     {props.user.admin ? 
                     <Nav.Link>
-                        <Link to="admin/notify-cms">Notify CMS</Link>
+                        <Link to="/admin/notify-cms">Notify CMS</Link>
                     </Nav.Link>
                     : null
                     }

@@ -250,6 +250,7 @@ class App extends React.Component {
             <Route exact path="/clubs/all" render={() => <ClubsAll user={this.state.user} userClubs={this.state.userClubs} />}/>
             <Route exact path="/clubs/hosted-all" render={() => <HostClubsAll user={this.state.user} hostClubs={this.state.hostClubs} />}/>
             <Route exact path="/clubs/manage" render={() => <ClubsManage user={this.state.user} clubs={this.state.clubs} userClubs={this.state.userClubs} deleteUserFromClub={this.deleteUserFromClub} />}/>
+            <Route exact path="/admin/notify-cms" render={() => <NotifyCMS user={this.state.user} />} />
             <Route path="/clubs/:id" render={({match}) => {
               let id = parseInt(match.params.id)
               return <ClubShow user={this.state.user} joinClubHandler={this.joinClubHandler} id={id} />
@@ -266,7 +267,6 @@ class App extends React.Component {
             <Route path="/contact" component={Contact}/>
             <Route path="/about" component={About} />
             <Route path="/pandemic-film-club" render={()=> <PFC user={this.state.user} />} />
-            <Route path="/admin/notify-cms" render={() => <NotifyCMS user={this.state.user} />} />
             <Route path="/" render={()=> <Home user={this.state.user} loggedOut={this.state.userLoggedOut} />} />
           </Switch>
       </React.Fragment>
