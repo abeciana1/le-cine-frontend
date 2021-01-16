@@ -266,7 +266,7 @@ class App extends React.Component {
             <Route path="/contact" component={Contact}/>
             <Route path="/about" component={About} />
             <Route path="/pandemic-film-club" render={()=> <PFC user={this.state.user} />} />
-            <Route path="/admin/notify-cms" render={() => <NotifyCMS user={this.state.user} />} />
+            <Route exact path="/admin/notify-cms" render={() => <NotifyCMS user={this.state.user} />} />
             <Route path="/" render={()=> <Home user={this.state.user} loggedOut={this.state.userLoggedOut} />} />
           </Switch>
       </React.Fragment>
