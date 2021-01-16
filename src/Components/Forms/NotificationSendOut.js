@@ -4,6 +4,7 @@ import {Form} from 'react-bootstrap'
 class NotificationSendOut extends React.Component {
     state = {
         messageSentOut: false,
+        previewMessageShow: false,
         body: "",
         media_url: ""
     }
@@ -16,7 +17,9 @@ class NotificationSendOut extends React.Component {
 
     areYouSureHandler = (e) => {
         e.preventDefault();
-        
+        this.setState({
+            previewMessageShow: !this.state.previewMessageShow
+        })
     }
 
     submitHandler = (e) => {
@@ -59,10 +62,14 @@ class NotificationSendOut extends React.Component {
                         />
                     </Form.Group>
                 </Form>
+                {this.state.previewMessageShow ? 
                 <div style={{"marginLeft":"10%", "marginRight":"10%", "padding":"20px" ,"backgroundColor":"#efefef"}}>
                     <h2>Preview Your Message Before Sending It Out</h2>
-                    
+                    <h3>Body:</h3>
+                    <p>{this.state.body}</p>
+                    <h3>Images</h3>
                 </div>
+                : null}
             </React.Fragment>
         )
     }
