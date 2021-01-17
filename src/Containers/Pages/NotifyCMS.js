@@ -44,7 +44,7 @@ class NotifyCMS extends React.Component {
             })
         }
         fetch("http://localhost:4000/api/v1/alert-users", options)
-        .then(console.log)
+        // .then(console.log)
         // .then(res => res.json())
         // .then(data => {
         //         console.log(data)

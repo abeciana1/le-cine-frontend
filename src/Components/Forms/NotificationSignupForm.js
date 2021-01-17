@@ -7,12 +7,19 @@ class NotificationSignupForm extends React.Component {
 
     state = {
         name: "",
+        email: "",
         phone: ""
     }
 
     nameHandler = (e) => {
         this.setState({
             name: e.target.value
+        })
+    }
+
+    emailHandler = (e) => {
+        this.setState({
+            email: e.target.value
         })
     }
 
@@ -45,7 +52,18 @@ class NotificationSignupForm extends React.Component {
                                 required={true}
                                 style={{ width: "300px" }}
                             />
-                        </Form.Group>
+                    </Form.Group>
+                    <Form.Group>
+                    <Form.Label>Email:</Form.Label>
+                        <Form.Control
+                            type="email"
+                            name="email"
+                            value={this.state.email}
+                            onChange={this.emailHandler}
+                            required={true}
+                            style={{ width: "300px" }}
+                        />
+                    </Form.Group>
                         <Form.Group>
                             <Form.Label>Phone:</Form.Label>
                             <PhoneInput
