@@ -28,8 +28,31 @@ class NotifyCMS extends React.Component {
         })
     }
 
+    messageSubmitHandler = (bodyObj, mediaObj) => {
+        console.log("Sent out message")
+        // console.log("body", bodyObj)
+        // console.log("media", mediaObj)
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                body: bodyObj,
+                media_url: mediaObj
+            })
+        }
+        fetch("http://localhost:4000/api/v1/alert-users", options)
+        .then(console.log)
+        // .then(res => res.json())
+        // .then(data => {
+        //         console.log(data)
+        //     })
+    }
+
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         return (
             <React.Fragment>
                 <div className="page-normal-margin">
@@ -44,7 +67,7 @@ class NotifyCMS extends React.Component {
                 : null}
                     {this.state.immediateMessage ?
                         <div style={{"paddingTop":"15px"}}>
-                            <NotificationSendOut immediateMessageShow={this.immediateMessageShow} messageSentOutAlert={this.messageSentOutAlert} />
+                            <NotificationSendOut immediateMessageShow={this.immediateMessageShow} messageSentOutAlert={this.messageSentOutAlert} messageSubmitHandler={this.messageSubmitHandler} />
                         </div>
                         : null}
                     <br />

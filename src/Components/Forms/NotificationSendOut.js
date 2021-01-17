@@ -6,14 +6,45 @@ class NotificationSendOut extends React.Component {
         messageSentOut: false,
         previewMessageShow: false,
         body: "",
-        media_url: ""
+        media_url: "",
+        mediaArr: []
     }
 
-    changeHandler = (e) => {
+    bodyHandler = (e) => {
         this.setState({
-            [e.target.name]: e.target.value
+            body: e.target.value
         })
     }
+
+    mediaUrlHandler = (e) => {
+        this.setState({
+            media_url: e.target.value,
+            mediaArr: [...this.state.mediaArr, e.target.value]
+        })
+    }
+
+    imageRender = () => {
+        let images = this.state.media_url.split(",")
+        // this.setState({
+        //     mediaArr: images
+        // })
+        return images.map(image => <img src={image} style={{"height":"300px"}} />)
+        // for (let image of this.state.mediaArr) {
+        //     return <img src={image} />
+        // }
+    }
+
+    // imagePreviewHandler = () => {
+    //     if (this.state.mediaArr.length > 0) {
+    //         let images = this.state.media_url.split(",")
+    //         this.setState({
+    //             mediaArr: [...this.state.mediaArr, images]
+    //         });
+    //         return images.map(image => <img src={image} alt="Image to user" style={{"width":"300px", "marginRight":"5px", "marginTop":"5px"}}/>)
+    //     } else {
+    //         return <p style={{ color: "red" }}>No images added</p>;
+    //     }
+    // }
 
     areYouSureHandler = (e) => {
         e.preventDefault();
@@ -23,55 +54,108 @@ class NotificationSendOut extends React.Component {
     }
 
     submitHandler = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         this.props.immediateMessageShow();
         this.props.messageSentOutAlert();
+        this.props.messageSubmitHandler(this.state.body, this.state.media_url)
     }
 
     render() {
-        console.log(this.state)
+        // console.log(this.state.mediaArr)
         return (
-            <React.Fragment>
-                <Form onSubmit={this.areYouSureHandler} style={{"marginLeft":"10%", "marginRight":"10%", "padding":"20px" ,"backgroundColor":"#efefef", "paddingTop":"5 px"}}>
-                    <Form.Group>
-                        <Form.Label>Text Body:</Form.Label>
-                        <Form.Control
-                            as="textarea"
-                            required={true}
-                            name="body"
-                            value={this.state.body}
-                            onChange={this.changeHandler}
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Add Image/Gif Urls here:</Form.Label>
-                        <p style={{"textSize":"15px", "color":"red"}}>If you have multiple images/gifs - separate them with commas - NO SPACES</p>
-                        <Form.Control
-                            type="text"
-                            name="media_url"
-                            value={this.state.media_url}
-                            onChange={this.changeHandler}
-                        />
-                    </Form.Group>
-                    <Form.Group>
-                        <input
-                            type="submit"
-                            className="read-more-btn"
-                            value="Submit"
-                            style={{ width: "30%" }}
-                        />
-                    </Form.Group>
-                </Form>
-                {this.state.previewMessageShow ? 
-                <div style={{"marginLeft":"10%", "marginRight":"10%", "padding":"20px" ,"backgroundColor":"#efefef"}}>
-                    <h2>Preview Your Message Before Sending It Out</h2>
-                    <h3>Body:</h3>
-                    <p>{this.state.body}</p>
-                    <h3>Images</h3>
+          <React.Fragment>
+            <Form
+              onSubmit={this.areYouSureHandler}
+              style={{
+                marginLeft: "10%",
+                marginRight: "10%",
+                padding: "20px",
+                backgroundColor: "#efefef",
+                paddingTop: "5 px",
+              }}
+            >
+              <Form.Group>
+                <Form.Label>Text Body:</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  required={true}
+                  name="body"
+                  value={this.state.body}
+                  onChange={this.bodyHandler}
+                />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Add Image/Gif Urls here:</Form.Label>
+                <p style={{ textSize: "15px", color: "red" }}>
+                  If you have multiple images/gifs - separate them with commas -
+                  NO SPACES
+                </p>
+                <p style={{ textSize: "15px", color: "red" }}>
+                  To find image urls - use this{" "}
+                  <a
+                    href="https://support.google.com/websearch/answer/118238?co=GENIE.Platform%3DDesktop&hl=en"
+                    target="_blank"
+                    rel="noreferrer"
+                    alt="Google - Find the URL of a page or image"
+                  >
+                    guide
+                  </a>
+                  .
+                </p>
+                <Form.Control
+                  type="text"
+                  name="media_url"
+                  value={this.state.media_url}
+                  onChange={this.mediaUrlHandler}
+                />
+              </Form.Group>
+              <Form.Group>
+                <input
+                  type="submit"
+                  className="read-more-btn"
+                  value="Submit"
+                  style={{ width: "30%" }}
+                />
+              </Form.Group>
+            </Form>
+            {this.state.previewMessageShow ? (
+              <div
+                style={{
+                  marginLeft: "10%",
+                  marginRight: "10%",
+                  padding: "20px",
+                  backgroundColor: "#efefef",
+                }}
+              >
+                <h2>Preview Your Message Before Sending It Out</h2>
+                <h4 style={{ color: "#FF3900" }}>Body:</h4>
+                <p>{this.state.body}</p>
+                <h4 style={{ color: "#FF3900" }}>Images:</h4>
+                {this.imageRender()}
+                {this.state.mediaArr.length >= 1 ? 
+                ()=> this.state.mediaArr.map(image => <img src={image} />)
+                : <p style={{"color":"red"}}>No images added</p>}
+                {/* {this.imagePreviewHandler()} */}
+                <div style={{ marginTop: "10px" }}>
+                    <h2>Are you sure you want to send this message?</h2>
+                  <button
+                    className="read-more-btn"
+                    style={{ marginRight: "10px" }}
+                    onClick={this.submitHandler}
+                  >
+                    Yes
+                  </button>
+                  <button
+                    className="read-more-btn"
+                    // onClick={this.areYouSureHandler}
+                  >
+                    No
+                  </button>
                 </div>
-                : null}
-            </React.Fragment>
-        )
+              </div>
+            ) : null}
+          </React.Fragment>
+        );
     }
 }
 
