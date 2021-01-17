@@ -32,12 +32,12 @@ class NotificationSignupForm extends React.Component {
     submitHandler = (e) => {
         e.preventDefault()
         console.log("submit")
+        this.props.addSubscriberHandler(this.state)
         this.props.signupHandler()
         this.props.signedUpHandler()
     }
 
     render() {
-        console.log(this.state.phone.length)
         return (
             <React.Fragment>
                 {/* <div style={{"textAlign":"center"}}> */}

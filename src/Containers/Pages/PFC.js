@@ -93,6 +93,23 @@ class PFC extends React.Component{
         return sortedMovieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} />)
     }
 
+    addSubscriberHandler = (subObj) => {
+        console.log("subscriber added", subObj)
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify(subObj)
+        }
+        fetch("http://localhost:4000/api/v1/subscribers", options)
+            .then((res) => res.json())
+            .then((data) => {
+            console.log(data)
+        })
+    }
+
     render() {
         console.log(this.state.showSignup)
         return (
@@ -124,7 +141,7 @@ class PFC extends React.Component{
                         </div>
                         :
                             this.state.showSignup ?
-                            <NotificationSignupForm signupHandler={this.signupHandler} signedUpHandler={this.signedUpHandler}/>
+                            <NotificationSignupForm signupHandler={this.signupHandler} signedUpHandler={this.signedUpHandler} addSubscriberHandler={this.addSubscriberHandler}/>
                                 :
                                 <div style={{"marginLeft":"auto", "marginRight":"auto", "width":"60%", "padding":"20px" ,"backgroundColor":"#efefef"}}>
                                     <h4>If you haven't done so, signup for notifications to get the link</h4>
