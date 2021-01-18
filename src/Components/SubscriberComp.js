@@ -1,10 +1,17 @@
 import React from 'react'
 import { Col, Row } from 'react-bootstrap'
+import NotificationUpdateForm from './Forms/NotificationUpdateForm'
 
 class SubscriberComp extends React.Component {
 
     state = {
         updateFormShow: false
+    }
+
+    updateFormHandler = () => {
+        this.setState({
+            updateFormShow: !this.state.updateFormShow
+        })
     }
     
     render() {
@@ -30,11 +37,14 @@ class SubscriberComp extends React.Component {
                             : <button className="read-more-btn" onClick={() => this.props.changeSubcriberStatus(this.props.subscriber)}>Subscribe</button>}
                     </Col>
                     <Col>
-                        <button className="read-more-btn" onClick={() => this.props.updateSubscriberHandler(this.props.subscriber)}>Update Contact</button>
+                        <button className="read-more-btn" onClick={this.updateFormHandler}>Update Contact</button>
                     </Col>
                     <Col>
                         <button className="read-more-btn" onClick={() => this.props.deleteSubscriberHandler(this.props.subscriber)}>Delete</button>
                     </Col>
+                    {this.state.updateFormShow ?
+                        <NotificationUpdateForm key={sub.id} id={sub.id} name={sub.name} email={sub.email_address} phone={sub.phone_number} status={sub.status} updateSubscriberHandler={this.props.updateSubscriberHandler} updateFormHandler={this.updateFormHandler} />
+                    :null}
                 </Row>
             </React.Fragment>
         )

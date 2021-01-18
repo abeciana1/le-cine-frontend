@@ -8,7 +8,7 @@ class SubscriberListing extends React.Component {
         let subs = this.props.subscribers.sort((a, b) => {
             return new Date(a.created_at) - new Date(b.created_at)
         })
-        return subs.map(subscriber => <SubscriberComp subscriber={subscriber} changeSubcriberStatus={this.props.changeSubcriberStatus} deleteSubscriberHandler={this.props.deleteSubscriberHandler} updateSubscriberHandler={this.updateSubscriberHandler} />)
+        return subs.map(subscriber => <SubscriberComp subscriber={subscriber} changeSubcriberStatus={this.props.changeSubcriberStatus} deleteSubscriberHandler={this.props.deleteSubscriberHandler} updateSubscriberHandler={this.props.updateSubscriberHandler} />)
     }
 
     render() {

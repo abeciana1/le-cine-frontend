@@ -265,24 +265,25 @@ class App extends React.Component {
   };
 
   updateSubscriberHandler = (subObj) => {
-    console.log("update")
-    // const options = {
-    //   method: "PATCH",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     Accept: "application/json",
-    //   },
-    //   body: JSON.stringify({subObj}),
-    // };
-    // fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     // let newArray = [...this.state.subscribers];
-    //     // let index = newArray.findIndex((sub) => sub.id === subObj.id);
-    //     // newArray[index] = data;
-    //     // this.setState({ subscribers: newArray });
-    //   });
+    // console.log(subObj)
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(subObj),
+    };
+    fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        let newArray = [...this.state.subscribers];
+        let index = newArray.findIndex((sub) => sub.id === subObj.id);
+        newArray[index] = data;
+        this.setState({ subscribers: newArray });
+        // debugger
+      });
   }
 
   render() {

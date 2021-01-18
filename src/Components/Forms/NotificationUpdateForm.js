@@ -6,10 +6,11 @@ import "react-phone-input-2/lib/style.css";
 class NotificationUpdateForm extends React.Component {
 
     state = {
-        name: "",
-        email_address: "",
-        phone_number: "",
-        status: true
+        id: this.props.id,
+        name: this.props.name,
+        email_address: this.props.email,
+        phone_number: this.props.phone,
+        status: this.props.status
     }
 
     nameHandler = (e) => {
@@ -33,16 +34,15 @@ class NotificationUpdateForm extends React.Component {
     submitHandler = (e) => {
         e.preventDefault()
         console.log("submit")
-        this.props.addSubscriberHandler(this.state)
-        this.props.signupHandler()
-        this.props.signedUpHandler()
+        this.props.updateFormHandler()
+        this.props.updateSubscriberHandler(this.state)
     }
 
     render() {
         return (
             <React.Fragment>
                 {/* <div style={{"textAlign":"center"}}> */}
-                    <form onSubmit={this.submitHandler} style={{"marginLeft":"10%", "marginRight":"10%", "padding":"20px" ,"backgroundColor":"#efefef"}}>
+                    <form onSubmit={this.submitHandler} style={{"marginTop":"30px"}}>
                         <Form.Group>
                             <Form.Label>Full Name:</Form.Label>
                             <Form.Control
@@ -96,7 +96,7 @@ class NotificationUpdateForm extends React.Component {
                             type="submit"
                             className="read-more-btn"
                             value="Submit"
-                            style={{ width: "30%" }}
+                            style={{ width: "40%" }}
                             disabled={this.state.phone_number.length < 11 ? true : false}
                         />
                         </Form.Group>
