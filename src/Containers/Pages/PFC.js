@@ -53,9 +53,6 @@ class PFC extends React.Component{
                     past.push(meetingObj)
                 }
             }
-            
-            console.log("past", past)
-            console.log("upcoming",upcoming)
             this.setState({
                 nextMeeting: upcoming[0]
             })
@@ -111,7 +108,6 @@ class PFC extends React.Component{
     }
 
     render() {
-        console.log(this.state.showSignup)
         return (
             <>
                 <div style={{ "textAlign": "center", "marginTop": "50px", "zIndex": "1" }}>

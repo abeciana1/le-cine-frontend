@@ -7,8 +7,9 @@ class NotificationSignupForm extends React.Component {
 
     state = {
         name: "",
-        email: "",
-        phone: ""
+        email_address: "",
+        phone_number: "",
+        status: true
     }
 
     nameHandler = (e) => {
@@ -19,13 +20,13 @@ class NotificationSignupForm extends React.Component {
 
     emailHandler = (e) => {
         this.setState({
-            email: e.target.value
+            email_address: e.target.value
         })
     }
 
     phoneHandler = (e) => {
         this.setState({
-            phone: e
+            phone_number: e
         })
     }
 
@@ -57,8 +58,8 @@ class NotificationSignupForm extends React.Component {
                     <Form.Label>Email:</Form.Label>
                         <Form.Control
                             type="email"
-                            name="email"
-                            value={this.state.email}
+                            name="email_address"
+                            value={this.state.email_address}
                             onChange={this.emailHandler}
                             required={true}
                             style={{ width: "300px" }}
@@ -70,14 +71,14 @@ class NotificationSignupForm extends React.Component {
                                 // required={true}
                                 country={'us'}
                                 onlyCountries={["us"]}
-                                name="phone"
-                                value={this.state.phone}
+                                name="phone_number"
+                                value={this.state.phone_number}
                                 inputProps={{
                                     required: true,
                                 }}
                                 onChange={this.phoneHandler}
                         />
-                                                {this.state.phone.length < 11 ? 
+                                                {this.state.phone_number.length < 11 ? 
                             <Form.Text style={{"color":"red"}}>
                                 This field is required and must be filled out.
                             </Form.Text>
@@ -96,7 +97,7 @@ class NotificationSignupForm extends React.Component {
                             className="read-more-btn"
                             value="Submit"
                             style={{ width: "30%" }}
-                            disabled={this.state.phone.length < 11 ? true : false}
+                            disabled={this.state.phone_number.length < 11 ? true : false}
                         />
                         </Form.Group>
                     </form>

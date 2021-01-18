@@ -55,7 +55,7 @@ class NotifyCMS extends React.Component {
         return (
             <React.Fragment>
                 <div className="page-normal-margin">
-                    <h1>Notify Members</h1>
+                    <h1>Notify Subscribers</h1>
                     <br />
                     <br />
                     <button className="read-more-btn" onClick={this.immediateMessageShow}>Send Immediate Message</button>
@@ -72,6 +72,10 @@ class NotifyCMS extends React.Component {
                     <br />
                     <br />
                     <button className="read-more-btn"> Schedule Message (Coming Soon)</button>
+                    <div style={{"paddingTop":"10px"}}>
+                        <h1>Subscriber Management</h1>
+                        
+                    </div>
                 </div>
             </React.Fragment>
         )

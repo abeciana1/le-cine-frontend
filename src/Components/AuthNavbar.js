@@ -3,7 +3,6 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { withRouter, Link } from 'react-router-dom';
 
 const AuthNavBar = (props) => {
-    console.log(props)
         return(
         <React.Fragment>
         {props.location.pathname.match("/movies/search/") || props.location.pathname.match("/pandemic-film-club") ? null : <img className="site-logo" src={process.env.PUBLIC_URL + '/images/le-cine-logo.png'} style={{"height": "300px", "float": "right", "zIndex": "1"}} alt="le-cine-logo"/> }
