@@ -2,20 +2,29 @@ import React from 'react'
 import { Col, Row } from 'react-bootstrap'
 import SubscriberComp from './SubscriberComp'
 
-const SubscriberListing = (props) => {
-    let subs = props.subscribers.map(subscriber => <SubscriberComp subscriber={subscriber} />)
+class SubscriberListing extends React.Component {
 
-    return (
-        <React.Fragment>
-            <Row xs={2} md={4} lg={6}>
-                <Col><h4>Name</h4></Col>
-                <Col><h4>Phone Number</h4></Col>
-                <Col><h4>Email</h4></Col>
-                <Col><h4>Subscriber Status</h4></Col>
-            </Row>
-            {subs}
-        </React.Fragment>
-    )
+    getSubscribers = () => {
+        console.log(this.props.subscribers)
+        let subs = this.props.subscribers.sort((a, b) => {
+            return new Date(a.created_at) - new Date(b.created_at)
+        })
+        return subs.map(subscriber => <SubscriberComp subscriber={subscriber} changeSubcriberStatus={this.props.changeSubcriberStatus} />)
+    }
+
+    render() {
+        return (
+            <React.Fragment>
+                <Row xs={2} md={4} lg={6}>
+                    <Col><h4>Name</h4></Col>
+                    <Col><h4>Phone</h4></Col>
+                    <Col><h4>Email</h4></Col>
+                    <Col><h4>Status</h4></Col>
+                </Row>
+                {this.getSubscribers()}
+            </React.Fragment>
+        )
+    }
 }
 
 export default SubscriberListing

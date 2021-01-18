@@ -25,7 +25,6 @@ import ClubsAll from './Containers/Pages/ClubsAll'
 import HostClubsAll from './Containers/Pages/HostClubsAll'
 
 class App extends React.Component {
-
   state = {
     user: null,
     movies: null,
@@ -36,16 +35,13 @@ class App extends React.Component {
     userWatchlist: [], //! stretch - way to map over movie_id attributes and return movie objects found
     wrongCredentials: false,
     userClubs: [],
-    hostClubs: []
-  }
+    hostClubs: [],
+    subscribers: []
+  };
 
-
-
-
-  
   componentDidMount = () => {
-    const token = localStorage.getItem("token")
-    if(token){
+    const token = localStorage.getItem("token");
+    if (token) {
       fetch("https://le-cine-backend.herokuapp.com/api/v1/profile", {
         method: "GET",
         headers: {
@@ -63,36 +59,43 @@ class App extends React.Component {
             hostClubs: data.user.host_clubs,
           });
         });
-    } 
-      fetch("https://le-cine-backend.herokuapp.com/api/v1/users")
-        .then((resp) => resp.json())
-        .then((data) => {
-          this.setState({ allUsers: data });
+    }
+    fetch("https://le-cine-backend.herokuapp.com/api/v1/users")
+      .then((resp) => resp.json())
+      .then((data) => {
+        this.setState({ allUsers: data });
+      });
+    fetch("http://localhost:4000/api/v1/subscribers")
+      .then((res) => res.json())
+      .then((data) => {
+        this.setState({
+          subscribers: data,
         });
-    };
+      });
+  };
 
   logoutHandler = () => {
-    localStorage.clear()
+    localStorage.clear();
     this.setState({
-      user: null //,
-    })
-    this.props.history.push("/")
-  }
+      user: null, //,
+    });
+    this.props.history.push("/");
+  };
 
   loginHandler = (userObj) => {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         user: {
           email: userObj.email,
-          password: userObj.password
-        }
-      })
-    }
+          password: userObj.password,
+        },
+      }),
+    };
     fetch("https://le-cine-backend.herokuapp.com/api/v1/login", options)
       .then((res) => res.json())
       .then((data) => {
@@ -113,17 +116,17 @@ class App extends React.Component {
           );
         }
       });
-  }
+  };
 
   signupHandler = (userObj) => {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
-      body: JSON.stringify(userObj)
-    }
+      body: JSON.stringify(userObj),
+    };
     fetch("https://le-cine-backend.herokuapp.com/api/v1/users", options)
       .then((res) => res.json())
       .then((data) => {
@@ -135,28 +138,31 @@ class App extends React.Component {
           () => this.props.history.push("/")
         );
       });
-  }
+  };
 
   //! Used for user watchlist
   watchlistHandler = (movieObj) => {
-    let newArray = [...this.state.movies, movieObj.movie]
+    let newArray = [...this.state.movies, movieObj.movie];
     this.setState({
       selectedMovieId: movieObj.movie.id,
       selectedMovie: movieObj.movie,
-      movies: newArray.reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [])
-    })
+      movies: newArray.reduce(
+        (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
+        []
+      ),
+    });
 
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         user_id: this.state.user.id,
-        movie_id: movieObj.movie.id
-      })
-    }
+        movie_id: movieObj.movie.id,
+      }),
+    };
     fetch("https://le-cine-backend.herokuapp.com/api/v1/watchlists", options)
       .then((res) => res.json())
       .then((data) => {
@@ -167,34 +173,34 @@ class App extends React.Component {
           userWatchlist: newArray,
         });
       });
-  }
+  };
 
   deleteFromUserWatchlist = (id) => {
-    let newArray = [...this.state.userWatchlist]
-    let foundWatchlist = newArray.find(watchlist => watchlist.id === id)
-    newArray.splice(newArray.indexOf(foundWatchlist), 1)
+    let newArray = [...this.state.userWatchlist];
+    let foundWatchlist = newArray.find((watchlist) => watchlist.id === id);
+    newArray.splice(newArray.indexOf(foundWatchlist), 1);
     this.setState({
-      userWatchlist: newArray
-    })
-    const options = {method: 'DELETE'}
+      userWatchlist: newArray,
+    });
+    const options = { method: "DELETE" };
     fetch(
       "https://le-cine-backend.herokuapp.com/api/v1/watchlists/" + id,
       options
     ).then((res) => res.json());
-  }
+  };
 
   addToClubWatchlist = (clubId, movie) => {
     const options = {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
       body: JSON.stringify({
         club_id: clubId,
-        movie_id: movie
-      })
-    }
+        movie_id: movie,
+      }),
+    };
     fetch(
       "https://le-cine-backend.herokuapp.com/api/v1/club_watchlists",
       options
@@ -202,73 +208,235 @@ class App extends React.Component {
     // .then(data => {
     //   console.log(data)
     // })
-  }
+  };
 
   deleteUserFromClub = (id) => {
-    let newArray = [...this.state.userClubs]
-    let foundClub = newArray.find(club => club.id === id)
-    newArray.splice(newArray.indexOf(foundClub), 1)
+    let newArray = [...this.state.userClubs];
+    let foundClub = newArray.find((club) => club.id === id);
+    newArray.splice(newArray.indexOf(foundClub), 1);
     this.setState({
-      userClubs: newArray
-    })
-    const options = {method: 'DELETE'}
+      userClubs: newArray,
+    });
+    const options = { method: "DELETE" };
     fetch(
       "https://le-cine-backend.herokuapp.com/api/v1/user_clubs/" + foundClub.id,
       options
     ).then((res) => res.json());
-  }
+  };
 
   joinClubHandler = (userClubObj) => {
-    let newArray = [...this.state.userClubs, userClubObj]
-    newArray.reduce((unique, item) => unique.includes(item) ? unique : [...unique, item], [])
-    this.setState({ userClubs: newArray})
+    let newArray = [...this.state.userClubs, userClubObj];
+    newArray.reduce(
+      (unique, item) => (unique.includes(item) ? unique : [...unique, item]),
+      []
+    );
+    this.setState({ userClubs: newArray });
+  };
+
+  changeSubcriberStatus = (subObj) => {
+    const options = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        name: subObj.name,
+        email_address: subObj.email_address,
+        phone_number: subObj.phone_number,
+        status: !subObj.status,
+      }),
+    };
+    fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        let newArray = [...this.state.subscribers]
+        let index = newArray.findIndex((sub) => sub.id === subObj.id)
+        newArray[index] = data
+        this.setState({subscribers: newArray})
+      });
   }
 
-  render(){
+  render() {
     return (
       <React.Fragment>
-        {this.state.user ? <AuthNavBar user={this.state.user} logoutHandler={this.logoutHandler} /> : <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />}
-          <Switch>
-          <Route path="/clubs/:club_id/meetings/:meeting_id" render={({match}) => {
-              let meeting_id = parseInt(match.params.meeting_id)
-              let club_id = parseInt(match.params.club_id)
-              return <ClubMeetingShow user={this.state.user} club_id={club_id} meeting_id={meeting_id} />
-            }}/>
-          <Route path="/clubs/:id/meetings" render={({match}) => {
-              let id = parseInt(match.params.id)
-              return <ClubMeetingsIndex user={this.state.user} id={id} />
-            }}/>
-            <Route path="/clubs/:id/member-list" render={({match}) => {
-              let id = parseInt(match.params.id)
-              return <ClubMemberIndex user={this.state.user} id={id} />
-            }}/>
-            <Route path="/clubs/:id/watchlist" render={({match}) => {
-              let id = parseInt(match.params.id)
-              return <ClubWatchlist user={this.state.user} id={id} />
-            }}/>
-            <Route exact path="/clubs/index" render={() => <ClubsIndex user={this.state.user} />}/>
-            <Route exact path="/clubs/all" render={() => <ClubsAll user={this.state.user} userClubs={this.state.userClubs} />}/>
-            <Route exact path="/clubs/hosted-all" render={() => <HostClubsAll user={this.state.user} hostClubs={this.state.hostClubs} />}/>
-            <Route exact path="/clubs/manage" render={() => <ClubsManage user={this.state.user} clubs={this.state.clubs} userClubs={this.state.userClubs} deleteUserFromClub={this.deleteUserFromClub} />}/>
-            <Route exact path="/admin/notify-cms" render={() => <NotifyCMS user={this.state.user} />} />
-            <Route path="/clubs/:id" render={({match}) => {
-              let id = parseInt(match.params.id)
-              return <ClubShow user={this.state.user} joinClubHandler={this.joinClubHandler} id={id} />
-            }}/>
-            <Route path="/movies/search/:id" render={({match}) => {
-              let id = parseInt(match.params.id)
-              return <MovieShow addToClub={this.addToClubWatchlist} user={this.state.user} watchlistHandler={this.watchlistHandler} id={id} />
-            }} /> 
-            <Route path="/dashboard" render={() => <Dashboard user={this.state.user} userClubs={this.state.userClubs} hostClubs={this.state.hostClubs} />} />
-            <Route path="/signup" render={()=> <Signup signupHandler={this.signupHandler} />} />
-            <Route path="/movies/search" render={() => <MovieSearch addToClub={this.addToClubWatchlist} clubWatchlistSubmit={this.clubWatchlistSubmit} user={this.state.user} watchlistHandler={this.watchlistHandler} movieShow={this.goToMovieShow} />} />
-            <Route path="/my-watchlist" render={() => <UserWatchlist user={this.state.user} movies={this.state.movies} userWatchlistId={this.state.userWatchlistId} userWatchlist={this.state.userWatchlist} deleteHandler={this.deleteFromUserWatchlist} />} />
-            <Route path="/login" render={()=> <Login loginHandler={this.loginHandler} wrongCredentials={this.state.wrongCredentials} />} />
-            <Route path="/contact" component={Contact}/>
-            <Route path="/about" component={About} />
-            <Route path="/pandemic-film-club" render={()=> <PFC user={this.state.user} />} />
-            <Route path="/" render={()=> <Home user={this.state.user} loggedOut={this.state.userLoggedOut} />} />
-          </Switch>
+        {this.state.user ? (
+          <AuthNavBar
+            user={this.state.user}
+            logoutHandler={this.logoutHandler}
+          />
+        ) : (
+          <NavBar user={this.state.user} logoutHandler={this.logoutHandler} />
+        )}
+        <Switch>
+          <Route
+            path="/clubs/:club_id/meetings/:meeting_id"
+            render={({ match }) => {
+              let meeting_id = parseInt(match.params.meeting_id);
+              let club_id = parseInt(match.params.club_id);
+              return (
+                <ClubMeetingShow
+                  user={this.state.user}
+                  club_id={club_id}
+                  meeting_id={meeting_id}
+                />
+              );
+            }}
+          />
+          <Route
+            path="/clubs/:id/meetings"
+            render={({ match }) => {
+              let id = parseInt(match.params.id);
+              return <ClubMeetingsIndex user={this.state.user} id={id} />;
+            }}
+          />
+          <Route
+            path="/clubs/:id/member-list"
+            render={({ match }) => {
+              let id = parseInt(match.params.id);
+              return <ClubMemberIndex user={this.state.user} id={id} />;
+            }}
+          />
+          <Route
+            path="/clubs/:id/watchlist"
+            render={({ match }) => {
+              let id = parseInt(match.params.id);
+              return <ClubWatchlist user={this.state.user} id={id} />;
+            }}
+          />
+          <Route
+            exact
+            path="/clubs/index"
+            render={() => <ClubsIndex user={this.state.user} />}
+          />
+          <Route
+            exact
+            path="/clubs/all"
+            render={() => (
+              <ClubsAll
+                user={this.state.user}
+                userClubs={this.state.userClubs}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/clubs/hosted-all"
+            render={() => (
+              <HostClubsAll
+                user={this.state.user}
+                hostClubs={this.state.hostClubs}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/clubs/manage"
+            render={() => (
+              <ClubsManage
+                user={this.state.user}
+                clubs={this.state.clubs}
+                userClubs={this.state.userClubs}
+                deleteUserFromClub={this.deleteUserFromClub}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/admin/notify-cms"
+            render={() => <NotifyCMS user={this.state.user} changeSubcriberStatus={this.changeSubcriberStatus} subscribers={this.state.subscribers} />}
+          />
+          <Route
+            path="/clubs/:id"
+            render={({ match }) => {
+              let id = parseInt(match.params.id);
+              return (
+                <ClubShow
+                  user={this.state.user}
+                  joinClubHandler={this.joinClubHandler}
+                  id={id}
+                />
+              );
+            }}
+          />
+          <Route
+            path="/movies/search/:id"
+            render={({ match }) => {
+              let id = parseInt(match.params.id);
+              return (
+                <MovieShow
+                  addToClub={this.addToClubWatchlist}
+                  user={this.state.user}
+                  watchlistHandler={this.watchlistHandler}
+                  id={id}
+                />
+              );
+            }}
+          />
+          <Route
+            path="/dashboard"
+            render={() => (
+              <Dashboard
+                user={this.state.user}
+                userClubs={this.state.userClubs}
+                hostClubs={this.state.hostClubs}
+              />
+            )}
+          />
+          <Route
+            path="/signup"
+            render={() => <Signup signupHandler={this.signupHandler} />}
+          />
+          <Route
+            path="/movies/search"
+            render={() => (
+              <MovieSearch
+                addToClub={this.addToClubWatchlist}
+                clubWatchlistSubmit={this.clubWatchlistSubmit}
+                user={this.state.user}
+                watchlistHandler={this.watchlistHandler}
+                movieShow={this.goToMovieShow}
+              />
+            )}
+          />
+          <Route
+            path="/my-watchlist"
+            render={() => (
+              <UserWatchlist
+                user={this.state.user}
+                movies={this.state.movies}
+                userWatchlistId={this.state.userWatchlistId}
+                userWatchlist={this.state.userWatchlist}
+                deleteHandler={this.deleteFromUserWatchlist}
+              />
+            )}
+          />
+          <Route
+            path="/login"
+            render={() => (
+              <Login
+                loginHandler={this.loginHandler}
+                wrongCredentials={this.state.wrongCredentials}
+              />
+            )}
+          />
+          <Route path="/contact" component={Contact} />
+          <Route path="/about" component={About} />
+          <Route
+            path="/pandemic-film-club"
+            render={() => <PFC user={this.state.user} />}
+          />
+          <Route
+            path="/"
+            render={() => (
+              <Home
+                user={this.state.user}
+                loggedOut={this.state.userLoggedOut}
+              />
+            )}
+          />
+        </Switch>
       </React.Fragment>
     );
   }

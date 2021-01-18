@@ -8,19 +8,8 @@ class NotifyCMS extends React.Component {
     state = {
         immediateMessage: false,
         scheduledMessage: false,
-        messageSentOut: false,
-        subscribers: null
+        messageSentOut: false
     }
-
-    componentDidMount = () => {
-        fetch("http://localhost:4000/api/v1/subscribers")
-            .then(res => res.json())
-            .then(data => {
-                this.setState({
-                    subscribers: data
-                })
-            })
-    };
     
 
     immediateMessageShow = () => {
@@ -55,14 +44,7 @@ class NotifyCMS extends React.Component {
             })
         }
         fetch("http://localhost:4000/api/v1/alert-users", options)
-        // .then(console.log)
-        // .then(res => res.json())
-        // .then(data => {
-        //         console.log(data)
-        //     })
     }
-
-
 
     render() {
         return (
@@ -87,15 +69,7 @@ class NotifyCMS extends React.Component {
                     <button className="read-more-btn"> Schedule Message (Coming Soon)</button>
                     <div style={{"paddingTop":"10px"}}>
                         <h1>Subscriber Management</h1>
-                        {this.state.subscribers ? 
-                        <SubscriberListing subscribers={this.state.subscribers} />
-                        : null}
-                        {/* <Row xs={2} md={4} lg={6}>
-                            <Col><h4>Name</h4></Col>
-                            <Col><h4>Phone Number</h4></Col>
-                            <Col><h4>Email</h4></Col>
-                            <Col><h4>Subscriber Status</h4></Col>
-                        </Row> */}
+                        <SubscriberListing subscribers={this.props.subscribers} changeSubcriberStatus={this.props.changeSubcriberStatus}  />
                     </div>
                 </div>
             </React.Fragment>
