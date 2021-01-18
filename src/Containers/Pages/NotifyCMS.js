@@ -1,6 +1,6 @@
 import React from 'react'
 import NotificationSendOut from '../../Components/Forms/NotificationSendOut'
-import { Alert, Col, Row } from 'react-bootstrap'
+import { Alert} from 'react-bootstrap'
 import SubscriberListing from '../../Components/SubscriberListing'
 
 class NotifyCMS extends React.Component {
@@ -8,8 +8,20 @@ class NotifyCMS extends React.Component {
     state = {
         immediateMessage: false,
         scheduledMessage: false,
-        messageSentOut: false
+        messageSentOut: false,
+        subscribers: null
     }
+
+    componentDidMount = () => {
+        fetch("http://localhost:4000/api/v1/subscribers")
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    subscribers: data
+                })
+            })
+    };
+    
 
     immediateMessageShow = () => {
         this.setState({
@@ -31,8 +43,6 @@ class NotifyCMS extends React.Component {
 
     messageSubmitHandler = (bodyObj, mediaObj) => {
         console.log("Sent out message")
-        // console.log("body", bodyObj)
-        // console.log("media", mediaObj)
         const options = {
             method: 'POST',
             headers: {
@@ -51,6 +61,8 @@ class NotifyCMS extends React.Component {
         //         console.log(data)
         //     })
     }
+
+
 
     render() {
         return (
@@ -75,7 +87,9 @@ class NotifyCMS extends React.Component {
                     <button className="read-more-btn"> Schedule Message (Coming Soon)</button>
                     <div style={{"paddingTop":"10px"}}>
                         <h1>Subscriber Management</h1>
-                        <SubscriberListing />
+                        {this.state.subscribers ? 
+                        <SubscriberListing subscribers={this.state.subscribers} />
+                        : null}
                         {/* <Row xs={2} md={4} lg={6}>
                             <Col><h4>Name</h4></Col>
                             <Col><h4>Phone Number</h4></Col>

@@ -1,7 +1,9 @@
 import React from 'react'
-import {Col, Row} from 'react-bootstrap'
+import { Col, Row } from 'react-bootstrap'
+import SubscriberComp from './SubscriberComp'
 
 const SubscriberListing = (props) => {
+    let subs = props.subscribers.map(subscriber => <SubscriberComp subscriber={subscriber} />)
 
     return (
         <React.Fragment>
@@ -11,9 +13,7 @@ const SubscriberListing = (props) => {
                 <Col><h4>Email</h4></Col>
                 <Col><h4>Subscriber Status</h4></Col>
             </Row>
-            <Row xs={2} md={4} lg={6}>
-                
-            </Row>
+            {subs}
         </React.Fragment>
     )
 }
