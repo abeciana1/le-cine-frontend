@@ -100,7 +100,7 @@ class PFC extends React.Component{
             },
             body: JSON.stringify(subObj)
         }
-        fetch("http://localhost:4000/api/v1/subscribers", options)
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/subscribers", options)
             .then((res) => res.json())
             .then((data) => {
             console.log(data)

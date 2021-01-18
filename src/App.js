@@ -61,13 +61,14 @@ class App extends React.Component {
         });
     }
     fetch("https://le-cine-backend.herokuapp.com/api/v1/users")
-      .then((resp) => resp.json())
-      .then((data) => {
+    .then((resp) => resp.json())
+    .then((data) => {
         this.setState({ allUsers: data });
       });
     fetch("https://le-cine-backend.herokuapp.com/api/v1/subscribers")
-      .then((res) => res.json())
-      .then((data) => {
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
         this.setState({
           subscribers: data,
         });
