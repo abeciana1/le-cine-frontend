@@ -43,7 +43,7 @@ class NotifyCMS extends React.Component {
                 media_url: mediaObj
             })
         }
-        fetch("http://localhost:4000/api/v1/alert-users", options)
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/alert-users", options)
     }
 
     render() {

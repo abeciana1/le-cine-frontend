@@ -25,26 +25,8 @@ class NotificationSendOut extends React.Component {
 
     imageRender = () => {
         let images = this.state.media_url.split(",")
-        // this.setState({
-        //     mediaArr: images
-        // })
         return images.map(image => <img src={image} style={{"height":"300px"}} />)
-        // for (let image of this.state.mediaArr) {
-        //     return <img src={image} />
-        // }
     }
-
-    // imagePreviewHandler = () => {
-    //     if (this.state.mediaArr.length > 0) {
-    //         let images = this.state.media_url.split(",")
-    //         this.setState({
-    //             mediaArr: [...this.state.mediaArr, images]
-    //         });
-    //         return images.map(image => <img src={image} alt="Image to user" style={{"width":"300px", "marginRight":"5px", "marginTop":"5px"}}/>)
-    //     } else {
-    //         return <p style={{ color: "red" }}>No images added</p>;
-    //     }
-    // }
 
     areYouSureHandler = (e) => {
         e.preventDefault();
@@ -53,15 +35,13 @@ class NotificationSendOut extends React.Component {
         })
     }
 
-    submitHandler = (e) => {
-        // e.preventDefault();
+    submitHandler = () => {
         this.props.immediateMessageShow();
         this.props.messageSentOutAlert();
         this.props.messageSubmitHandler(this.state.body, this.state.media_url)
     }
 
     render() {
-        // console.log(this.state.mediaArr)
         return (
           <React.Fragment>
             <Form
@@ -147,7 +127,6 @@ class NotificationSendOut extends React.Component {
                   </button>
                   <button
                     className="read-more-btn"
-                    // onClick={this.areYouSureHandler}
                   >
                     No
                   </button>

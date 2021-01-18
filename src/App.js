@@ -65,7 +65,7 @@ class App extends React.Component {
       .then((data) => {
         this.setState({ allUsers: data });
       });
-    fetch("http://localhost:4000/api/v1/subscribers")
+    fetch("https://le-cine-backend.herokuapp.com/api/v1/subscribers")
       .then((res) => res.json())
       .then((data) => {
         this.setState({
@@ -244,7 +244,7 @@ class App extends React.Component {
         status: !subObj.status,
       }),
     };
-    fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
+    fetch("https://le-cine-backend.herokuapp.com/api/v1/subscribers/" + subObj.id, options)
       .then((res) => res.json())
       .then((data) => {
         let newArray = [...this.state.subscribers];
@@ -261,7 +261,7 @@ class App extends React.Component {
       subscribers: newSubscriberList
     })
     const options = {method: 'DELETE'}
-    fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
+    fetch("https://le-cine-backend.herokuapp.com/api/v1/subscribers/" + subObj.id, options)
   };
 
   updateSubscriberHandler = (subObj) => {
@@ -274,7 +274,7 @@ class App extends React.Component {
       },
       body: JSON.stringify(subObj),
     };
-    fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
+    fetch("https://le-cine-backend.herokuapp.com/api/v1/subscribers/" + subObj.id, options)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
