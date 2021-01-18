@@ -36,7 +36,7 @@ class App extends React.Component {
     wrongCredentials: false,
     userClubs: [],
     hostClubs: [],
-    subscribers: []
+    subscribers: [],
   };
 
   componentDidMount = () => {
@@ -205,9 +205,6 @@ class App extends React.Component {
       "https://le-cine-backend.herokuapp.com/api/v1/club_watchlists",
       options
     ).then((resp) => resp.json());
-    // .then(data => {
-    //   console.log(data)
-    // })
   };
 
   deleteUserFromClub = (id) => {
@@ -250,12 +247,42 @@ class App extends React.Component {
     fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
-        let newArray = [...this.state.subscribers]
-        let index = newArray.findIndex((sub) => sub.id === subObj.id)
-        newArray[index] = data
-        this.setState({subscribers: newArray})
+        let newArray = [...this.state.subscribers];
+        let index = newArray.findIndex((sub) => sub.id === subObj.id);
+        newArray[index] = data;
+        this.setState({ subscribers: newArray });
       });
+  };
+
+  deleteSubscriberHandler = (subObj) => {
+    let newSubscriberList = [...this.state.subscribers]
+    newSubscriberList.splice(newSubscriberList.indexOf(subObj), 1)
+    this.setState({
+      subscribers: newSubscriberList
+    })
+    const options = {method: 'DELETE'}
+    fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
+  };
+
+  updateSubscriberHandler = (subObj) => {
+    console.log("update")
+    // const options = {
+    //   method: "PATCH",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     Accept: "application/json",
+    //   },
+    //   body: JSON.stringify({subObj}),
+    // };
+    // fetch("http://localhost:4000/api/v1/subscribers/" + subObj.id, options)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     // let newArray = [...this.state.subscribers];
+    //     // let index = newArray.findIndex((sub) => sub.id === subObj.id);
+    //     // newArray[index] = data;
+    //     // this.setState({ subscribers: newArray });
+    //   });
   }
 
   render() {
@@ -345,7 +372,15 @@ class App extends React.Component {
           <Route
             exact
             path="/admin/notify-cms"
-            render={() => <NotifyCMS user={this.state.user} changeSubcriberStatus={this.changeSubcriberStatus} subscribers={this.state.subscribers} />}
+            render={() => (
+              <NotifyCMS
+                user={this.state.user}
+                changeSubcriberStatus={this.changeSubcriberStatus}
+                subscribers={this.state.subscribers}
+                deleteSubscriberHandler={this.deleteSubscriberHandler}
+                updateSubscriberHandler={this.updateSubscriberHandler}
+              />
+            )}
           />
           <Route
             path="/clubs/:id"

@@ -69,7 +69,7 @@ class NotifyCMS extends React.Component {
                     <button className="read-more-btn"> Schedule Message (Coming Soon)</button>
                     <div style={{"paddingTop":"10px"}}>
                         <h1>Subscriber Management</h1>
-                        <SubscriberListing subscribers={this.props.subscribers} changeSubcriberStatus={this.props.changeSubcriberStatus}  />
+                        <SubscriberListing subscribers={this.props.subscribers} changeSubcriberStatus={this.props.changeSubcriberStatus} deleteSubscriberHandler={this.props.deleteSubscriberHandler} updateSubscriberHandler={this.updateSubscriberHandler} />
                     </div>
                 </div>
             </React.Fragment>
