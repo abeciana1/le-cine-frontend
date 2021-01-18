@@ -1,6 +1,7 @@
 import React from 'react'
 import NotificationSendOut from '../../Components/Forms/NotificationSendOut'
-import {Alert} from 'react-bootstrap'
+import { Alert, Col, Row } from 'react-bootstrap'
+import SubscriberListing from '../../Components/SubscriberListing'
 
 class NotifyCMS extends React.Component {
 
@@ -74,7 +75,13 @@ class NotifyCMS extends React.Component {
                     <button className="read-more-btn"> Schedule Message (Coming Soon)</button>
                     <div style={{"paddingTop":"10px"}}>
                         <h1>Subscriber Management</h1>
-                        
+                        <SubscriberListing />
+                        {/* <Row xs={2} md={4} lg={6}>
+                            <Col><h4>Name</h4></Col>
+                            <Col><h4>Phone Number</h4></Col>
+                            <Col><h4>Email</h4></Col>
+                            <Col><h4>Subscriber Status</h4></Col>
+                        </Row> */}
                     </div>
                 </div>
             </React.Fragment>
