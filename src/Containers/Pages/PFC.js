@@ -57,13 +57,16 @@ class PFC extends React.Component{
                 nextMeeting: upcoming[0]
             })
 
-        fetch("https://le-cine-backend.herokuapp.com/api/v1/meetings/" + sortedMeetings[0].id)
+        // fetch("https://le-cine-backend.herokuapp.com/api/v1/meetings/" + sortedMeetings[0].id)
+        fetch("https://le-cine-backend.herokuapp.com/api/v1/meetings/" + upcoming[0].id)
         .then((res) => res.json())
-        .then(data => {
+            .then(data => {
+            console.log(data)
             for (const movieMeeting of data.movie_meetings) {
                 fetch("https://le-cine-backend.herokuapp.com/api/v1/movie_meetings/" + movieMeeting.id)
                 .then(res => res.json())
                 .then(data => {
+                    console.log(data)
                     this.setState({
                         movieMeetings: [...this.state.movieMeetings, data],
                     });
@@ -87,6 +90,8 @@ class PFC extends React.Component{
 
     renderMovieMeetings = () => {
         let sortedMovieMeetings = this.state.movieMeetings.sort((a, b) => a.created_at.localeCompare(b.created_at))
+        console.log(sortedMovieMeetings)
+        // debugger
         return sortedMovieMeetings.map(movieMeeting => <MovieMeeting key={movieMeeting.id} movieMeeting={movieMeeting} sumbitHandler={this.submitHandler} removeMovieMeeting={this.removeMovieMeeting} />)
     }
 
