@@ -32,13 +32,14 @@ const NavBar = (props) => {
                     </Nav.Link>
                     <Nav.Link>
                         <Link to="/movies/search/" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Movie Search</Link>
-                    </Nav.Link>
-                    {props.user ? <Nav.Link onClick={logout}>Logout</Nav.Link> : <Nav.Link>
+                            </Nav.Link>
+                            {props.user ? <Nav.Link onClick={logout}>Logout</Nav.Link> : null}
+                    {/* {props.user ? <Nav.Link onClick={logout}>Logout</Nav.Link> : <Nav.Link>
                         <Link to="/login" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Login</Link>
-                    </Nav.Link>}
-                    {props.user ? null : <Nav.Link href="/signup">
+                    </Nav.Link>} */}
+                    {/* {props.user ? null : <Nav.Link href="/signup">
                         <Link to="/signup" style={{"textDecoration": "none", "color": "rgba(0,0,0,.5)"}}>Signup</Link>
-                    </Nav.Link>}
+                    </Nav.Link>} */}
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
