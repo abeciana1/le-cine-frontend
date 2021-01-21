@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Alert } from 'react-bootstrap'
+import { Alert, Carousel } from 'react-bootstrap'
 import MediaQuery from 'react-responsive'
 
 const Home = (props) => {
@@ -96,7 +96,12 @@ const Home = (props) => {
                         </div>
                         <br />
                         <br /> */}
-                        {/* <Link to="/signup"> */}
+                                {/* <Link to="/signup"> */}
+                    <Carousel>
+                        <img style={{"marginLeft": "10px"}} src={process.env.PUBLIC_URL + "/images/film-reel.png"} className="giphy-embed" alt="film reel countdown"/>
+                        <img style={{"marginLeft": "10px"}} src={process.env.PUBLIC_URL + "/images/film-reel.png"} className="giphy-embed" alt="film reel countdown"/>
+                        <img style={{"marginLeft": "10px"}} src={process.env.PUBLIC_URL + "/images/film-reel.png"} className="giphy-embed" alt="film reel countdown"/>
+                    </Carousel>
                     <br />
                     <br />
                         <Link to="/pandemic-film-club">
