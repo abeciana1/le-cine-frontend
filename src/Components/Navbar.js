@@ -28,7 +28,7 @@ const NavBar = (props) => {
                         <Link to="/contact" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Contact Us</Link>
                     </Nav.Link>
                     <Nav.Link>
-                        <Link to="/pandemic-film-club" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Pandemic Film Club</Link>
+                        <Link to="/pandemic-film-club" style={{"textDecoration":"none", "color": "#FF3900"}}>Pandemic Film Club</Link>
                     </Nav.Link>
                     <Nav.Link>
                         <Link to="/movies/search/" style={{"textDecoration":"none", "color": "rgba(0,0,0,.5)"}}>Movie Search</Link>
