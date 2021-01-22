@@ -20,26 +20,54 @@ class ClubMeetingsIndex extends React.Component {
         )
           .then((res) => res.json())
           .then((data) => {
+              let sortedMeetings = data.meetings.sort(function (a, b) {
+                  return new Date(b.date) - new Date(a.date);
+              })
             this.setState({
-              club: data,
-              allMeetings: data.meetings,
+                club: data,
+                allMeetings: sortedMeetings
             });
-            this.getMeetings();
+            let past = []
+            let upcoming = []
+
+            let todayDate = moment().format("MMMM Do YYYY, h:mm:ss a");
+            for (let meetingObj of sortedMeetings) {
+                // console.log(moment(meetingObj.date).isAfter(todayDate));
+                if(meetingObj.date > todayDate){ //! for upcoming meetings
+                // if(moment(meetingObj.date).isAfter(todayDate)){ 
+                    console.log(meetingObj.date < todayDate);
+                    upcoming.push(meetingObj)
+                } else if (moment(todayDate).isAfter(meetingObj.date)) { //! for previous meetings
+                    past.push(meetingObj)
+                }
+            }
+            // this.getMeetings(past, upcoming)
           });
     }
 
     getMeetings = () => {
-        let todayDate = moment().format('YYYY-MM-DD')
-        this.setState({
-            upcomingMeetings: this.state.allMeetings.filter(meeting => moment(meeting.date).isAfter(todayDate)),
-            previousMeetings: this.state.allMeetings.filter(meeting => moment(todayDate).isAfter(meeting.date))
-        })
+        // let todayDate = moment().format("MMMM Do YYYY");
+        // console.log("past", past)
+        // console.log("upcoming", upcoming)
+        // console.log("all", this.state.allMeetings)
+        // this.setState({
+        //     upcomingMeetings: upcoming,
+        //     previousMeetings: past
+        // })
+        // debugger
+        // this.setState({
+        //     upcomingMeetings: this.state.allMeetings.filter(meeting => meeting.date > todayDate),
+        //     upcomingMeetings: this.state.allMeetings.filter(meeting => meeting.date > todayDate),
+        //     previousMeetings: this.state.allMeetings.filter(meeting => todayDate > meeting.date)
+        // })
+        return this.state.allMeetings.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.state.club} deleteMeetingHandler={this.deleteMeetingHandler} meeting={meeting} />)
     }
 
     renderUpcomingMeeting = () => {
         if(this.state.upcomingMeetings.length !== 0){
             return this.state.upcomingMeetings.map(meeting => <ClubMeetingComponent key={meeting.id} club={this.state.club} deleteMeetingHandler={this.deleteMeetingHandler} meeting={meeting} />)
-        }else {
+        }
+        else {
             return <h3 style={{"textAlign": "center"}}>Sorry, there are no upcoming meetings!</h3>
         }
     }
@@ -50,16 +78,20 @@ class ClubMeetingsIndex extends React.Component {
 
     deleteMeetingHandler = (meetingObj) => {
         let todayDate = moment().format('YYYY-MM-DD')
+
+        let newArray = [...this.state.allMeetings];
+        newArray.splice(newArray.indexOf(meetingObj), 1);
+        this.setState({ allMeetings: newArray})
         
-        if(moment(meetingObj.date).isAfter(todayDate)){ //! for upcoming meetings
-            let newArray = [...this.state.upcomingMeetings]
-            newArray.splice(newArray.indexOf(meetingObj), 1)
-            this.setState({upcomingMeetings: newArray})
-        } else if (moment(todayDate).isAfter(meetingObj.date)) { //! for previous meetings
-            let newArray = [...this.state.previousMeetings]
-            newArray.splice(newArray.indexOf(meetingObj), 1)
-            this.setState({previousMeetings: newArray})
-        }
+        // if(meetingObj.date > todayDate){ //! for upcoming meetings
+        //     let newArray = [...this.state.upcomingMeetings]
+        //     newArray.splice(newArray.indexOf(meetingObj), 1)
+        //     this.setState({upcomingMeetings: newArray})
+        // } else if (moment(todayDate).isAfter(meetingObj.date)) { //! for previous meetings
+        //     let newArray = [...this.state.previousMeetings]
+        //     newArray.splice(newArray.indexOf(meetingObj), 1)
+        //     this.setState({previousMeetings: newArray})
+        // }
         const options = {method: 'DELETE'}
         fetch(
           "https://le-cine-backend.herokuapp.com/api/v1/meetings/" +
@@ -69,6 +101,8 @@ class ClubMeetingsIndex extends React.Component {
     }
 
     render() {
+        // console.log("upcoming", this.state.upcomingMeetings)
+        console.log("all", this.state.allMeetings)
         return(
             <React.Fragment>
             {this.state.club ?
@@ -84,7 +118,7 @@ class ClubMeetingsIndex extends React.Component {
                 </div>
                 <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
                     <div style={{"backgroundColor": "white", "paddingTop":"20px", "paddingBottom":"20px", "marginLeft":"20px", "marginRight":"20px"}}>
-                        {this.renderUpcomingMeeting()}
+                        {this.getMeetings()}
                     </div>
                 </div>
                 <br />
@@ -95,7 +129,7 @@ class ClubMeetingsIndex extends React.Component {
                 </div>
                 <div style={{"backgroundColor": "#EFEFEF", "width": "100%", "paddingTop":"30px", "paddingBottom": "30px", "marginTop":"50px"}}>
                     <div className="internal-card-white">
-                        {this.renderPreviousMeeting()}
+                        {/* {this.renderPreviousMeeting()} */}
                     </div>
                 </div>
                 <br />
@@ -113,7 +147,7 @@ class ClubMeetingsIndex extends React.Component {
                 </div>
                 <div className="index-container">
                     <div className="internal-card-white">
-                        {this.renderUpcomingMeeting()}
+                        {this.getMeetings()}
                     </div>
                 </div>
                 <br />
@@ -124,7 +158,7 @@ class ClubMeetingsIndex extends React.Component {
                 </div>
                 <div className="index-container">
                     <div className="internal-card-white">
-                        {this.renderPreviousMeeting()}
+                        {/* {this.renderPreviousMeeting()} */}
                     </div>
                 </div>
                 <br />

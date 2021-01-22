@@ -93,7 +93,7 @@ class MovieMeeting extends React.Component {
                         {this.props.location.pathname === "/pandemic-film-club" ?
                         null
                         : 
-                        this.props.club.host.id !== this.props.user.id ?
+                        this.props.club.host.id === this.props.user.id ?
                         <button button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button>
                         : null}
                         </div>
@@ -150,7 +150,7 @@ class MovieMeeting extends React.Component {
                         {this.props.location.pathname === "/pandemic-film-club" ?
                         null
                         : 
-                        this.props.club.host.id !== this.props.user.id ?
+                        this.props.club.host.id === this.props.user.id ?
                         <button button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button>
                         : null}
                         {/* <button className="read-more-btn" style={{"marginLeft": "20px"}} onClick={this.removeMovieMeeting}>Remove Movie</button> */}
