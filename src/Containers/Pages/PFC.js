@@ -41,11 +41,11 @@ class PFC extends React.Component{
             })
 
             //! separate meetings past and upcoming
-            console.log("sortedMeetings", sortedMeetings)
+            // console.log("sortedMeetings", sortedMeetings)
             let past = []
             let upcoming = []
 
-            let todayDate = moment().format("MMMM Do YYYY, h:mm:ss a");
+            let todayDate = moment().format("MMMM Do YYYY");
             for (let meetingObj of sortedMeetings) {
                 console.log(moment(meetingObj.date).isAfter(todayDate));
                 if(meetingObj.date < todayDate){ //! for upcoming meetings
@@ -55,9 +55,9 @@ class PFC extends React.Component{
                     past.push(meetingObj)
                 }
             }
-            console.log(todayDate)
-            console.log("past", past)
-            console.log("upcoming", upcoming)
+            // console.log(todayDate)
+            // console.log("past", past)
+            // console.log("upcoming", upcoming)
             this.setState({
                 nextMeeting: upcoming[0]
             })
@@ -118,8 +118,8 @@ class PFC extends React.Component{
     }
 
     render() {
-        console.log(this.state.nextMeeting)
-        console.log(this.state.movieMeetings)
+        // console.log(this.state.nextMeeting)
+        // console.log(this.state.movieMeetings)
         return (
             <>
                 <div style={{ "textAlign": "center", "marginTop": "50px", "zIndex": "1" }}>
@@ -162,7 +162,9 @@ class PFC extends React.Component{
                         <div style={{"textAlign": "center", "paddingTop":"20px"}}>
                             <h1>{this.state.nextMeeting.title}</h1>
                             <div style={{"textAlign": "center"}}>
-                                <h3>{moment(this.state.nextMeeting.date).format("MMM Do YY")} | {moment(this.state.nextMeeting.time, "HH:mm:ss").format("hh:mm A")}</h3>
+                                <h3>{moment(this.state.nextMeeting.date).format("MMM Do YYYY")}</h3>
+                                {/* | {moment(this.state.nextMeeting.time, "HH:mm:ss").format("hh:mm A")} */}
+                                <h5>{this.state.nextMeeting.excerpt}</h5>
                             </div>
                             <br />
                             {/* <h4 style={{"color":"blue"}}>Please use the form above to signup up for notifications</h4> */}

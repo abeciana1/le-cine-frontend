@@ -33,7 +33,6 @@ class NotificationUpdateForm extends React.Component {
 
     submitHandler = (e) => {
         e.preventDefault()
-        console.log("submit")
         this.props.updateFormHandler()
         this.props.updateSubscriberHandler(this.state)
     }

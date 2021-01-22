@@ -27,7 +27,6 @@ class ClubShow extends React.Component {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
             this.setState({
               club: data,
               allMeetings: data.meetings,
@@ -104,7 +103,6 @@ class ClubShow extends React.Component {
     }
 
     disbandHandler = (e) => {
-        console.log("disband")
         const options = {method: 'DELETE'}
         fetch(
           "https://le-cine-backend.herokuapp.com/api/v1/clubs/" +
@@ -113,7 +111,7 @@ class ClubShow extends React.Component {
         )
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             this.props.history.push("/clubs");
           });
     }

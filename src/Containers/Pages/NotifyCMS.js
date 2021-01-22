@@ -31,7 +31,6 @@ class NotifyCMS extends React.Component {
     }
 
     messageSubmitHandler = (bodyObj, mediaObj) => {
-        console.log("Sent out message")
         const options = {
             method: 'POST',
             headers: {
@@ -43,7 +42,7 @@ class NotifyCMS extends React.Component {
                 media_url: mediaObj
             })
         }
-        fetch("https://le-cine-backend.herokuapp.com/api/v1/alert-users", options)
+        fetch("https://le-cine-backend.herokuapp.comf/api/v1/alert-users", options)
     }
 
     render() {
