@@ -37,22 +37,27 @@ class PFC extends React.Component{
             })
 
             let sortedMeetings = data.meetings.sort(function (a, b) {
-                return new Date(a.date) - new Date(b.date);
+                return new Date(b.date) - new Date(a.date);
             })
 
             //! separate meetings past and upcoming
-
+            console.log("sortedMeetings", sortedMeetings)
             let past = []
             let upcoming = []
 
             let todayDate = moment().format("MMMM Do YYYY, h:mm:ss a");
             for (let meetingObj of sortedMeetings) {
-                if(moment(meetingObj.date).isAfter(todayDate)){ //! for upcoming meetings
+                console.log(moment(meetingObj.date).isAfter(todayDate));
+                if(meetingObj.date < todayDate){ //! for upcoming meetings
+                // if(moment(meetingObj.date).isAfter(todayDate)){ 
                     upcoming.push(meetingObj)
                 } else if (moment(todayDate).isAfter(meetingObj.date)) { //! for previous meetings
                     past.push(meetingObj)
                 }
             }
+            console.log(todayDate)
+            console.log("past", past)
+            console.log("upcoming", upcoming)
             this.setState({
                 nextMeeting: upcoming[0]
             })
@@ -113,6 +118,8 @@ class PFC extends React.Component{
     }
 
     render() {
+        console.log(this.state.nextMeeting)
+        console.log(this.state.movieMeetings)
         return (
             <>
                 <div style={{ "textAlign": "center", "marginTop": "50px", "zIndex": "1" }}>
