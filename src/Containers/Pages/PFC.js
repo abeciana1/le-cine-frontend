@@ -45,7 +45,7 @@ class PFC extends React.Component{
             let past = []
             let upcoming = []
 
-            let todayDate = moment().format('YYYY-MM-DD')
+            let todayDate = moment().format("MMMM Do YYYY, h:mm:ss a");
             for (let meetingObj of sortedMeetings) {
                 if(moment(meetingObj.date).isAfter(todayDate)){ //! for upcoming meetings
                     upcoming.push(meetingObj)
