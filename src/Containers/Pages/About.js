@@ -29,9 +29,7 @@ const About = (props) => {
                     Each week, we shall pick a movie we can all watch from a
                     shortlist I'll send out every Saturday afternoon. Ideally
                     it'll be a bit obscure or new so everybody will get to see it
-                    with fresh eyes. Then, based on everybody's availability we
-                    will use Discord to do a discussion of the film at the end of
-                    each week.
+                    with fresh eyes.
                     </div>
                     <br />
                     <br />
