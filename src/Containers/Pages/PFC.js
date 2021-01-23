@@ -48,7 +48,7 @@ class PFC extends React.Component{
 
             let todayDate = moment().format("MMMM Do YYYY");
             for (let meetingObj of sortedMeetings) {
-                console.log(moment(meetingObj.date).isAfter(todayDate));
+                // console.log(moment(meetingObj.date).isAfter(todayDate));
                 if(meetingObj.date < todayDate){ //! for upcoming meetings
                 // if(moment(meetingObj.date).isAfter(todayDate)){ 
                     upcoming.push(meetingObj)
@@ -67,7 +67,7 @@ class PFC extends React.Component{
         fetch("https://le-cine-backend.herokuapp.com/api/v1/meetings/" + upcoming[0].id)
         .then((res) => res.json())
             .then(data => {
-            console.log(data)
+            // console.log(data)
             for (const movieMeeting of data.movie_meetings) {
                 fetch("https://le-cine-backend.herokuapp.com/api/v1/movie_meetings/" + movieMeeting.id)
                 .then(res => res.json())
@@ -102,7 +102,7 @@ class PFC extends React.Component{
     }
 
     addSubscriberHandler = (subObj) => {
-        console.log("subscriber added", subObj)
+        // console.log("subscriber added", subObj)
         const options = {
             method: 'POST',
             headers: {
@@ -129,7 +129,7 @@ class PFC extends React.Component{
                 <img
                   src={process.env.PUBLIC_URL + "../../../images/PFC-new-logo.png"}
                   alt="Pandemic Film Club intro"
-                  style={{ width: "400px", border: "1px solid black" }}
+                  style={{ width: "300px", border: "1px solid black" }}
                 />
                 <br />
                 <br />
