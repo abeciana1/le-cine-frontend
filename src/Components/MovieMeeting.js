@@ -19,21 +19,21 @@ class MovieMeeting extends React.Component {
     streamingIconHanddler = () => {
         switch(this.props.movieMeeting.source_name){
             case "Netflix":
-                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/icons8-netflix-48.png"} alt="Netflix" /></a>
+                return <a href={this.props.movieMeeting.source_url} target="_blank" rel="noreferrer"><img src={process.env.PUBLIC_URL + "/images/icons8-netflix-48.png"} alt="Netflix" /></a>
             case "Hulu":
-                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/icons8-hulu-48.png"} alt="Hulu"/></a>
+                return <a href={this.props.movieMeeting.source_url} target="_blank" rel="noreferrer"><img src={process.env.PUBLIC_URL + "/images/icons8-hulu-48.png"} alt="Hulu"/></a>
             case "Amazon Prime":
-                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/icons8-amazon-prime-video-50.png"} alt="Amazon Prime"/></a>
+                return <a href={this.props.movieMeeting.source_url} target="_blank" rel="noreferrer"><img src={process.env.PUBLIC_URL + "/images/icons8-amazon-prime-video-50.png"} alt="Amazon Prime"/></a>
             case "Shudder":
-                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/shudder-logo.png"} alt="Shudder" style={{"height":"20px"}} /></a>
+                return <a href={this.props.movieMeeting.source_url} target="_blank" rel="noreferrer"><img src={process.env.PUBLIC_URL + "/images/shudder-logo.png"} alt="Shudder" style={{"height":"20px"}} /></a>
             case "Mubi":
-                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/MUBI-logo.png"} alt="Mubi" style={{"height":"20px"}}/></a>
+                return <a href={this.props.movieMeeting.source_url} target="_blank" rel="noreferrer"><img src={process.env.PUBLIC_URL + "/images/MUBI-logo.png"} alt="Mubi" style={{"height":"20px"}}/></a>
             case "Tubi":
-                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/1280px-Tubi_logo.svg.png"} alt="Tubi" style={{"height":"20px"}}/></a>
+                return <a href={this.props.movieMeeting.source_url} target="_blank" rel="noreferrer"><img src={process.env.PUBLIC_URL + "/images/1280px-Tubi_logo.svg.png"} alt="Tubi" style={{"height":"20px"}}/></a>
             case "HBOMax":
-                return <a href={"https://" + this.props.movieMeeting.source_url}><img src={process.env.PUBLIC_URL + "/images/HBO_Max-Logo.wine.png"} alt="HBOMax" style={{"height":"20px"}}/></a>
+                return <a href={this.props.movieMeeting.source_url} target="_blank" rel="noreferrer"><img src={process.env.PUBLIC_URL + "/images/HBO_Max-Logo.wine.png"} alt="HBOMax" style={{"height":"20px"}}/></a>
             case "Other":
-                return <a href={"https://" + this.props.movieMeeting.source_url} style={{"textDecoration": "none","color":"black"}}><img src={process.env.PUBLIC_URL + "/images/noun_TV_3399985.png"} alt="Other" style={{"height":"20px"}}/> Other Source</a>
+                return <a href={this.props.movieMeeting.source_url} style={{"textDecoration": "none","color":"black"}} target="_blank" rel="noreferrer"><img src={process.env.PUBLIC_URL + "/images/noun_TV_3399985.png"} alt="Other" style={{"height":"20px"}}/> Other Source</a>
             default:
                 return <h6>Source Not Available</h6>
         }

@@ -77,7 +77,7 @@ class ClubMeetingsIndex extends React.Component {
     }
 
     deleteMeetingHandler = (meetingObj) => {
-        let todayDate = moment().format('YYYY-MM-DD')
+        // let todayDate = moment().format('YYYY-MM-DD')
 
         let newArray = [...this.state.allMeetings];
         newArray.splice(newArray.indexOf(meetingObj), 1);

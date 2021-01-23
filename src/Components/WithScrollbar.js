@@ -54,7 +54,7 @@ class WithScrollbar extends React.Component {
               const nextTransform = e.target.value * value;
               const nextSlide = Math.round(nextTransform / carouselItemWidth);
               if (
-                e.target.value == 0 &&
+                e.target.value === 0 &&
                 this.state.additionalTransfrom === 150
               ) {
                 this.Carousel.isAnimationAllowed = true;
@@ -96,6 +96,7 @@ class WithScrollbar extends React.Component {
             draggable={false}
             style={{ width: "100%", cursor: "pointer" }}
             src={process.env.PUBLIC_URL + "/images/film-reel.png"}
+            alt="Film reel"
           />
         </div>
         <div class="increase-size">
@@ -104,6 +105,7 @@ class WithScrollbar extends React.Component {
             draggable={false}
             style={{ width: "100%", cursor: "pointer" }}
             src={process.env.PUBLIC_URL + "/images/bauhaus-load.gif"}
+            alt="Bauhaus Gif"
           />
         </div>
 
@@ -113,6 +115,7 @@ class WithScrollbar extends React.Component {
             draggable={false}
             style={{ width: "100%", cursor: "pointer" }}
             src={process.env.PUBLIC_URL + "/images/pandemic-film-club.gif"}
+            alt="PFC theater opening"
           />
         </div>
         <div class="image-container increase-size">
@@ -122,6 +125,7 @@ class WithScrollbar extends React.Component {
                 draggable={false}
                 style={{ width: "50%", cursor: "pointer" }}
                 src={process.env.PUBLIC_URL + "/images/1MmIEguoGEnnZxaINQsQA0z21Nbq8R.gif"}
+                alt="Bauhaus ballet"
             />
           </div>
         </div>
@@ -132,6 +136,7 @@ class WithScrollbar extends React.Component {
             draggable={false}
             style={{ width: "150%", cursor: "pointer" }}
             src={process.env.PUBLIC_URL + "/images/Screen Shot 2021-01-21 at 5.25.30 PM.png"}
+            alt="Greener Grass"
           />
         </div>
         {/* <div class="image-container increase-size">

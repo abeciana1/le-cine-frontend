@@ -129,12 +129,12 @@ class MovieShow extends React.Component {
                     {this.state.movie.trailer ?
                     <section style={{"paddingTop": "20px", "marginLeft": "30px"}}>
                         <h1>Cast</h1>
-                        CAST CONTAINER HERE -- STRETCH
+                        Film Cast Coming Soon
                     </section>
                     :
                     <section style={{"paddingTop": "20px", "marginLeft": "30px"}}>
                         <h1>Cast</h1>
-                        CAST CONTAINER HERE -- STRETCH
+                        Film Cast Coming Soon
                     </section>
                     }
                     <section style={{"paddingTop": "20px", "marginLeft": "30px", "marginRight": "30px"}}>
@@ -188,12 +188,12 @@ class MovieShow extends React.Component {
                     {this.state.movie.trailer ?
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px",}}>
                         <h1>Cast</h1>
-                        CAST CONTAINER HERE -- STRETCH
+                        Film Cast Coming Soon
                     </section>
                     :
                     <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
                         <h1>Cast</h1>
-                        CAST CONTAINER HERE -- STRETCH
+                        Film Cast Coming Soon
                     </section>
                     }
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px", "paddingBottom": "20px"}}>

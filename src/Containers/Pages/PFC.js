@@ -6,6 +6,7 @@ import NotificationSignupForm from "../../Components/Forms/NotificationSignupFor
 import { Link } from "react-router-dom";
 
 import { Alert } from "react-bootstrap"
+import MediaQuery from "react-responsive";
 
 class PFC extends React.Component{
 
@@ -122,71 +123,212 @@ class PFC extends React.Component{
         // console.log(this.state.movieMeetings)
         return (
             <>
-                <div style={{ "textAlign": "center", "marginTop": "50px", "zIndex": "1" }}>
-                    {/* <h1>new PFC logo</h1> */}
-                    <img src={process.env.PUBLIC_URL + '../../../images/PFC-new-logo.png'} alt="Pandemic Film Club intro" style={{"width":"600px","border":"1px solid black"}} />
-                    <br />
-                    <br />
-                    <br />
-                        <h3>Search for films here</h3>
-                    {/* <button class="read-more-btn"><h2>Search for films</h2></button> */}
-                    <Link to={"/movies/search/"}>
-                        <button class="read-more-btn">Search for films</button>
-                    </Link>
-                    <br />
-                </div>
-                <div style={{ "marginLeft": "auto", "marginRight": "auto" }}>
-                    {/* ===== */}
-                    <br />
-                    {/* <h4>If you haven't done so, signup for notifications to get the link</h4>
+            <MediaQuery maxWidth={999}>
+                <div style={{ textAlign: "center", marginTop: "50px", zIndex: "1" }}>
+                {/* <h1>new PFC logo</h1> */}
+                <img
+                  src={process.env.PUBLIC_URL + "../../../images/PFC-new-logo.png"}
+                  alt="Pandemic Film Club intro"
+                  style={{ width: "400px", border: "1px solid black" }}
+                />
+                <br />
+                <br />
+                <br />
+                <h3>Search for films here</h3>
+                {/* <button class="read-more-btn"><h2>Search for films</h2></button> */}
+                <Link to={"/movies/search/"}>
+                  <button class="read-more-btn">Search for films</button>
+                </Link>
+                <br />
+              </div>
+              <div style={{ marginLeft: "auto", marginRight: "auto" }}>
+                {/* ===== */}
+                <br />
+                {/* <h4>If you haven't done so, signup for notifications to get the link</h4>
                         <button className="read-more-btn" onClick={this.signupHandler} >Signup for Text Notifications</button> */}
+                <br />
+                {this.state.signedUp ? (
+                  <div style={{ textAlign: "center" }}>
+                    <Alert
+                      variant="success"
+                      style={{
+                        width: "50%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                      }}
+                    >
+                      Thanks for signing up!
+                    </Alert>
+                  </div>
+                ) : this.state.showSignup ? (
+                  <NotificationSignupForm
+                    signupHandler={this.signupHandler}
+                    signedUpHandler={this.signedUpHandler}
+                    addSubscriberHandler={this.addSubscriberHandler}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      width: "60%",
+                      padding: "20px",
+                      backgroundColor: "#efefef",
+                    }}
+                  >
+                    <h4>
+                      If you haven't done so, signup for notifications to get
+                      the link
+                    </h4>
+                    <button
+                      className="read-more-btn"
+                      onClick={this.signupHandler}
+                    >
+                      Signup for Text Notifications
+                    </button>
+                  </div>
+                )}
+                {/* <h1>area to signup for sms and/or email notifications</h1> */}
+                {/* ================================================================ */}
+                {this.state.nextMeeting ? (
+                  <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                    <h1>{this.state.nextMeeting.title}</h1>
+                    <div style={{ textAlign: "center" }}>
+                      <h3>
+                        {moment(this.state.nextMeeting.date).format(
+                          "MMM Do YYYY"
+                        )}
+                      </h3>
+                      {/* | {moment(this.state.nextMeeting.time, "HH:mm:ss").format("hh:mm A")} */}
+                      <h5>{this.state.nextMeeting.excerpt}</h5>
+                    </div>
                     <br />
-                    {this.state.signedUp ?
-                        <div style={{"textAlign":"center"}}>
-                            <Alert variant="success" style={{"width": "50%", "marginLeft":"auto", "marginRight":"auto"}}>
-                                Thanks for signing up!
-                            </Alert>
-                        </div>
-                        :
-                            this.state.showSignup ?
-                            <NotificationSignupForm signupHandler={this.signupHandler} signedUpHandler={this.signedUpHandler} addSubscriberHandler={this.addSubscriberHandler}/>
-                                :
-                                <div style={{"marginLeft":"auto", "marginRight":"auto", "width":"60%", "padding":"20px" ,"backgroundColor":"#efefef"}}>
-                                    <h4>If you haven't done so, signup for notifications to get the link</h4>
-                                    <button className="read-more-btn" onClick={this.signupHandler} >Signup for Text Notifications</button>
-                                </div>
-                            }
-                    {/* <h1>area to signup for sms and/or email notifications</h1> */}
-                    {/* ================================================================ */}
-                    {this.state.nextMeeting ?
-                        <div style={{"textAlign": "center", "paddingTop":"20px"}}>
-                            <h1>{this.state.nextMeeting.title}</h1>
-                            <div style={{"textAlign": "center"}}>
-                                <h3>{moment(this.state.nextMeeting.date).format("MMM Do YYYY")}</h3>
-                                {/* | {moment(this.state.nextMeeting.time, "HH:mm:ss").format("hh:mm A")} */}
-                                <h5>{this.state.nextMeeting.excerpt}</h5>
-                            </div>
-                            <br />
-                            {/* <h4 style={{"color":"blue"}}>Please use the form above to signup up for notifications</h4> */}
-                            {/* {this.props.user ?
+                    {/* <h4 style={{"color":"blue"}}>Please use the form above to signup up for notifications</h4> */}
+                    {/* {this.props.user ?
                                 <h4><a href={"http://" + this.state.nextMeeting.link}>Meeting Link</a></h4>    
                             :
                                 <h4>Please <a href="/login">login</a> to find the link to this meeting</h4>    
                             } */}
-                            <br />
-                                {ReactHtmlParser(this.state.nextMeeting.about)}
-                            <br />
-                            <h1>Films for the meeting</h1>
-                            <div style={{ "marginLeft": "20%"}}>
-                                {this.renderMovieMeetings()}
-                            </div>
-                        </div>        
-                    :null}
-                    {/* ================================================================                
+                    <br />
+                    <div style={{"marginLeft":"10px", "marginRight": "10px"}}>
+                    {ReactHtmlParser(this.state.nextMeeting.about)}
+                    </div>
+                    <br />
+                    <h2>Films for the meeting</h2>
+                    <div>
+                      {this.renderMovieMeetings()}
+                    </div>
+                  </div>
+                ) : null}
+                {/* ================================================================                
                     <h1>films posters linked film pages from past meetings</h1> */}
-                </div>
-            </>
-        )
+              </div>
+            </MediaQuery>
+            <MediaQuery minWidth={1000}>
+              <div
+                style={{ textAlign: "center", marginTop: "50px", zIndex: "1" }}
+              >
+                {/* <h1>new PFC logo</h1> */}
+                <img
+                  src={
+                    process.env.PUBLIC_URL + "../../../images/PFC-new-logo.png"
+                  }
+                  alt="Pandemic Film Club intro"
+                  style={{ width: "400px", border: "1px solid black" }}
+                />
+                <br />
+                <br />
+                <br />
+                <h3>Search for films here</h3>
+                {/* <button class="read-more-btn"><h2>Search for films</h2></button> */}
+                <Link to={"/movies/search/"}>
+                  <button class="read-more-btn">Search for films</button>
+                </Link>
+                <br />
+              </div>
+              <div style={{ marginLeft: "auto", marginRight: "auto" }}>
+                {/* ===== */}
+                <br />
+                {/* <h4>If you haven't done so, signup for notifications to get the link</h4>
+                        <button className="read-more-btn" onClick={this.signupHandler} >Signup for Text Notifications</button> */}
+                <br />
+                {this.state.signedUp ? (
+                  <div style={{ textAlign: "center" }}>
+                    <Alert
+                      variant="success"
+                      style={{
+                        width: "50%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                      }}
+                    >
+                      Thanks for signing up!
+                    </Alert>
+                  </div>
+                ) : this.state.showSignup ? (
+                  <NotificationSignupForm
+                    signupHandler={this.signupHandler}
+                    signedUpHandler={this.signedUpHandler}
+                    addSubscriberHandler={this.addSubscriberHandler}
+                  />
+                ) : (
+                  <div
+                    style={{
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                      width: "60%",
+                      padding: "20px",
+                      backgroundColor: "#efefef",
+                    }}
+                  >
+                    <h4>
+                      If you haven't done so, signup for notifications to get
+                      the link
+                    </h4>
+                    <button
+                      className="read-more-btn"
+                      onClick={this.signupHandler}
+                    >
+                      Signup for Text Notifications
+                    </button>
+                  </div>
+                )}
+                {/* <h1>area to signup for sms and/or email notifications</h1> */}
+                {/* ================================================================ */}
+                {this.state.nextMeeting ? (
+                  <div style={{ textAlign: "center", paddingTop: "20px" }}>
+                    <h1>{this.state.nextMeeting.title}</h1>
+                    <div style={{ textAlign: "center" }}>
+                      <h3>
+                        {moment(this.state.nextMeeting.date).format(
+                          "MMM Do YYYY"
+                        )}
+                      </h3>
+                      {/* | {moment(this.state.nextMeeting.time, "HH:mm:ss").format("hh:mm A")} */}
+                      <h5>{this.state.nextMeeting.excerpt}</h5>
+                    </div>
+                    <br />
+                    {/* <h4 style={{"color":"blue"}}>Please use the form above to signup up for notifications</h4> */}
+                    {/* {this.props.user ?
+                                <h4><a href={"http://" + this.state.nextMeeting.link}>Meeting Link</a></h4>    
+                            :
+                                <h4>Please <a href="/login">login</a> to find the link to this meeting</h4>    
+                            } */}
+                    <br />
+                    {ReactHtmlParser(this.state.nextMeeting.about)}
+                    <br />
+                    <h2>Films for the meeting</h2>
+                    <div style={{ marginLeft: "20%" }}>
+                      {this.renderMovieMeetings()}
+                    </div>
+                  </div>
+                ) : null}
+                {/* ================================================================                
+                    <h1>films posters linked film pages from past meetings</h1> */}
+              </div>
+            </MediaQuery>
+          </>
+        );
     }
 }
 
