@@ -12,7 +12,8 @@ class MovieShow extends React.Component {
         genres: [],
         modalOpen: false,
         watchlistClick: false,
-        credits: null
+        cast: null,
+        crew: null
     }
 
     configGenres = () => {
@@ -41,8 +42,10 @@ class MovieShow extends React.Component {
         .then((movie) => {
             console.log(movie)
             this.setState({
-              movie: movie,
-              genres: movie.genres,
+                movie: movie,
+                genres: movie.genres,
+                cast: movie.cast,
+                crew: movie.crew
             });
           });
     }
