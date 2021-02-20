@@ -5,6 +5,8 @@ import AddMovieToClub from '../../Components/Forms/AddMovieToClub'
 import RecommendationsContainer from '../RecommendationsContainer'
 import MediaQuery from 'react-responsive'
 
+import PersonContainer from '../PersonContiner'
+
 class MovieShow extends React.Component {
 
     state = {
@@ -194,12 +196,14 @@ class MovieShow extends React.Component {
                     {this.state.movie.trailer ?
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px",}}>
                         <h1>Cast</h1>
-                        Film Cast Coming Soon
+                        <PersonContainer people={this.state.cast}/>
+                        {/* Film Cast Coming Soon */}
                     </section>
                     :
                     <section style={{"marginTop": "400px", "marginLeft": "50px", "marginRight": "50px",}}>
                         <h1>Cast</h1>
-                        Film Cast Coming Soon
+                        <PersonContainer people={this.state.cast}/>
+                        {/* Film Cast Coming Soon */}
                     </section>
                     }
                     <section style={{"marginTop": "100px", "marginLeft": "50px", "marginRight": "50px", "paddingBottom": "20px"}}>
