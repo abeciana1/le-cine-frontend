@@ -17,7 +17,6 @@ class MovieCard extends React.Component {
     }
 
     render(){
-        console.log(this.props.movie)
         return(
             <React.Fragment>
             <MediaQuery maxWidth={999}>

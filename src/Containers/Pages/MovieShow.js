@@ -11,7 +11,8 @@ class MovieShow extends React.Component {
         movie: null,
         genres: [],
         modalOpen: false,
-        watchlistClick: false
+        watchlistClick: false,
+        credits: null
     }
 
     configGenres = () => {
@@ -34,9 +35,11 @@ class MovieShow extends React.Component {
             },
             body: JSON.stringify({tmdb_id: this.props.id})
         }
-        fetch("https://le-cine-backend.herokuapp.com/api/v1/details", options)
-          .then((res) => res.json())
-          .then((movie) => {
+        // fetch("https://le-cine-backend.herokuapp.com/api/v1/details", options);
+        fetch("http://localhost:3000/api/v1/details", options)
+        .then((res) => res.json())
+        .then((movie) => {
+            console.log(movie)
             this.setState({
               movie: movie,
               genres: movie.genres,
